@@ -2,13 +2,12 @@
 
 const Contents = ({ children }: { children: React.ReactNode }) => {
   return (
-    <section
+    <section className="text-cBlack"
       style={{
         minHeight: "100vh",
-        color: "black",
       }}
     >
-      <div className="px-5">{children}</div>
+      <div>{children}</div>
     </section>
   );
 };
