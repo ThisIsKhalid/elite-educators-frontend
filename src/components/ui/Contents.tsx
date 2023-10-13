@@ -8,13 +8,7 @@ const Contents = ({ children }: { children: React.ReactNode }) => {
         color: "black",
       }}
     >
-      <div
-        style={{
-          padding: "10px",
-        }}
-      >
-        {children}
-      </div>
+      <div className="px-5">{children}</div>
     </section>
   );
 };
