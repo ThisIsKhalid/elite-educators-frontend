@@ -1,6 +1,4 @@
-import { Layout } from "antd";
 
-const { Footer } = Layout;
 
 const footerStyle: React.CSSProperties = {
   textAlign: "center",
@@ -9,7 +7,7 @@ const footerStyle: React.CSSProperties = {
 };
 
 const Footers = () => {
-  return <Footer style={footerStyle}>Footer</Footer>;
+  return <div style={footerStyle}>Footer</div>;
 };
 
 export default Footers;

@@ -1,11 +1,8 @@
 "use client";
-import { Layout } from "antd";
-
-const { Content } = Layout;
 
 const Contents = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Content
+    <section
       style={{
         minHeight: "100vh",
         color: "black",
@@ -18,7 +15,7 @@ const Contents = ({ children }: { children: React.ReactNode }) => {
       >
         {children}
       </div>
-    </Content>
+    </section>
   );
 };
 
