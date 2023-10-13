@@ -1,7 +1,32 @@
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../assets/elite-educators.png";
+import { usePathname } from "next/navigation";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { BiSearch } from "react-icons/bi";
+import logo from "../../assets/elite-educators.png";
+
+type CustomLinkProps = {
+  href: string;
+  title: string;
+  className?: string;
+};
+
+const CustomLink = ({ href, title, className = "" }: CustomLinkProps) => {
+  const pathname = usePathname();
+  // console.log(pathname);
+  return (
+    <Link href={href} className={`${className} relative group`}>
+      {title}
+      <span
+        className={`h-[2px] inline-block bg-cOrange absolute left-0 -bottom-0.5 group-hover:w-full transition-[width] ease-in-out duration-300
+        ${pathname === href ? "w-full" : "w-0"}
+        `}
+      >
+        &nbsp;
+      </span>
+    </Link>
+  );
+};
 
 const Headers = () => {
   return (
@@ -40,15 +65,29 @@ const Headers = () => {
         <div>
           <Image src={logo} alt="logo" width={160} height={80} style={{}} />
         </div>
+        <div className="relative md:flex hidden">
+          <input
+            type="text"
+            placeholder="What do you want to learn?"
+            className="border border-cBlack lg:w-96 input focus:outline-none focus:border-cOrange pl-10"
+          />
+          <span className="absolute left-3 top-4 text-lg">
+            <BiSearch />
+          </span>
+        </div>
         <div>
           <div className="md:flex hidden gap-10 items-center text-base">
-            <Link href="/">Home</Link>
-            <Link href="/services">Services</Link>
-           <Link href='/tutors'>Tuors</Link>
-           <Link href='/about'>About Us</Link>
+            <nav>
+              <CustomLink href="/home" title="Home" className="mr-4" />
+              <CustomLink href="/services" title="Services" className="mx-4" />
+              <CustomLink href="/tutors" title="Tutors" className="mx-4" />
+              <CustomLink href="/about" title="About" className="ml-4" />
+              <CustomLink href="/signin" title="Signin" className="ml-4" />
+              <CustomLink href="/signup" title="Signup" className="ml-4" />
+            </nav>
           </div>
           <div className="dropdown dropdown-bottom dropdown-end flex md:hidden">
-            <label tabIndex={0} className="">
+            <label tabIndex={0} className="text-xl">
               <GiHamburgerMenu />
             </label>
             <ul
@@ -56,23 +95,25 @@ const Headers = () => {
               className="dropdown-content z-[1] menu p-2 shadow bg-gray-100 rounded-box w-52"
             >
               <li>
-                <Link href="/">Home</Link>
+                <CustomLink href="/home" title="Home" />
               </li>
               <li>
-                <Link href="/services">Services</Link>
+                <CustomLink href="/services" title="Services" />
               </li>
               <li>
-                <Link href="/signin">Login</Link>
+                <CustomLink href="/tutors" title="Tutors" />
               </li>
               <li>
-                <Link href="/signup">Register</Link>
+                <CustomLink href="/about" title="About" />
+              </li>
+              <li>
+                <CustomLink href="/signin" title="Signin" />
+              </li>
+              <li>
+                <CustomLink href="/signup" title="Signup" />
               </li>
             </ul>
           </div>
-        </div>
-        <div className="md:flex hidden gap-10">
-          <Link href="/signin">Login</Link>
-          <Link href="/signup">Register</Link>
         </div>
       </div>
     </>

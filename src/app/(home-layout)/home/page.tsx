@@ -1,8 +1,11 @@
+import TopBannner from "@/components/ui/home/TopBannner";
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
-  )
-}
+    <div>
+      <TopBannner />
+    </div>
+  );
+};
 
-export default HomePage
+export default HomePage;

@@ -5,6 +5,8 @@ import Footers from "@/components/ui/Footers";
 import Headers from "@/components/ui/Headers";
 
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
+  
+  
   return (
     <section>
       <Headers />

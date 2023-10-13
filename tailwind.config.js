@@ -9,7 +9,13 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        cBlack: "#201A18",
+        cOrange: "#E7652B",
+        cBlue: "#1F8A70",
+      },
+    },
   },
   daisyui: {
     themes: ["light", "dark", "cupcake"],
