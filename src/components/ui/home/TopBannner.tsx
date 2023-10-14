@@ -3,6 +3,7 @@ import { BiSolidRightArrow } from "react-icons/bi";
 import photo from "../../../assets/Online learning-bro.svg"
 import profile1 from "../../../assets/profile.png"
 import profile2 from "../../../assets/user-profile.png"
+import Button from "../Button";
 
 const TopBannner = () => {
   return (
@@ -25,9 +26,7 @@ const TopBannner = () => {
         </p>
 
         <div className="flex items-center gap-5">
-          <button className="btn bg-cBlue w-40 rounded-full py-3 text-gray-50 hover:bg-cOrange transition-colors">
-            Get Started
-          </button>
+          <Button text="Get Started"  />
 
           <button className="btn py-3 w-40 rounded-full flex items-center justify-center">
             <span className="text-cOrange mr-3">
