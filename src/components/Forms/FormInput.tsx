@@ -39,16 +39,7 @@ const FormInput = ({
       <Controller
         control={control}
         name={name}
-        render={({ field }) =>
-          type === "file" ? (
-            <input
-              type={type}
-              {...field}
-              value={field.value ? field.value : value}
-              className={`border border-cBlack file-input focus:outline focus:outline-cOrange focus:border-none w-full ${className}`}
-              required={required}
-            />
-          ) : (
+        render={({ field }) => (
             <input
               type={type}
               {...field}

@@ -14,7 +14,6 @@ type FormValues = {
   name: string;
   email: string;
   password: string;
-  profileImgUrl: string;
   phoneNumber: string;
 };
 
@@ -67,16 +66,6 @@ const SignUpPage = () => {
                 type="password"
                 label="Password"
                 placeholder="Your password"
-                required
-                className="md:w-3/4"
-              />
-            </div>
-            <div>
-              <FormInput
-                name="profileImgUrl"
-                type="file"
-                label="Profile Image URL"
-                placeholder="Your profile image url"
                 required
                 className="md:w-3/4"
               />
