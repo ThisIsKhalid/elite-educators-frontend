@@ -9,7 +9,7 @@ const PopulerServices = () => {
         title="Our Populer Services"
         subtitle="Some of our most popular tutors are giving this services"
       />
-      <div className="grid grid-cols-3">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
         <ServiceCard />
       </div>
     </div>

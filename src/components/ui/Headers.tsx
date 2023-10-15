@@ -1,8 +1,10 @@
+import { authKey } from "@/constants/storageKey";
+import { isLoggedIn, removeUserInfo } from "@/services/auth.service";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { usePathname, useRouter } from "next/navigation";
 import { BiSearch } from "react-icons/bi";
+import { GiHamburgerMenu } from "react-icons/gi";
 import logo from "../../assets/elite-educators.png";
 
 type CustomLinkProps = {
@@ -29,6 +31,14 @@ const CustomLink = ({ href, title, className = "" }: CustomLinkProps) => {
 };
 
 const Headers = () => {
+  const userLoggedIn = isLoggedIn();
+  const router = useRouter();
+
+  const logout = () => {
+    removeUserInfo(authKey);
+    router.push("/signin");
+  };
+
   return (
     <>
       <div
@@ -81,9 +91,28 @@ const Headers = () => {
               <CustomLink href="/home" title="Home" className="mr-4" />
               <CustomLink href="/services" title="Services" className="mx-4" />
               <CustomLink href="/tutors" title="Tutors" className="mx-4" />
-              <CustomLink href="/about" title="About" className="ml-4" />
-              <CustomLink href="/signin" title="Signin" className="ml-4" />
-              <CustomLink href="/signup" title="Signup" className="ml-4" />
+              <CustomLink href="/about" title="About" className="mx-4" />
+
+              {userLoggedIn ? (
+                <>
+                  <CustomLink
+                    href="/dashboard"
+                    title="Dashboard"
+                    className="mx-4"
+                  />
+                  <button
+                    onClick={logout}
+                    className="btn btn-xs bg-cBlack text-gray-100 hover:bg-cBlue ml-4"
+                  >
+                    Signout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <CustomLink href="/signin" title="Signin" className="ml-4" />
+                  <CustomLink href="/signup" title="Signup" className="ml-4" />
+                </>
+              )}
             </nav>
           </div>
           <div className="dropdown dropdown-bottom dropdown-end flex md:hidden">
@@ -106,12 +135,29 @@ const Headers = () => {
               <li>
                 <CustomLink href="/about" title="About" />
               </li>
-              <li>
-                <CustomLink href="/signin" title="Signin" />
-              </li>
-              <li>
-                <CustomLink href="/signup" title="Signup" />
-              </li>
+              {userLoggedIn ? (
+                <>
+                  <CustomLink
+                    href="/dashboard"
+                    title="Dashboard"
+                  />
+                  <button
+                    onClick={logout}
+                    className="btn btn-xs bg-cBlack text-gray-100 hover:bg-cBlue"
+                  >
+                    Signout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <CustomLink href="/signin" title="Signin" />
+                  </li>
+                  <li>
+                    <CustomLink href="/signup" title="Signup" />
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>

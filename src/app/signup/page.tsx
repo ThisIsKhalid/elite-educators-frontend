@@ -28,7 +28,7 @@ const SignUpPage = () => {
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
       const res = await userSignup({ ...data }).unwrap();
-      console.log(res);
+      // console.log(res);
 
       if (res?.accessToken) {
         router.push("/home");

@@ -9,6 +9,8 @@ import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signInSchema } from "@/schemas/signin";
 import { useUserloginMutation } from "@/redux/api/authApi";
+import { useRouter } from "next/navigation";
+import { storeUserInfo } from "@/services/auth.service";
 
 type FormValues = {
   id: string;
@@ -17,11 +19,18 @@ type FormValues = {
 
 const SignInPage = () => {
   const [userlogin] = useUserloginMutation();
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
       const res = await userlogin({...data}).unwrap();
-      console.log(res);
+      // console.log(res);
+
+      if (res?.accessToken) {
+        router.push("/home");
+      }
+      storeUserInfo({ accessToken: res?.accessToken });
+
     } catch (err: any) {
       console.error(err.message);
     }
