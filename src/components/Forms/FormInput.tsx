@@ -24,7 +24,7 @@ const FormInput = ({
   validation,
   label,
   required,
-  className,
+  className="",
 }: IInput) => {
   const {
     control,
@@ -43,7 +43,7 @@ const FormInput = ({
             <input
               type={type}
               {...field}
-              value={value ? value : field.value}
+              value={field.value ? field.value : value}
               className={`border border-cBlack input focus:outline focus:outline-cOrange focus:border-none w-full ${className}`}
               placeholder={placeholder}
               required={required}

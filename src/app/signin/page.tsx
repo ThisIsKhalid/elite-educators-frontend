@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signInSchema } from "@/schemas/signin";
+import { useUserloginMutation } from "@/redux/api/authApi";
 
 type FormValues = {
   id: string;
@@ -15,9 +16,12 @@ type FormValues = {
 };
 
 const SignInPage = () => {
+  const [userlogin] = useUserloginMutation();
+
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
     try {
-      console.log(data);
+      const res = await userlogin({...data}).unwrap();
+      console.log(res);
     } catch (err: any) {
       console.error(err.message);
     }
