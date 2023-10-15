@@ -14,6 +14,7 @@ module.exports = {
         cBlack: "#201A18",
         cOrange: "#E7652B",
         cBlue: "#1F8A70",
+        cDeepBlue: "#001D22",
       },
     },
   },
