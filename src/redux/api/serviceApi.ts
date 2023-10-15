@@ -6,7 +6,7 @@ const SERVICE = "/services";
 export const serviceApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getSingleService: build.query({
-      query: (id) => ({
+      query: (id: string) => ({
         url: `${SERVICE}/${id}`,
         method: "GET",
       }),

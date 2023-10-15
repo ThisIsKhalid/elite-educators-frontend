@@ -24,7 +24,7 @@ const AllServicePage = () => {
   const services = data?.services;
   const meta = data?.meta;
 
-   console.log(services);
+  //  console.log(services);
 
   return (
     <div className="">
