@@ -5,10 +5,11 @@ import { IService } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { BsStarFill } from "react-icons/bs";
+import { ImCancelCircle } from "react-icons/im";
 import img from "../../assets/photo-1635805737707-575885ab0820.jpg";
 import profile from "../../assets/user-profile.png";
-import { ImCancelCircle } from "react-icons/im";
 
 const ServiceCard = ({ service }: any) => {
   const {
@@ -29,13 +30,28 @@ const ServiceCard = ({ service }: any) => {
   }
 
   const [selectedPrice, setSelectedPrice] = useState({});
+  const [formData, setFormData] = useState({
+    startDate: "",
+    endDate: "",
+  });
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
   const handlePrice = (price: any) => {
     setSelectedPrice(price);
   };
 
   const handleConfirmPrice = () => {
+    toast.success("Price Confirmed");
     console.log(selectedPrice);
+    console.log(formData.startDate, formData.endDate);
   };
 
   return (
@@ -72,7 +88,7 @@ const ServiceCard = ({ service }: any) => {
               <div className="">
                 <p className="mt-2 text-sm text-cOrange flex items-center">
                   <span className="text-gray-100 mr-3">Rating :</span>
-                  <div className="flex items-center gap-1">{stars}</div>
+                  <span className="flex items-center gap-1">{stars}</span>
                 </p>
                 <p className="mt-2 text-sm text-cOrange">
                   <span className="text-gray-100 ">Level :</span> {level}
@@ -156,6 +172,30 @@ const ServiceCard = ({ service }: any) => {
                       {priced.amountPerWeek}
                     </button>
                   ))}
+                </div>
+              </div>
+              <div className="flex gap-3 justify-center items-center">
+                <div>
+                  <label className="label">Start Date</label>
+                  <input
+                    type="date"
+                    name="startDate"
+                    id="startDate"
+                    value={formData.startDate}
+                    onChange={handleInputChange}
+                    className="px-5 py-2 rounded-lg bg-cDeepBlue text-gray-100"
+                  />
+                </div>
+                <div>
+                  <label className="label">End Date </label>
+                  <input
+                    type="date"
+                    name="endDate"
+                    id="endDate"
+                    value={formData.endDate}
+                    onChange={handleInputChange}
+                    className="px-5 py-2 rounded-lg bg-cDeepBlue text-gray-100"
+                  />
                 </div>
               </div>
               <div>
