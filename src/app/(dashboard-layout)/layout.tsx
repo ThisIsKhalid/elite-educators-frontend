@@ -4,10 +4,10 @@ import React from "react";
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <section className="flex">
-      <div>
+      <div className="md:flex hidden">
         <Sidebar />
       </div>
-      <div>{children}</div>
+      <div className="w-full py-5">{children}</div>
     </section>
   );
 };
