@@ -31,7 +31,7 @@ const AllServicePage = () => {
       <CourseBanner />
       <div className="grid lg:grid-cols-3 grid-cols-1 gap-5 my-10 px-5">
         {services?.map((service: any) => (
-          <ServiceCard key={service.id} service={service} />
+          <ServiceCard key={service._id} service={service} />
         ))}
       </div>
     </div>
