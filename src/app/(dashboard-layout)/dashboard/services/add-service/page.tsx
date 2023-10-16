@@ -1,19 +1,34 @@
-'use client'
+"use client";
 
+import { courseYupSchema } from "@/schemas/course";
 import { IService } from "@/types";
+import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { BiSolidRightArrow } from "react-icons/bi";
 
-type FormData = IService;
+type IPrice = {
+  amountPerWeek: number;
+  daysPerWeek: number;
+};
 
-const AddCourse = () => {
+type FormValues = {
+  subject: string;
+  description: string;
+  level: string;
+  location: string;
+  seats: number;
+  classtime: string;
+  price: IPrice[];
+};
+
+const AddService = () => {
   const {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormValues>();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "price",
@@ -26,11 +41,11 @@ const AddCourse = () => {
   return (
     <div className="min-h-screen">
       <div className="flex items-center justify-between mb-5 px-10">
-        <h1 className="text-3xl uppercase text-center font-bold">
+        <h1 className="lg:text-3xl text-2xl uppercase text-center font-bold">
           Add Service
         </h1>
         <Link href="/dashboard/services">
-          <button className="btn bg-cDeepBlue text-gray-100 hover:bg-cOrange py-2 w-40 rounded-full flex items-center justify-center">
+          <button className="btn btn-sm bg-cDeepBlue text-gray-100 hover:bg-cOrange py-2 w-40 rounded-full flex items-center justify-center">
             <span className="text-gray-100 mr-3">
               <BiSolidRightArrow />
             </span>{" "}
@@ -53,6 +68,7 @@ const AddCourse = () => {
               <Controller
                 name="subject"
                 control={control}
+                rules={{ required: "Subject is required" }}
                 defaultValue=""
                 render={({ field }) => (
                   <input
@@ -64,7 +80,7 @@ const AddCourse = () => {
                 )}
               />
               {errors.subject && (
-                <span className="text-red-500">This field is required</span>
+                <p className="text-red-500 mt-1">{errors.subject.message}</p>
               )}
             </div>
 
@@ -78,6 +94,7 @@ const AddCourse = () => {
               <Controller
                 name="description"
                 control={control}
+                rules={{ required: "Description is required" }}
                 defaultValue=""
                 render={({ field }) => (
                   <textarea
@@ -88,7 +105,9 @@ const AddCourse = () => {
                 )}
               />
               {errors.description && (
-                <span className="text-red-500">This field is required</span>
+                <p className="text-red-500 mt-1">
+                  {errors.description.message}
+                </p>
               )}
             </div>
 
@@ -102,20 +121,28 @@ const AddCourse = () => {
               <Controller
                 name="level"
                 control={control}
+                rules={{ required: "Level is required" }}
                 render={({ field }) => (
                   <select
                     {...field}
                     id="level"
                     className="select border border-cBlack focus:outline focus:outline-cOrange focus:border-none lg:w-3/4 w-full"
                   >
-                    <option value="junior">Junior</option>
-                    <option value="secondary">Secondary</option>
-                    <option value="higher-secondary">Higher Secondary</option>
+                    <option>Select Level</option>
+                    <option value="junior" id="level">
+                      Junior
+                    </option>
+                    <option value="secondary" id="level">
+                      Secondary
+                    </option>
+                    <option value="higher-secondary" id="level">
+                      Higher Secondary
+                    </option>
                   </select>
                 )}
               />
               {errors.level && (
-                <span className="text-red-500">This field is required</span>
+                <p className="text-red-500 mt-1">{errors.level.message}</p>
               )}
             </div>
 
@@ -129,7 +156,7 @@ const AddCourse = () => {
               <Controller
                 name="location"
                 control={control}
-                defaultValue=""
+                rules={{ required: "Location is required" }}
                 render={({ field }) => (
                   <input
                     {...field}
@@ -140,7 +167,7 @@ const AddCourse = () => {
                 )}
               />
               {errors.location && (
-                <span className="text-red-500">This field is required</span>
+                <p className="text-red-500 mt-1">{errors.location.message}</p>
               )}
             </div>
 
@@ -154,6 +181,11 @@ const AddCourse = () => {
               <Controller
                 name="seats"
                 control={control}
+                rules={{
+                  required:
+                    "Seats is required & value should be greater than 0",
+                  min: 0,
+                }}
                 render={({ field }) => (
                   <input
                     {...field}
@@ -164,7 +196,7 @@ const AddCourse = () => {
                 )}
               />
               {errors.seats && (
-                <span className="text-red-500">This field is required</span>
+                <p className="text-red-500 mt-1">{errors.seats.message}</p>
               )}
             </div>
 
@@ -178,24 +210,25 @@ const AddCourse = () => {
               <Controller
                 name="classtime"
                 control={control}
+                rules={{ required: "Classtime is required" }}
                 render={({ field }) => (
                   <input
                     {...field}
                     id="classtime"
-                    type="text"
+                    type="time"
                     className="border border-cBlack input focus:outline focus:outline-cOrange focus:border-none lg:w-3/4 w-full"
                   />
                 )}
               />
               {errors.classtime && (
-                <span className="text-red-500">This field is required</span>
+                <p className="text-red-500 mt-1">{errors.classtime.message}</p>
               )}
             </div>
           </div>
 
           {/* Array of IPrice objects */}
-          <div className="grid grid-cols-3">
-            {fields.map((field, index) => (
+          <div className="grid lg:grid-cols-3">
+            {fields.map((field, index: number) => (
               <div key={field.id}>
                 <label
                   htmlFor={`price[${index}].amountPerWeek`}
@@ -204,8 +237,9 @@ const AddCourse = () => {
                   Price per Week
                 </label>
                 <Controller
-                  name={`price[${index}].amountPerWeek`}
+                  name={`price.${index}.amountPerWeek`}
                   control={control}
+                  rules={{ required: "Price per week is required", min: 0 }}
                   render={({ field }) => (
                     <input
                       {...field}
@@ -218,13 +252,14 @@ const AddCourse = () => {
 
                 <label
                   htmlFor={`price[${index}].daysPerWeek`}
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className="block text-gray-700 text-sm font-bold my-2"
                 >
                   Days per Week
                 </label>
                 <Controller
-                  name={`price[${index}].daysPerWeek`}
+                  name={`price.${index}.daysPerWeek`}
                   control={control}
+                  rules={{ required: "Days per week is required", min: 0 }}
                   render={({ field }) => (
                     <input
                       {...field}
@@ -245,6 +280,7 @@ const AddCourse = () => {
               </div>
             ))}
           </div>
+
           <div className="flex gap-5 items-center mt-5">
             <button
               type="button"
@@ -277,4 +313,4 @@ const AddCourse = () => {
   );
 };
 
-export default AddCourse;
+export default AddService;
