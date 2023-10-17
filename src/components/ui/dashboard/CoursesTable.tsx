@@ -1,7 +1,11 @@
 "use client";
 
-import { useGetServicesQuery } from "@/redux/api/serviceApi";
+import {
+  useDeleteServiceMutation,
+  useGetServicesQuery,
+} from "@/redux/api/serviceApi";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 
 const CoursesTable = () => {
@@ -19,11 +23,23 @@ const CoursesTable = () => {
   query["sortOrder"] = sortOrder;
 
   const { data, isLoading } = useGetServicesQuery({ ...query });
+  const [deleteService] = useDeleteServiceMutation();
 
   const services = data?.services;
   const meta = data?.meta;
 
-//   console.log(services);
+  //   console.log(services);
+
+  const handleDelete = async (id: string) => {
+    const res = await deleteService(id).unwrap();
+    // console.log(res._id, id);
+
+    if (res._id === id) {
+      toast.success("Service Deleted Successfully");
+    } else {
+      toast.error("Something Went Wrong");
+    }
+  };
 
   return (
     <div className="">
@@ -47,10 +63,17 @@ const CoursesTable = () => {
                 <td>{service?.isAvailable ? "Available" : "Not Available"}</td>
                 <td>{service?.instructorId?.name}</td>
                 <td>
-                  <button className="text-xl text-cBlue"><AiOutlineEdit/></button>
+                  <button className="text-xl text-cBlue">
+                    <AiOutlineEdit />
+                  </button>
                 </td>
                 <td>
-                  <button className="text-xl text-cOrange"><AiOutlineDelete/></button>
+                  <button
+                    onClick={() => handleDelete(service?._id)}
+                    className="text-xl text-cOrange"
+                  >
+                    <AiOutlineDelete />
+                  </button>
                 </td>
               </tr>
             ))}
