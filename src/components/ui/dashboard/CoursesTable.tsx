@@ -4,6 +4,7 @@ import {
   useDeleteServiceMutation,
   useGetServicesQuery,
 } from "@/redux/api/serviceApi";
+import Link from "next/link";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
@@ -63,9 +64,13 @@ const CoursesTable = () => {
                 <td>{service?.isAvailable ? "Available" : "Not Available"}</td>
                 <td>{service?.instructorId?.name}</td>
                 <td>
-                  <button className="text-xl text-cBlue">
-                    <AiOutlineEdit />
-                  </button>
+                  <Link
+                    href={`/dashboard/services/update-service/${service?._id}`}
+                  >
+                    <button className="text-xl text-cBlue">
+                      <AiOutlineEdit />
+                    </button>
+                  </Link>
                 </td>
                 <td>
                   <button
