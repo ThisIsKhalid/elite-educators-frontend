@@ -1,11 +1,15 @@
 "use client";
 
+import { useCreateServiceMutation } from "@/redux/api/serviceApi";
 import { courseYupSchema } from "@/schemas/course";
+import { getUserInfo } from "@/services/auth.service";
 import { IService } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { BiSolidRightArrow } from "react-icons/bi";
 
 type IPrice = {
@@ -24,18 +28,55 @@ type FormValues = {
 };
 
 const AddService = () => {
+  const router = useRouter();
   const {
     handleSubmit,
     control,
     formState: { errors },
+    reset,
   } = useForm<FormValues>();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "price",
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const userInfo: any = getUserInfo();
+  const userId = userInfo?.id;
+
+  const [createService] = useCreateServiceMutation();
+
+  const onSubmit = async (data: any) => {
+    try {
+      let newPrice: IPrice[] = [];
+      data?.price?.forEach((price: any) => {
+        const customizedPrice = {
+          amountPerWeek: Number(price.amountPerWeek),
+          daysPerWeek: Number(price.daysPerWeek),
+        };
+        newPrice.push(customizedPrice);
+      });
+
+      const service = {
+        instructorId: userId,
+        subject: data.subject,
+        description: data.description,
+        price: newPrice,
+        level: data.level,
+        location: data.location,
+        seats: Number(data.seats),
+        classtime: data.classtime,
+      };
+
+      const res = await createService({ ...service }).unwrap();
+      // console.log(res);
+      if (res) {
+        toast.success("Course added successfully !");
+        router.push("/dashboard/services");
+        reset();
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
   };
 
   return (
