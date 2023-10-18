@@ -42,6 +42,7 @@ const AllServicePage = () => {
   const meta = data?.meta;
 
   // console.log(searchTerm);
+  if(isLoading) return <p>Loading...</p>;
 
   const handleAvailabilityChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
@@ -67,6 +68,8 @@ const AllServicePage = () => {
     setSortBy("");
     setSortOrder("");
   };
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <div className="">
@@ -147,37 +150,39 @@ const AllServicePage = () => {
 
       {/*  rating and sorting */}
       <div className="my-5 flex items-center gap-3 justify-end px-10">
-        <div className="flex items-center gap-1 border-2 py-1 px-3 border-gray-300">
+        <div
+          onClick={() => {
+            if (sortBy === "level") {
+              setSortOrder((prevSortOrder) =>
+                prevSortOrder === "asc" ? "desc" : "asc"
+              );
+            } else {
+              setSortBy("level");
+              setSortOrder("desc");
+            }
+          }}
+          className="flex items-center gap-1 border-2 py-1 px-3 border-gray-300 cursor-pointer"
+        >
           <h1 className="text-base font-semibold">Level</h1>
-          <button
-            onClick={() => {
-              if (sortBy === "level") {
-                setSortOrder((prevSortOrder) =>
-                  prevSortOrder === "asc" ? "desc" : "asc"
-                );
-              } else {
-                setSortBy("level");
-                setSortOrder("desc");
-              }
-            }}
-          >
+          <button>
             <BiSort />
           </button>
         </div>
-        <div className="flex items-center gap-1 border-2 py-1 px-3 border-gray-300">
+        <div
+          onClick={() => {
+            if (sortBy === "rating") {
+              setSortOrder((prevSortOrder) =>
+                prevSortOrder === "asc" ? "desc" : "asc"
+              );
+            } else {
+              setSortBy("rating");
+              setSortOrder("desc");
+            }
+          }}
+          className="flex items-center gap-1 border-2 py-1 px-3 border-gray-300 cursor-pointer"
+        >
           <h1 className="text-base font-semibold">Rating</h1>
-          <button
-            onClick={() => {
-              if (sortBy === "rating") {
-                setSortOrder((prevSortOrder) =>
-                  prevSortOrder === "asc" ? "desc" : "asc"
-                );
-              } else {
-                setSortBy("rating");
-                setSortOrder("desc");
-              }
-            }}
-          >
+          <button>
             <BiSort />
           </button>
         </div>

@@ -47,8 +47,8 @@ const CoursesTable = () => {
     <div className="">
       <BreadCrumb />
       <div className="overflow-x-auto">
-        <table className="table">
-          <thead className="bg-cBlue text-gray-100 text-base">
+        <table className="table lg:table-lg table-xs">
+          <thead className="bg-cBlue text-gray-100 lg:text-base">
             <tr>
               <th>Serial</th>
               <th>Subject</th>

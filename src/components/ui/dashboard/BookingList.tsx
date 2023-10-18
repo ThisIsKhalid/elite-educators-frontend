@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  useBookingStatusChangeMutation,
   useDeleteBookingMutation,
   useGetBookingByUserIdQuery,
 } from "@/redux/api/bookingApi";
@@ -11,9 +12,9 @@ import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import BreadCrumb from "../BreadCrumb";
 
 const BookingList = () => {
-    
   const loggedUser: any = getUserInfo();
-  const { id } = loggedUser;
+  const { id, role } = loggedUser;
+  console.log(role);
 
   const query: Record<string, any> = {};
 
@@ -30,6 +31,7 @@ const BookingList = () => {
 
   const { data, isLoading } = useGetBookingByUserIdQuery({ id, ...query });
   const [deleteBooking] = useDeleteBookingMutation();
+  const [bookingStatusChange] = useBookingStatusChangeMutation();
 
   const bookings = data?.services;
   const meta = data?.meta;
@@ -45,12 +47,22 @@ const BookingList = () => {
     }
   };
 
+  const handleStatusChange = async (id: string) => {
+    const res = await bookingStatusChange(id).unwrap();
+
+    if (res._id === id) {
+      toast.success("Booking Accepted Successfully");
+    } else {
+      toast.error("Something Went Wrong");
+    }
+  };
+
   return (
     <div className="">
-        <BreadCrumb/>
+      <BreadCrumb />
       <div className="overflow-x-auto">
-        <table className="table">
-          <thead className="bg-cBlue text-gray-100 text-base">
+        <table className="table lg:table-lg table-xs">
+          <thead className="bg-cBlue text-gray-100 lg:text-base">
             <tr>
               <th>Serial</th>
               <th>Subject</th>
@@ -59,6 +71,7 @@ const BookingList = () => {
               <th>Amount/Week</th>
               <th>Days/Week</th>
               <th>Status</th>
+              {role === "admin" && <th>Accept</th>}
               <th>Cancel</th>
             </tr>
           </thead>
@@ -78,6 +91,16 @@ const BookingList = () => {
                     <span className="text-cOrange">Pending</span>
                   )}
                 </td>
+                {role === "admin" && (
+                  <td>
+                    <button
+                      onClick={() => handleStatusChange(booking?._id)}
+                      className="border border-cBlue px-3 rounded-lg text-cBlack font-semibold"
+                    >
+                      Accept
+                    </button>
+                  </td>
+                )}
                 <td>
                   <button
                     onClick={() => handleDelete(booking?._id)}

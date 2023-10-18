@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { BsBoxArrowInLeft, BsBoxArrowInRight, BsBox } from "react-icons/bs";
-import { FaPeopleGroup } from "react-icons/fa6";
 import { AiOutlineProfile } from "react-icons/ai";
+import { BiHomeAlt } from "react-icons/bi";
+import { BsBox, BsBoxArrowInLeft, BsBoxArrowInRight } from "react-icons/bs";
+import { FaPeopleGroup } from "react-icons/fa6";
 import { TbBrandBooking } from "react-icons/tb";
 
 const Sidebar = () => {
@@ -27,21 +28,24 @@ const Sidebar = () => {
           <BsBoxArrowInLeft className="text-gray-100 text-xl" />
         )}
       </button>
+      <Link href="/" className="text-gray-100 text-2xl absolute bottom-10 left-1/2 -translate-x-1/2" >
+        <BiHomeAlt />
+      </Link>
 
       {/* ----------------main part------------- */}
       <div className="text-gray-200 mt-5">
-        <div className="flex items-center text-2xl gap-3 hover:bg-gray-800 py-2 pl-2 rounded-lg">
-          <Link href="/dashboard">
-            {isShrunk ? (
-              <BsBox />
-            ) : (
-              <>
-                <BsBox />
-                <h1 className={`font-bold`}>Elite Educators</h1>
-              </>
-            )}
-          </Link>
-        </div>
+        <Link
+          href="/dashboard"
+          className="flex items-center  gap-3 hover:bg-gray-800 py-2 pl-2 rounded-lg"
+        >
+          {isShrunk ? (
+            <BsBox className="text-2xl" />
+          ) : (
+            <>
+              <h1 className={`font-bold text-2xl`}>Elite Educators</h1>
+            </>
+          )}
+        </Link>
         <Link
           href="/dashboard/services"
           className="flex items-center  gap-3 hover:bg-gray-800 py-2 pl-2 rounded-lg"
@@ -51,7 +55,7 @@ const Sidebar = () => {
           ) : (
             <>
               <AiOutlineProfile className="text-2xl" />
-              <h1 className={`font-bold text-xl`}>Services</h1>
+              <h1 className={`font-bold text-base`}>Services</h1>
             </>
           )}
         </Link>
@@ -63,8 +67,8 @@ const Sidebar = () => {
             <TbBrandBooking className="text-2xl" />
           ) : (
             <>
-              <FaPeopleGroup className="text-2xl" />
-              <h1 className={`font-bold text-xl`}>Bookings</h1>
+              <TbBrandBooking className="text-2xl" />
+              <h1 className={`font-bold text-base`}>Bookings</h1>
             </>
           )}
         </Link>

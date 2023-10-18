@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { BiSearch } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import logo from "../../assets/elite-educators.png";
+import toast from "react-hot-toast";
 
 type CustomLinkProps = {
   href: string;
@@ -36,7 +37,8 @@ const Headers = () => {
 
   const logout = () => {
     removeUserInfo(authKey);
-    // router.push("/signin");
+    toast.success("Logout successfully");
+    router.push("/signin");
   };
 
   return (
