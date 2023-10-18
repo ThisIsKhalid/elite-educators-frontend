@@ -1,40 +1,65 @@
+import { useAddBookingMutation } from "@/redux/api/bookingApi";
+import { getUserInfo } from "@/services/auth.service";
+import { IBooking } from "@/types";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { ImCancelCircle } from "react-icons/im";
 
+const BookingModal = ({ service }: any) => {
+  const loggedUser: any = getUserInfo();
+  const [addBooking] = useAddBookingMutation();
 
-const BookingModal = ({ service }:any) => {
-    const {
-      _id,
-      subject,
-      price,
-      instructorId,
-    } = service;
+  const { _id, subject, price, instructorId } = service;
 
-    const [selectedPrice, setSelectedPrice] = useState({});
-    const [formData, setFormData] = useState({
-      startDate: "",
-      endDate: "",
+  const [selectedPrice, setSelectedPrice] = useState<any>({});
+  const [formData, setFormData] = useState({
+    startDate: "",
+    endDate: "",
+  });
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+
+    setFormData({
+      ...formData,
+      [name]: value,
     });
+  };
 
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = event.target;
+  const handlePrice = (price: any) => {
+    setSelectedPrice(price);
+  };
 
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
+  const handleConfirmPrice = async () => {
+    if (!loggedUser) {
+      return toast.error("Please signin to book a service");
+    }
+
+    if (!formData.startDate || !formData.endDate || !selectedPrice) {
+      return toast.error("Please select all fields");
+    }
+
+    const batchdata = {
+      daysPerWeek: selectedPrice?.daysPerWeek,
+      amountPerWeek: selectedPrice?.amountPerWeek,
     };
 
-    const handlePrice = (price: any) => {
-      setSelectedPrice(price);
-    };
+    if (loggedUser) {
+      const data: IBooking = {
+        userId: loggedUser?.id,
+        serviceId: _id,
+        batch: batchdata,
+        status: false,
+        startDate: formData.startDate,
+        endDate: formData.endDate,
+      };
 
-    const handleConfirmPrice = () => {
-      toast.success("Price Confirmed");
-      console.log(selectedPrice);
-      console.log(formData.startDate, formData.endDate);
-    };
+      console.log(data);
+      const res = await addBooking({...data}).unwrap();
+
+      console.log(res);
+    }
+  };
 
   return (
     <dialog id={_id} className="modal">
@@ -108,4 +133,4 @@ const BookingModal = ({ service }:any) => {
   );
 };
 
-export default BookingModal
+export default BookingModal;

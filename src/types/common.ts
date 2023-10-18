@@ -41,4 +41,19 @@ export type IService = {
 };
 
 
+ export type IBatch = {
+  amountPerWeek: number;
+  daysPerWeek: number;
+};
+
+ export type IBooking = {
+   userId: string;
+   serviceId: string;
+   status?: boolean; // true = accepted, false = rejected
+   batch: IBatch;
+   startDate: string;
+   endDate: string;
+ };
+
+
 

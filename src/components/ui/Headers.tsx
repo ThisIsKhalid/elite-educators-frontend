@@ -36,7 +36,7 @@ const Headers = () => {
 
   const logout = () => {
     removeUserInfo(authKey);
-    router.push("/signin");
+    // router.push("/signin");
   };
 
   return (
