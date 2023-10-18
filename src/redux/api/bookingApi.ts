@@ -45,6 +45,23 @@ export const bookingApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["booking"],
     }),
+
+    getAllBookings: build.query({
+      query: (arg: Record<string, any>) => {
+        return {
+          url: `${URL}`,
+          method: "GET",
+          params: arg,
+        };
+      },
+      transformResponse: (response: IBooking[], meta: IMeta) => {
+        return {
+          bookings: response,
+          meta,
+        };
+      },
+      providesTags: ["booking"],
+    }),
   }),
 });
 
@@ -52,5 +69,6 @@ export const {
   useAddBookingMutation,
   useGetBookingByUserIdQuery,
   useDeleteBookingMutation,
-  useBookingStatusChangeMutation
+  useBookingStatusChangeMutation,
+  useGetAllBookingsQuery
 } = bookingApi;

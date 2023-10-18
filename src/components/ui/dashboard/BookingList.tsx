@@ -3,6 +3,7 @@
 import {
   useBookingStatusChangeMutation,
   useDeleteBookingMutation,
+  useGetAllBookingsQuery,
   useGetBookingByUserIdQuery,
 } from "@/redux/api/bookingApi";
 import { getUserInfo } from "@/services/auth.service";
@@ -10,11 +11,12 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import BreadCrumb from "../BreadCrumb";
+import { IBooking } from "@/types";
 
 const BookingList = () => {
   const loggedUser: any = getUserInfo();
   const { id, role } = loggedUser;
-  console.log(role);
+  // console.log(role);
 
   const query: Record<string, any> = {};
 
@@ -29,16 +31,27 @@ const BookingList = () => {
   query["sortBy"] = sortBy;
   query["sortOrder"] = sortOrder;
 
-  const { data, isLoading } = useGetBookingByUserIdQuery({ id, ...query });
+  const { data: dataByUserId, isLoading } = useGetBookingByUserIdQuery({ id, ...query });
+  const {data: allData} = useGetAllBookingsQuery({...query})
   const [deleteBooking] = useDeleteBookingMutation();
   const [bookingStatusChange] = useBookingStatusChangeMutation();
 
-  const bookings = data?.services;
-  const meta = data?.meta;
+  const bookings = dataByUserId?.services;
+  const meta = dataByUserId?.meta;
+
+  const allBookings = allData?.bookings;
+
+  let bookingsData: any = [];
+  if(loggedUser?.role === "user") {
+    bookingsData = bookings
+  } else {
+    bookingsData = allBookings
+  }
+
+  // console.log(bookingsData);
 
   const handleDelete = async (id: string) => {
     const res = await deleteBooking(id).unwrap();
-    // console.log(res._id, id);
 
     if (res._id === id) {
       toast.success("Service Deleted Successfully");
@@ -65,6 +78,9 @@ const BookingList = () => {
           <thead className="bg-cBlue text-gray-100 lg:text-base">
             <tr>
               <th>Serial</th>
+              {
+                loggedUser?.role === "admin" && <th>User</th>
+              }
               <th>Subject</th>
               <th>Start Date</th>
               <th>End Date</th>
@@ -76,41 +92,45 @@ const BookingList = () => {
             </tr>
           </thead>
           <tbody className="text-base">
-            {bookings?.map((booking: any, index) => (
-              <tr key={booking?._id}>
-                <th>{index + 1}</th>
-                <td>{booking?.serviceId?.subject}</td>
-                <td>{booking?.startDate}</td>
-                <td>{booking?.endDate}</td>
-                <td>{booking?.batch?.amountPerWeek}</td>
-                <td>{booking?.batch?.daysPerWeek}</td>
-                <td>
-                  {booking?.status ? (
-                    <span className="text-cBlue">Accepted</span>
-                  ) : (
-                    <span className="text-cOrange">Pending</span>
+            {bookingsData &&
+              bookingsData?.map((booking: any, index: number) => (
+                <tr key={booking?._id}>
+                  <th>{index + 1}</th>
+                  {
+                    loggedUser?.role === "admin" && <td>{booking?.userId?.name}</td>
+                  }
+                  <td>{booking?.serviceId?.subject}</td>
+                  <td>{booking?.startDate}</td>
+                  <td>{booking?.endDate}</td>
+                  <td>{booking?.batch?.amountPerWeek}</td>
+                  <td>{booking?.batch?.daysPerWeek}</td>
+                  <td>
+                    {booking?.status ? (
+                      <span className="text-cBlue">Accepted</span>
+                    ) : (
+                      <span className="text-cOrange">Pending</span>
+                    )}
+                  </td>
+                  {role === "admin" && (
+                    <td>
+                      <button
+                        onClick={() => handleStatusChange(booking?._id)}
+                        className="border border-cBlue px-3 rounded-lg text-cBlack font-semibold"
+                      >
+                        Accept
+                      </button>
+                    </td>
                   )}
-                </td>
-                {role === "admin" && (
                   <td>
                     <button
-                      onClick={() => handleStatusChange(booking?._id)}
-                      className="border border-cBlue px-3 rounded-lg text-cBlack font-semibold"
+                      onClick={() => handleDelete(booking?._id)}
+                      className="text-xl text-cOrange"
                     >
-                      Accept
+                      <AiOutlineDelete />
                     </button>
                   </td>
-                )}
-                <td>
-                  <button
-                    onClick={() => handleDelete(booking?._id)}
-                    className="text-xl text-cOrange"
-                  >
-                    <AiOutlineDelete />
-                  </button>
-                </td>
-              </tr>
-            ))}
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
