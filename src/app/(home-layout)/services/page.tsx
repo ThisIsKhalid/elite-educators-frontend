@@ -73,7 +73,7 @@ const AllServicePage = () => {
 
   return (
     <div className="">
-      <CourseBanner />
+      <CourseBanner title="Services" />
 
       <div className="bg-gray-700 w-full py-3 flex items-center justify-between gap-2 px-5">
         <div className="relative">
