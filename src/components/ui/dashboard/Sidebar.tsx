@@ -5,6 +5,7 @@ import { useState } from "react";
 import { BsBoxArrowInLeft, BsBoxArrowInRight, BsBox } from "react-icons/bs";
 import { FaPeopleGroup } from "react-icons/fa6";
 import { AiOutlineProfile } from "react-icons/ai";
+import { TbBrandBooking } from "react-icons/tb";
 
 const Sidebar = () => {
   const [isShrunk, setIsShrunk] = useState(true);
@@ -30,14 +31,16 @@ const Sidebar = () => {
       {/* ----------------main part------------- */}
       <div className="text-gray-200 mt-5">
         <div className="flex items-center text-2xl gap-3 hover:bg-gray-800 py-2 pl-2 rounded-lg">
-          {isShrunk ? (
-            <BsBox />
-          ) : (
-            <>
+          <Link href="/dashboard">
+            {isShrunk ? (
               <BsBox />
-              <h1 className={`font-bold`}>Elite Educators</h1>
-            </>
-          )}
+            ) : (
+              <>
+                <BsBox />
+                <h1 className={`font-bold`}>Elite Educators</h1>
+              </>
+            )}
+          </Link>
         </div>
         <Link
           href="/dashboard/services"
@@ -49,6 +52,19 @@ const Sidebar = () => {
             <>
               <AiOutlineProfile className="text-2xl" />
               <h1 className={`font-bold text-xl`}>Services</h1>
+            </>
+          )}
+        </Link>
+        <Link
+          href="/dashboard/bookings"
+          className="flex items-center  gap-3 hover:bg-gray-800 py-2 pl-2 rounded-lg"
+        >
+          {isShrunk ? (
+            <TbBrandBooking className="text-2xl" />
+          ) : (
+            <>
+              <FaPeopleGroup className="text-2xl" />
+              <h1 className={`font-bold text-xl`}>Bookings</h1>
             </>
           )}
         </Link>

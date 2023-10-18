@@ -54,10 +54,10 @@ const BookingModal = ({ service }: any) => {
         endDate: formData.endDate,
       };
 
-      console.log(data);
-      const res = await addBooking({...data}).unwrap();
-
-      console.log(res);
+      const res = await addBooking({ ...data }).unwrap();
+      if (res) {
+        toast.success("Booking successful");
+      }
     }
   };
 
