@@ -60,7 +60,7 @@ const ServiceCard = ({ service }: any) => {
               <div className="">
                 <p className="mt-2 text-sm text-cOrange flex items-center">
                   <span className="text-gray-100 mr-3">Rating :</span>
-                  <span className="flex items-center gap-1">{stars}</span>
+                  <span className="flex items-center gap-1">{stars.length > 0 ? stars : '0'}</span>
                 </p>
                 <p className="mt-2 text-sm text-cOrange">
                   <span className="text-gray-100 ">Level :</span> {level}
