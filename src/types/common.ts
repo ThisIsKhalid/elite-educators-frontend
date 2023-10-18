@@ -26,6 +26,7 @@ export type IPrice = {
 };
 
 export type IService = {
+  _id: string;
   instructorId: string;
   subject: string;
   description: string;

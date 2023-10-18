@@ -7,6 +7,7 @@ import { BiSearch } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import logo from "../../assets/elite-educators.png";
 import toast from "react-hot-toast";
+import { BsCart2 } from "react-icons/bs";
 
 type CustomLinkProps = {
   href: string;
@@ -94,6 +95,8 @@ const Headers = () => {
               <CustomLink href="/services" title="Services" className="mx-4" />
               <CustomLink href="/tutors" title="Tutors" className="mx-4" />
               <CustomLink href="/about" title="About" className="mx-4" />
+              <CustomLink href="/cart" title="Cart" className="mx-4" />
+              
 
               {userLoggedIn ? (
                 <>
@@ -139,10 +142,7 @@ const Headers = () => {
               </li>
               {userLoggedIn ? (
                 <>
-                  <CustomLink
-                    href="/dashboard"
-                    title="Dashboard"
-                  />
+                  <CustomLink href="/dashboard" title="Dashboard" />
                   <button
                     onClick={logout}
                     className="btn btn-xs bg-cBlack text-gray-100 hover:bg-cBlue"
