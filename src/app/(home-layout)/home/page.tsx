@@ -1,5 +1,6 @@
 import PopulerServices from "@/components/ui/home/PopulerServices";
 import TopBannner from "@/components/ui/home/TopBannner";
+import UpcomingEvents from "@/components/ui/home/UpcomingEvents";
 import UpComingServices from "@/components/ui/home/UpcomingServices";
 
 const HomePage = () => {
@@ -8,6 +9,7 @@ const HomePage = () => {
       <TopBannner />
       <PopulerServices />
       <UpComingServices />
+      <UpcomingEvents />
     </div>
   );
 };

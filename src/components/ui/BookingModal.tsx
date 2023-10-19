@@ -35,8 +35,12 @@ const BookingModal = ({ service }: any) => {
       return toast.error("Please signin to book a service");
     }
 
-    if (!formData.startDate || !formData.endDate || !selectedPrice) {
-      return toast.error("Please select all fields");
+    if(!selectedPrice?.daysPerWeek || !selectedPrice?.amountPerWeek){
+      return toast.error("Please select a price");
+    }
+
+    if (!formData.startDate || !formData.endDate) {
+      return toast.error("Please select a date");
     }
 
     const batchdata = {
