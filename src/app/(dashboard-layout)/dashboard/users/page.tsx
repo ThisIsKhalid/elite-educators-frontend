@@ -1,3 +1,5 @@
+"use client";
+
 import UsersTable from "@/components/ui/dashboard/UsersTable";
 import React from "react";
 

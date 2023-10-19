@@ -1,9 +1,10 @@
+"use client";
+
 import ProfileDetails from "@/components/ui/dashboard/ProfileDetails";
 import Link from "next/link";
 import { BiSolidRightArrow } from "react-icons/bi";
 
 const MyProfile = () => {
-  
   return (
     <div className="min-h-screen">
       <div className="flex items-center justify-between mb-5 px-5">

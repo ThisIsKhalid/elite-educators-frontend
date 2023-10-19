@@ -1,3 +1,5 @@
+"use client";
+
 import ServiceCardDetails from "@/components/ui/ServiceCardDetails";
 
 const ServiceDetailsPage = ({ params }: { params: { id: string } }) => {

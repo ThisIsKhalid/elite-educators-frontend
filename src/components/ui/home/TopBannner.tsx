@@ -1,8 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import { BiSolidRightArrow } from "react-icons/bi";
-import photo from "../../../assets/Online learning-bro.svg"
-import profile1 from "../../../assets/profile.png"
-import profile2 from "../../../assets/user-profile.png"
+import photo from "../../../assets/Online learning-bro.svg";
+import profile1 from "../../../assets/profile.png";
+import profile2 from "../../../assets/user-profile.png";
 import Button from "../Button";
 
 const TopBannner = () => {
@@ -26,7 +28,7 @@ const TopBannner = () => {
         </p>
 
         <div className="flex items-center gap-5">
-          <Button text="Get Started"  />
+          <Button text="Get Started" />
 
           <button className="btn py-3 w-40 rounded-full flex items-center justify-center">
             <span className="text-cOrange mr-3">
@@ -51,9 +53,10 @@ const TopBannner = () => {
               <Image src={profile2} alt="" />
             </div>
           </div>
-            <p className="text-xs">
-              <span className="text-cBlue font-semibold">200+</span> Tutor Available
-            </p>
+          <p className="text-xs">
+            <span className="text-cBlue font-semibold">200+</span> Tutor
+            Available
+          </p>
         </div>
       </div>
       <div className="mx-auto">

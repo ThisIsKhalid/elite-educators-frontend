@@ -3,8 +3,8 @@
 import CourseBanner from "@/components/ui/Banner";
 import HashLoading from "@/components/ui/HashLoading";
 import ServiceCard from "@/components/ui/ServiceCard";
-import { useDebounced } from "@/hooks/useDebounced";
 import { useGetServicesQuery } from "@/redux/api/serviceApi";
+import { useDebounced } from "@/redux/hooks";
 import { ChangeEvent, useState } from "react";
 import { BiSort } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";

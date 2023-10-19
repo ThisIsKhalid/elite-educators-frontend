@@ -1,3 +1,4 @@
+"use client";
 
 import { FiArrowUpRight } from "react-icons/fi";
 import certificate from "../../../assets/certification.png";

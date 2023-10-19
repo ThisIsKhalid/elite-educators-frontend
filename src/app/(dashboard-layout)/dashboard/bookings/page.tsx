@@ -1,7 +1,8 @@
+"use client";
+
 import BookingList from "@/components/ui/dashboard/BookingList";
 
 const BookingsPage = () => {
-
   return (
     <div className="min-h-screen">
       <div className="flex items-center justify-between mb-5 px-5">

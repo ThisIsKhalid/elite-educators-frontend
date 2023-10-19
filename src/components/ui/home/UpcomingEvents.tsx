@@ -1,8 +1,10 @@
-import React from 'react'
-import SectionTitle from '../SectionTitle';
-import EventCard from '../EventCard';
-import Link from 'next/link';
-import { BiSolidRightArrow } from 'react-icons/bi';
+"use client";
+
+import React from "react";
+import SectionTitle from "../SectionTitle";
+import EventCard from "../EventCard";
+import Link from "next/link";
+import { BiSolidRightArrow } from "react-icons/bi";
 
 const UpcomingEvents = () => {
   return (
@@ -29,6 +31,6 @@ const UpcomingEvents = () => {
       </div>
     </div>
   );
-}
+};
 
-export default UpcomingEvents
+export default UpcomingEvents;
