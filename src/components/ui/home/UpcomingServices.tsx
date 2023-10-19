@@ -20,7 +20,7 @@ const UpComingServices = () => {
   );
 
   return (
-    <div className="mb-20 px-5">
+    <div className="py-20 px-5">
       <SectionTitle
         title="Upcoming Services"
         subtitle="Some of our most popular tutors are now making their services available for booking."

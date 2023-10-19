@@ -17,7 +17,7 @@ const PopulerServices = () => {
   const services = data?.services;
 
   return (
-    <div className="mb-20 px-5">
+    <div className="py-20 px-5">
       <SectionTitle
         title="Our Populer Services"
         subtitle="Some of our most popular tutors are giving this services"

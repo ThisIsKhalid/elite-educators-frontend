@@ -6,7 +6,7 @@ import { BiSolidRightArrow } from 'react-icons/bi';
 
 const UpcomingEvents = () => {
   return (
-    <div className="mb-20 px-5">
+    <div className="py-20 px-5">
       <SectionTitle
         title="Join our upcoming event"
         subtitle="Join our upcoming event and get a chance to meet with our tutors"
