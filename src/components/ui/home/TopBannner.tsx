@@ -7,7 +7,7 @@ import Button from "../Button";
 
 const TopBannner = () => {
   return (
-    <div className="grid md:grid-cols-2 grid-cols-1 text-cBlack items-center mx-5">
+    <div className="grid md:grid-cols-2 grid-cols-1 text-cBlack items-center mx-5 mb-20">
       <div className="flex flex-col mx-auto">
         <div className="flex items-center">
           <div className="border-b-2 w-20 border-cOrange mr-3"></div>
