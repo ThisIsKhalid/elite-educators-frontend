@@ -22,6 +22,14 @@ export const authApi = baseApi.injectEndpoints({
       invalidatesTags: ["user"],
     }),
 
+    getSingleUser: build.query({
+      query: (id: string) => ({
+        url: `${USER_URL}/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["user"],
+    }),
+
     getAllUsers: build.query({
       query: (arg: Record<string, any>) => {
         return {
@@ -62,5 +70,6 @@ export const {
   useUserloginMutation,
   useGetAllUsersQuery,
   useRoleChangeMutation,
-  useDeleteUserMutation
+  useDeleteUserMutation,
+  useGetSingleUserQuery
 } = authApi;

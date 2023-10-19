@@ -7,6 +7,7 @@ import { AiOutlineProfile } from "react-icons/ai";
 import { BiHomeAlt } from "react-icons/bi";
 import { BsBox, BsBoxArrowInLeft, BsBoxArrowInRight } from "react-icons/bs";
 import { FaPeopleGroup } from "react-icons/fa6";
+import { ImProfile } from "react-icons/im";
 import { TbBrandBooking } from "react-icons/tb";
 
 const Sidebar = () => {
@@ -54,18 +55,50 @@ const Sidebar = () => {
           )}
         </Link>
         <Link
-          href="/dashboard/services"
+          href="/dashboard/profile"
           className="flex items-center  gap-3 hover:bg-gray-800 py-2 pl-2 rounded-lg"
         >
           {isShrunk ? (
-            <AiOutlineProfile className="text-2xl" />
+            <ImProfile className="text-2xl" />
           ) : (
             <>
               <AiOutlineProfile className="text-2xl" />
-              <h1 className={`font-bold text-base`}>Services</h1>
+              <h1 className={`font-bold text-base`}>Profile</h1>
             </>
           )}
         </Link>
+
+        {(loggedUser?.role === "admin" ||
+          loggedUser?.role === "super_admin") && (
+          <>
+            <Link
+              href="/dashboard/services"
+              className="flex items-center  gap-3 hover:bg-gray-800 py-2 pl-2 rounded-lg"
+            >
+              {isShrunk ? (
+                <AiOutlineProfile className="text-2xl" />
+              ) : (
+                <>
+                  <AiOutlineProfile className="text-2xl" />
+                  <h1 className={`font-bold text-base`}>Services</h1>
+                </>
+              )}
+            </Link>
+            <Link
+              href="/dashboard/users"
+              className="flex items-center  gap-3 hover:bg-gray-800 py-2 pl-2 rounded-lg"
+            >
+              {isShrunk ? (
+                <FaPeopleGroup className="text-2xl" />
+              ) : (
+                <>
+                  <FaPeopleGroup className="text-2xl" />
+                  <h1 className={`font-bold text-base`}>Clients</h1>
+                </>
+              )}
+            </Link>
+          </>
+        )}
         <Link
           href="/dashboard/bookings"
           className="flex items-center  gap-3 hover:bg-gray-800 py-2 pl-2 rounded-lg"
@@ -79,21 +112,6 @@ const Sidebar = () => {
             </>
           )}
         </Link>
-        {loggedUser?.role === "super_admin" && (
-          <Link
-            href="/dashboard/users"
-            className="flex items-center  gap-3 hover:bg-gray-800 py-2 pl-2 rounded-lg"
-          >
-            {isShrunk ? (
-              <FaPeopleGroup className="text-2xl" />
-            ) : (
-              <>
-                <FaPeopleGroup className="text-2xl" />
-                <h1 className={`font-bold text-base`}>Clients</h1>
-              </>
-            )}
-          </Link>
-        )}
       </div>
     </div>
   );

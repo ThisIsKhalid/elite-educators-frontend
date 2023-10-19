@@ -1,10 +1,11 @@
 "use client";
 
 import {
-    useDeleteUserMutation,
+  useDeleteUserMutation,
   useGetAllUsersQuery,
   useRoleChangeMutation,
 } from "@/redux/api/authApi";
+import { getUserInfo } from "@/services/auth.service";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -13,6 +14,8 @@ import HashLoading from "../HashLoading";
 
 const UsersTable = () => {
   const query: Record<string, any> = {};
+
+  const loggedUser: any = getUserInfo();
 
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(10);
@@ -72,7 +75,7 @@ const UsersTable = () => {
               <th>Email</th>
               <th>Role</th>
               <th>Phone Number</th>
-              <th>Change Role</th>
+              {loggedUser?.role === "super_admin" && <th>Change Role</th>}
               <th>Delete</th>
             </tr>
           </thead>
@@ -84,18 +87,20 @@ const UsersTable = () => {
                 <td>{user?.email}</td>
                 <td>{user?.role}</td>
                 <td>{user?.phonenumber}</td>
-                <td>
-                  <button
-                    onClick={() => handleRoleChange(user?.id)}
-                    className="btn btn-sm btn-outline text-cOrange"
-                  >
-                    {user?.role === "admin"
-                      ? "Make User"
-                      : user?.role === "super_admin"
-                      ? "No Action"
-                      : "Make Admin"}
-                  </button>
-                </td>
+                {loggedUser?.role === "super_admin" && (
+                  <td>
+                    <button
+                      onClick={() => handleRoleChange(user?.id)}
+                      className="btn btn-sm btn-outline text-cOrange"
+                    >
+                      {user?.role === "admin"
+                        ? "Make User"
+                        : user?.role === "super_admin"
+                        ? "No Action"
+                        : "Make Admin"}
+                    </button>
+                  </td>
+                )}
                 <td>
                   <button
                     onClick={() => handleDelete(user?._id)}
