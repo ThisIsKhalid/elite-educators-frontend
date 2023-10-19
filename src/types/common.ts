@@ -57,4 +57,12 @@ export type IService = {
  };
 
 
+ export type IServiceReview = {
+   studentId: string;
+   courseId: string;
+   description: string;
+   rating: number;
+ };
+
+
 
