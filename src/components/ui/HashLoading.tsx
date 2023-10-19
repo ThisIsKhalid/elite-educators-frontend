@@ -1,6 +1,6 @@
 import { HashLoader } from "react-spinners";
 
-const Loading = () => {
+const HashLoading = () => {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <HashLoader color="#36d7b7" />
@@ -8,4 +8,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default HashLoading;

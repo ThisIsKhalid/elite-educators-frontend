@@ -5,11 +5,12 @@ import { useGetReviewsByCourseIdQuery } from "@/redux/api/reviewsApi";
 import { useGetSingleServiceQuery } from "@/redux/api/serviceApi";
 import BookingModal from "./BookingModal";
 import ServiceReview from "./ServiceReview";
+import HashLoading from "./HashLoading";
 
 const ServiceCardDetails = ({ id }: any) => {
   const { data, isLoading } = useGetSingleServiceQuery(id);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <HashLoading />;
   // console.log(data);
   const {
     _id,

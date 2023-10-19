@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import person from "../../../assets/profile.png";
 import { useState } from "react";
 import { useGetReviewsQuery } from "@/redux/api/reviewsApi";
+import HashLoading from "../HashLoading";
 
 const StudentsReview = () => {
   const query: Record<string, any> = {};
@@ -22,7 +23,7 @@ const StudentsReview = () => {
   const reviews = data?.reviews;
   const meta = data?.meta;
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <HashLoading />;
 
   return (
     <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 items-center py-20 px-5">

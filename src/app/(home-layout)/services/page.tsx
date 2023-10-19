@@ -1,6 +1,7 @@
 "use client";
 
 import CourseBanner from "@/components/ui/Banner";
+import HashLoading from "@/components/ui/HashLoading";
 import ServiceCard from "@/components/ui/ServiceCard";
 import { useDebounced } from "@/hooks/useDebounced";
 import { useGetServicesQuery } from "@/redux/api/serviceApi";
@@ -42,7 +43,7 @@ const AllServicePage = () => {
   const meta = data?.meta;
 
   // console.log(searchTerm);
-  if(isLoading) return <p>Loading...</p>;
+  if (isLoading) return <HashLoading />;
 
   const handleAvailabilityChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
@@ -69,7 +70,7 @@ const AllServicePage = () => {
     setSortOrder("");
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <HashLoading />;
 
   return (
     <div className="">

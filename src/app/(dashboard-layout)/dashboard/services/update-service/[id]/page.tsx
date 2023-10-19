@@ -1,5 +1,6 @@
 "use client";
 
+import HashLoading from "@/components/ui/HashLoading";
 import {
   useCreateServiceMutation,
   useGetSingleServiceQuery,
@@ -62,7 +63,7 @@ const UpdateServicePage = ({ params }: { params: { id: string } }) => {
   }, [serviceData?.price, append]);
 
   if (!serviceData) {
-    return <div>Loading...</div>;
+    return <HashLoading />;
   }
   
 

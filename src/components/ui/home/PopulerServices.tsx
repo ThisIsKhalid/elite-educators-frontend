@@ -5,6 +5,7 @@ import SectionTitle from "../SectionTitle";
 import ServiceCard from "../ServiceCard";
 import { BiSolidRightArrow } from "react-icons/bi";
 import Link from "next/link";
+import HashLoading from "../HashLoading";
 
 const PopulerServices = () => {
   const query: Record<string, any> = {};
@@ -15,6 +16,8 @@ const PopulerServices = () => {
   const { data, isLoading } = useGetServicesQuery({ ...query });
 
   const services = data?.services;
+
+  if (isLoading) return <HashLoading />;
 
   return (
     <div className="py-20 px-5">
