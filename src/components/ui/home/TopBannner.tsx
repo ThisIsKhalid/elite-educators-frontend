@@ -52,7 +52,7 @@ const TopBannner = () => {
             </div>
           </div>
             <p className="text-xs">
-              <span className="text-cBlue font-semibold">1.2K+</span> Tutor Available
+              <span className="text-cBlue font-semibold">200+</span> Tutor Available
             </p>
         </div>
       </div>

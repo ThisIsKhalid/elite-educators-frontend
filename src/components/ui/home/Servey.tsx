@@ -35,16 +35,16 @@ const Survey = () => {
             decimals={1}
             decimal="."
             prefix=""
-            suffix="+"
+            suffix=""
           />
         </h1>
-        <p className="text-xl text-gray-700 font-semibold">500+ Reviews</p>
+        <p className="text-xl text-gray-700 font-semibold">Reviews</p>
       </div>
       <div className="lg:border-l-2 border-cOrange text-center">
         <h1 className="text-4xl text-cBlack font-semibold">
           <CountUp
             start={counterOn ? 0 : undefined}
-            end={700}
+            end={4500}
             duration={7}
             // onEnd={() => console.log("Ended! 👏")}
             // onStart={() => console.log("Started! 💨")}
@@ -62,7 +62,7 @@ const Survey = () => {
         <h1 className="text-4xl text-cBlack font-semibold">
           <CountUp
             start={counterOn ? 0 : undefined}
-            end={25}
+            end={200}
             duration={7}
             onEnd={() => console.log("Ended! 👏")}
             onStart={() => console.log("Started! 💨")}

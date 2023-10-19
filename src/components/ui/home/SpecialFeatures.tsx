@@ -16,9 +16,9 @@ const OurFeature = () => {
               <h1 className="lg:text-5xl text-4xl text-white font-medium leading-tight mb-6">
                 Our Special
                 <br />
-                <span className="text-cOrange">Features</span> For You
+                <span className="text-[#FFCD70]">Features</span> For You
               </h1>
-              <button className="flex items-center gap-2 text-lg font-medium px-4 py-3 rounded-full hover:bg-cOrange text-cOrange hover:text-gray-900 border border-cOrange transition-colors delay-75 duration-300">
+              <button className="flex items-center gap-2 text-lg font-medium px-4 py-3 rounded-full hover:bg-[#FFCD70] text-[#FFCD70] hover:text-gray-900 border border-[#FFCD70] transition-colors delay-75 duration-300">
                 See All Features <FiArrowUpRight className="text-xl" />
               </button>
             </div>
