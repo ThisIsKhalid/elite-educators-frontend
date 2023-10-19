@@ -2,7 +2,11 @@
 
 import Contents from "@/components/ui/Contents";
 import Footers from "@/components/ui/Footers";
-import Headers from "@/components/ui/Headers";
+import dynamic from "next/dynamic";
+
+const Headers = dynamic(() => import("@/components/ui/Headers"), {
+  ssr: false,
+});
 
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   
