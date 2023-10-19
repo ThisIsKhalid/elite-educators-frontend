@@ -1,8 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import { useGetReviewsByCourseIdQuery } from "@/redux/api/reviewsApi";
 import { useGetSingleServiceQuery } from "@/redux/api/serviceApi";
 import BookingModal from "./BookingModal";
+import ServiceReview from "./ServiceReview";
 
 const ServiceCardDetails = ({ id }: any) => {
   const { data, isLoading } = useGetSingleServiceQuery(id);
@@ -117,13 +119,11 @@ const ServiceCardDetails = ({ id }: any) => {
 
       {/* review */}
 
-      <div>
-        
+      <div className="border-t border-gray-300 mt-10 pt-10">
+        <ServiceReview id={_id} />
       </div>
     </div>
   );
 };
 
 export default ServiceCardDetails;
-
-

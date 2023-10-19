@@ -30,6 +30,23 @@ export const reviewsApi = baseApi.injectEndpoints({
       providesTags: ["reviews"],
     }),
 
+    getReviewsByCourseId: build.query({
+      query: ({ id, arg }) => {
+        return {
+          url: `${URL}/${id}`,
+          method: "GET",
+          params: arg,
+        };
+      },
+      transformResponse: (response: IServiceReview[], meta: IMeta) => {
+        return {
+          reviews: response,
+          meta,
+        };
+      },
+      providesTags: ["reviews"],
+    }),
+
     deleteReview: build.mutation({
       query: (id) => ({
         url: `${URL}/${id}`,
@@ -42,5 +59,6 @@ export const reviewsApi = baseApi.injectEndpoints({
 
 export const {
     useAddReviewMutation,
-    useGetReviewsQuery
+    useGetReviewsQuery,
+    useGetReviewsByCourseIdQuery
 } = reviewsApi;
