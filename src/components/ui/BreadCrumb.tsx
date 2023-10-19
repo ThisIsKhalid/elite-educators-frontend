@@ -16,7 +16,7 @@ const BreadCrumb = ({className=''}) => {
     <div className={`text-sm breadcrumbs ${className}`}>
       <ul>
         <li>
-          <Link href="/home">Home</Link>
+          <Link href="/">Home</Link>
         </li>
         {path1 && (
           <li>

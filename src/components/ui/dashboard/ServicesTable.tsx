@@ -9,6 +9,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import BreadCrumb from "../BreadCrumb";
+import HashLoading from "../HashLoading";
 
 const CoursesTable = () => {
   const query: Record<string, any> = {};
@@ -27,6 +28,7 @@ const CoursesTable = () => {
   const { data, isLoading } = useGetServicesQuery({ ...query });
   const [deleteService] = useDeleteServiceMutation();
 
+  if (isLoading) return <HashLoading />;
   const services = data?.services;
   const meta = data?.meta;
 

@@ -4,6 +4,7 @@ import { useGetServicesQuery } from "@/redux/api/serviceApi";
 import { useState } from "react";
 import SectionTitle from "../SectionTitle";
 import ServiceCard from "../ServiceCard";
+import HashLoading from "../HashLoading";
 
 const UpComingServices = () => {
   const query: Record<string, any> = {};
@@ -12,7 +13,7 @@ const UpComingServices = () => {
   query["sortOrder"] = "desc";
 
   const { data, isLoading } = useGetServicesQuery({ ...query });
-
+if (isLoading) return <HashLoading />;
   const services = data?.services;
 
   const servicesWithoutPrice = services?.filter(

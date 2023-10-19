@@ -39,11 +39,12 @@ const AllServicePage = () => {
 
   const { data, isLoading } = useGetServicesQuery({ ...query });
 
+  if (isLoading) return <HashLoading />;
+  
   const services = data?.services;
   const meta = data?.meta;
 
   // console.log(searchTerm);
-  if (isLoading) return <HashLoading />;
 
   const handleAvailabilityChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;

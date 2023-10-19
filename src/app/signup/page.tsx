@@ -31,7 +31,7 @@ const SignUpPage = () => {
       // console.log(res);
 
       if (res?.accessToken) {
-        router.push("/home");
+        router.push("/");
       }
       storeUserInfo({ accessToken: res?.accessToken });
       

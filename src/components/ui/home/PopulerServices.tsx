@@ -15,9 +15,9 @@ const PopulerServices = () => {
 
   const { data, isLoading } = useGetServicesQuery({ ...query });
 
+  if (isLoading) return <HashLoading />;
   const services = data?.services;
 
-  if (isLoading) return <HashLoading />;
 
   return (
     <div className="py-20 px-5">

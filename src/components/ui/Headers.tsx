@@ -93,7 +93,7 @@ const Headers = () => {
         <div>
           <div className="md:flex hidden gap-10 items-center text-base">
             <nav>
-              <CustomLink href="/home" title="Home" className="mr-4" />
+              <CustomLink href="/" title="Home" className="mr-4" />
               <CustomLink href="/services" title="Services" className="mx-4" />
               <CustomLink href="/" title="Tutors" className="mx-4" />
               <CustomLink href="/" title="About" className="mx-4" />
@@ -130,7 +130,7 @@ const Headers = () => {
               className="dropdown-content z-[1] menu p-2 shadow bg-gray-100 rounded-box w-52"
             >
               <li>
-                <CustomLink href="/home" title="Home" />
+                <CustomLink href="/" title="Home" />
               </li>
               <li>
                 <CustomLink href="/services" title="Services" />
