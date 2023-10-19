@@ -1,17 +1,10 @@
-"use client";
-import errorImg from "../assets/Error.png";
+'use client'
 
 const ErrorPage = () => {
   return (
-    <div className="bg-cover h-screen relative">
-      <div className="absolute inset-0 flex items-center justify-center">
-        <h1 className="text-4xl text-white font-bold">Something Went Wrong!</h1>
-      </div>
-      <style jsx>{`
-        .bg-cover {
-          background-image: url(${errorImg});
-        }
-      `}</style>
+    <div>
+      <h1>404</h1>
+      <p>Page not found</p>
     </div>
   );
 };

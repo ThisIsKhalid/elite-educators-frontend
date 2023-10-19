@@ -64,8 +64,8 @@ const Survey = () => {
             start={counterOn ? 0 : undefined}
             end={200}
             duration={7}
-            onEnd={() => console.log("Ended! 👏")}
-            onStart={() => console.log("Started! 💨")}
+            // onEnd={() => console.log("Ended! 👏")}
+            // onStart={() => console.log("Started! 💨")}
             delay={0}
             separator=" "
             decimals={0}
@@ -82,8 +82,8 @@ const Survey = () => {
             start={counterOn ? 0 : undefined}
             end={50}
             duration={7}
-            onEnd={() => console.log("Ended! 👏")}
-            onStart={() => console.log("Started! 💨")}
+            // onEnd={() => console.log("Ended! 👏")}
+            // onStart={() => console.log("Started! 💨")}
             delay={0}
             separator=" "
             decimals={0}

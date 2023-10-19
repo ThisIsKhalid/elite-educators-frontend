@@ -1,8 +1,8 @@
 import Providers from "@/lib/Providers";
+import ToasterProvider from "@/lib/ToasterProvider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,15 +14,14 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <Providers>
       <html lang="en" data-theme="light">
-        <body className={inter.className}>
-          <Toaster />
-          {children}
-          </body>
+        <body className={inter.className} suppressHydrationWarning={true}>
+          <ToasterProvider>{children}</ToasterProvider>
+        </body>
       </html>
     </Providers>
   );

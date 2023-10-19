@@ -4,27 +4,17 @@ import Link from "next/link";
 
 const NotFoundPage = () => {
   return (
-    <section className="flex items-center min-h-screen h-full p-16 bg-gray-900 text-gray-100">
-      <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
-        <div className="max-w-md text-center">
-          <h2 className="mb-8 font-extrabold text-9xl text-gray-600">
-            <span className="sr-only">Error</span>404
-          </h2>
-          <p className="text-2xl font-semibold md:text-3xl">
-            Sorry, we couldn&apos;t find this page.
-          </p>
-          <p className="mt-4 mb-8 text-gray-400">
-            But dont worry, you can find plenty of other things on our homepage.
-          </p>
-          <Link
-            href="/home"
-            className="px-8 py-3 font-semibold rounded bg-violet-400 text-gray-900"
-          >
-            Back to homepage
-          </Link>
-        </div>
-      </div>
-    </section>
+    <div className="flex flex-col items-center justify-center w-full h-screen">
+      <h1 className="text-6xl font-bold text-gray-800">404</h1>
+      <h2 className="text-2xl font-semibold text-gray-600">
+        Page not found
+      </h2>
+      <Link href="/">
+        <a className="px-4 py-2 mt-4 text-white bg-blue-600 rounded hover:bg-blue-700">
+          Go back home
+        </a>
+      </Link>
+    </div>
   );
 };
 
