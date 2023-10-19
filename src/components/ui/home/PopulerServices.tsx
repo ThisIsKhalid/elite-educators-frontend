@@ -3,7 +3,8 @@
 import { useGetServicesQuery } from "@/redux/api/serviceApi";
 import SectionTitle from "../SectionTitle";
 import ServiceCard from "../ServiceCard";
-import { useState } from "react";
+import { BiSolidRightArrow } from "react-icons/bi";
+import Link from "next/link";
 
 const PopulerServices = () => {
   const query: Record<string, any> = {};
@@ -25,6 +26,17 @@ const PopulerServices = () => {
         {services?.map((service: any) => (
           <ServiceCard key={service._id} service={service} />
         ))}
+      </div>
+
+      <div className="flex items-center justify-center">
+        <Link href="/services">
+          <button className="btn bg-gray-800 text-white btn-sm hover:bg-cBlue w-40 rounded-full flex items-center justify-center">
+            <span className="text-cOrange mr-3">
+              <BiSolidRightArrow />
+            </span>{" "}
+            See More
+          </button>
+        </Link>
       </div>
     </div>
   );
