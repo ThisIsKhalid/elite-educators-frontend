@@ -95,8 +95,8 @@ const Headers = () => {
             <nav>
               <CustomLink href="/home" title="Home" className="mr-4" />
               <CustomLink href="/services" title="Services" className="mx-4" />
-              <CustomLink href="/tutors" title="Tutors" className="mx-4" />
-              <CustomLink href="/about" title="About" className="mx-4" />
+              <CustomLink href="/" title="Tutors" className="mx-4" />
+              <CustomLink href="/" title="About" className="mx-4" />
               <CustomLink href="/cart" title="Cart" className="mx-4" />
 
               {userLoggedIn ? (
@@ -136,10 +136,10 @@ const Headers = () => {
                 <CustomLink href="/services" title="Services" />
               </li>
               <li>
-                <CustomLink href="/tutors" title="Tutors" />
+                <CustomLink href="/" title="Tutors" />
               </li>
               <li>
-                <CustomLink href="/about" title="About" />
+                <CustomLink href="/" title="About" />
               </li>
               {userLoggedIn ? (
                 <>

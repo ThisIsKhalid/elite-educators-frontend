@@ -24,10 +24,10 @@ const Footer = () => {
                 <Link href='/home'>Home</Link>
               </li>
               <li>
-                <Link href='/about'>About</Link>
+                <Link href='/'>About</Link>
               </li>
               <li>
-                <Link href='/contact'>Contact</Link>
+                <Link href='/'>Contact</Link>
               </li>
             </ul>
           </div>
@@ -38,7 +38,7 @@ const Footer = () => {
                 <Link href='/services'>Services</Link>
               </li>
               <li>
-                <Link href='/blogs'>Blog</Link>
+                <Link href='/'>Blog</Link>
               </li>
               <li>
                 <Link href='/events'>Events</Link>
@@ -49,13 +49,13 @@ const Footer = () => {
             <h3 className="text-xl font-medium">Product</h3>
             <ul className="flex flex-col gap-2 mt-4 text-gray-300">
               <li>
-                <Link href='/pricing'>Pricing</Link>
+                <Link href='/'>Pricing</Link>
               </li>
               <li>
-                <Link href='/faq'>FAQ</Link>
+                <Link href='/'>FAQ</Link>
               </li>
               <li>
-                <Link href='/terms'>Terms</Link>
+                <Link href='/'>Terms</Link>
               </li>
             </ul>
           </div>
