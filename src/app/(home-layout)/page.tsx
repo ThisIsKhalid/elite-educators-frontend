@@ -1,5 +1,6 @@
 "use client";
 
+import FeedBackForm from "@/components/ui/home/FeedbackForm";
 import PopulerServices from "@/components/ui/home/PopulerServices";
 import Servey from "@/components/ui/home/Servey";
 import OurFeature from "@/components/ui/home/SpecialFeatures";
@@ -18,6 +19,7 @@ const HomePage = () => {
       <UpcomingEvents />
       <OurFeature />
       <StudentsReview />
+      <FeedBackForm />
     </div>
   );
 };
