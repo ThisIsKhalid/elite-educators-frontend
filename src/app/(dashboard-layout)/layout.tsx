@@ -1,5 +1,6 @@
 "use client";
 
+import HashLoading from "@/components/ui/HashLoading";
 import Sidebar from "@/components/ui/dashboard/Sidebar";
 import { isLoggedIn } from "@/services/auth.service";
 import { useRouter } from "next/navigation";
@@ -20,7 +21,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   }, [router, isLoading, userLoggedIn]);
 
   if (!isLoading) {
-    return <p>Redirecting...</p>;
+    return <HashLoading />;
   }
 
   return (

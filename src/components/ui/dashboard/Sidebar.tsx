@@ -1,5 +1,6 @@
 "use client";
 
+import { getUserInfo } from "@/services/auth.service";
 import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineProfile } from "react-icons/ai";
@@ -15,6 +16,9 @@ const Sidebar = () => {
     setIsShrunk(!isShrunk);
   };
 
+  const loggedUser: any = getUserInfo();
+  // console.log(loggedUser);
+
   return (
     <div
       className={`bg-cDeepBlue min-h-screen h-full ${
@@ -28,7 +32,10 @@ const Sidebar = () => {
           <BsBoxArrowInLeft className="text-gray-100 text-xl" />
         )}
       </button>
-      <Link href="/" className="text-gray-100 text-2xl absolute bottom-10 left-1/2 -translate-x-1/2" >
+      <Link
+        href="/"
+        className="text-gray-100 text-2xl absolute bottom-10 left-1/2 -translate-x-1/2"
+      >
         <BiHomeAlt />
       </Link>
 
@@ -72,6 +79,21 @@ const Sidebar = () => {
             </>
           )}
         </Link>
+        {loggedUser?.role === "super_admin" && (
+          <Link
+            href="/dashboard/users"
+            className="flex items-center  gap-3 hover:bg-gray-800 py-2 pl-2 rounded-lg"
+          >
+            {isShrunk ? (
+              <FaPeopleGroup className="text-2xl" />
+            ) : (
+              <>
+                <FaPeopleGroup className="text-2xl" />
+                <h1 className={`font-bold text-base`}>Clients</h1>
+              </>
+            )}
+          </Link>
+        )}
       </div>
     </div>
   );
