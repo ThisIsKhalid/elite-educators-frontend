@@ -1,13 +1,15 @@
-import Link from 'next/link';
-import React from 'react'
+"use client";
+
+import Link from "next/link";
+import React from "react";
 
 type ButtonProps = {
-    href?: string;
-    text: string;
-    className?: string;
-}
+  href?: string;
+  text: string;
+  className?: string;
+};
 
-const Button = ({href, text, className=""}:ButtonProps) => {
+const Button = ({ href, text, className = "" }: ButtonProps) => {
   return (
     <Link href={href ? href : "/"}>
       <button
@@ -17,6 +19,6 @@ const Button = ({href, text, className=""}:ButtonProps) => {
       </button>
     </Link>
   );
-}
+};
 
-export default Button
+export default Button;

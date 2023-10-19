@@ -1,3 +1,5 @@
+"use client";
+
 import { useAddBookingMutation } from "@/redux/api/bookingApi";
 import { getUserInfo } from "@/services/auth.service";
 import { IBooking } from "@/types";
@@ -35,7 +37,7 @@ const BookingModal = ({ service }: any) => {
       return toast.error("Please signin to book a service");
     }
 
-    if(!selectedPrice?.daysPerWeek || !selectedPrice?.amountPerWeek){
+    if (!selectedPrice?.daysPerWeek || !selectedPrice?.amountPerWeek) {
       return toast.error("Please select a price");
     }
 

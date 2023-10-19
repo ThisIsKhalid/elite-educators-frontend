@@ -1,4 +1,4 @@
-'use client'
+
 
 import Button from "@/components/ui/Button";
 import CoursesTable from "@/components/ui/dashboard/ServicesTable";

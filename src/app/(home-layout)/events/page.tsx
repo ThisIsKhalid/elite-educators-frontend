@@ -1,3 +1,5 @@
+'use client'
+
 import CourseBanner from '@/components/ui/Banner';
 import EventCard from '@/components/ui/EventCard';
 import React from 'react'

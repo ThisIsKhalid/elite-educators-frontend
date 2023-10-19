@@ -1,3 +1,5 @@
+"use client";
+
 import PopulerServices from "@/components/ui/home/PopulerServices";
 import Servey from "@/components/ui/home/Servey";
 import OurFeature from "@/components/ui/home/SpecialFeatures";

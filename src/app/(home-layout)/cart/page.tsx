@@ -6,9 +6,7 @@ import { useAppSelector } from "@/redux/hooks";
 
 const CartPage = () => {
   const cartData = useAppSelector((state) => state.service.services);
-  if (cartData.length >= 1) {
-    console.log(cartData);
-  }
+  
   return (
     <div>
       <CourseBanner title="Cart" />

@@ -1,3 +1,5 @@
+"use client";
+
 import { authKey } from "@/constants/storageKey";
 import { isLoggedIn, removeUserInfo } from "@/services/auth.service";
 import Image from "next/image";
@@ -96,7 +98,6 @@ const Headers = () => {
               <CustomLink href="/tutors" title="Tutors" className="mx-4" />
               <CustomLink href="/about" title="About" className="mx-4" />
               <CustomLink href="/cart" title="Cart" className="mx-4" />
-              
 
               {userLoggedIn ? (
                 <>

@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
 import { useGetReviewsByCourseIdQuery } from "@/redux/api/reviewsApi";
 import { useGetSingleServiceQuery } from "@/redux/api/serviceApi";
 import BookingModal from "./BookingModal";
