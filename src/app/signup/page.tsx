@@ -7,15 +7,21 @@ import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import loginImage from "../../assets/Sign up-pana.svg";
 import { storeUserInfo } from "@/services/auth.service";
+import toast from "react-hot-toast";
 
 type FormValues = {
   name: string;
   email: string;
   password: string;
   phonenumber: string;
+  // profileImgUrl: string;
 };
 
 const SignUpPage = () => {
+  const preset_key = "rs0yclsi";
+  const cloud_name = "dz8rx1vk5";
+
+
   const {
     register,
     handleSubmit,
@@ -26,18 +32,19 @@ const SignUpPage = () => {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
+    console.log(data);
     try {
       const res = await userSignup({ ...data }).unwrap();
       // console.log(res);
 
       if (res?.accessToken) {
+        storeUserInfo({ accessToken: res?.accessToken });
+        toast.success("Signup successful");
         router.push("/");
       }
-      storeUserInfo({ accessToken: res?.accessToken });
-      
-
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      const errorMessage = error?.data?.message || "Signup failed";
+      toast.error(errorMessage);
     }
   };
 
@@ -89,7 +96,7 @@ const SignUpPage = () => {
               <p>{errors.password && <span>{errors.password.message}</span>}</p>
             </div>
 
-            <div className="mb-3">
+            <div className="mb-2">
               <label className="label">Phone Number</label>
               <input
                 type="text"
@@ -99,6 +106,19 @@ const SignUpPage = () => {
               />
               <p>{errors.phonenumber && <span>This field is required</span>}</p>
             </div>
+
+            {/* <div className="mb-3">
+              <label className="label">Image</label>
+              <input
+                type="file"
+                placeholder="Your Profile Image"
+                className="border border-cBlack file-input focus:outline focus:outline-cOrange focus:border-none lg:w-3/4 w-full"
+                {...register("profileImgUrl", { required: true })}
+              />
+              <p>
+                {errors.profileImgUrl && <span>This field is required</span>}
+              </p>
+            </div> */}
 
             <button
               type="submit"
