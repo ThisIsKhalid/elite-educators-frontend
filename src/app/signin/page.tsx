@@ -11,6 +11,7 @@ import { signInSchema } from "@/schemas/signin";
 import { useUserloginMutation } from "@/redux/api/authApi";
 import { useRouter } from "next/navigation";
 import { storeUserInfo } from "@/services/auth.service";
+import toast from "react-hot-toast";
 
 type FormValues = {
   id: string;
@@ -27,12 +28,14 @@ const SignInPage = () => {
       // console.log(res);
 
       if (res?.accessToken) {
+        storeUserInfo({ accessToken: res?.accessToken });
+        toast.success("Signup successful");
         router.push("/");
       }
-      storeUserInfo({ accessToken: res?.accessToken });
 
-    } catch (err: any) {
-      console.error(err.message);
+    } catch (error: any) {
+      const errorMessage = error?.data?.message || "Signup failed";
+      toast.error(errorMessage);
     }
   };
   return (
@@ -78,6 +81,12 @@ const SignInPage = () => {
             Signup
           </Link>{" "}
           here.
+        </p>
+        <p>
+          Back to{" "}
+          <Link href="/" className="text-cBlue font-semibold">
+            Home
+          </Link>
         </p>
       </div>
     </div>

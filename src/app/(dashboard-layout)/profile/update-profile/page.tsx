@@ -29,7 +29,7 @@ const ProfileUpdate = () => {
         
         if (res) {
           toast.success("Course updated successfully !");
-          router.push("/dashboard/profile");
+          router.push("/profile");
           reset();
         }
     }

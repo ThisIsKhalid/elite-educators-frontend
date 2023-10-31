@@ -7,10 +7,10 @@ const Footer = () => {
 
   return (
     <section className='bg-white'>
-      <div className="container mx-auto bg-cDeepBlue pt-20 pb-10 md:rounded-t-3xl px-10 text-white">
+      <div className="container mx-auto bg-cDeepBlue pt-10 pb-5 md:rounded-t-3xl px-10 text-white">
         <div className="grid lg:grid-cols-5 grid-cols-2  gap-3">
           <div className="col-span-2">
-            <h1 className="text-3xl mb-4 text-[#FFCD70] font-bold">
+            <h1 className="text-3xl mb-4 text-cOrange font-bold">
               Elite Educators
             </h1>
             <p className="text-gray-400 md:w-[80%] w-full">
@@ -62,7 +62,7 @@ const Footer = () => {
         </div>
 
         {/* footer down */}
-        <div className="mt-20 flex items-center justify-between text-gray-300 text-sm">
+        <div className="mt-5 flex items-center justify-between text-gray-300 text-sm">
           <div className="flex items-center ">
             <p>
               © Khalid Hasan {new Date().getFullYear()} | All right reserved.

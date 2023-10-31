@@ -1,13 +1,18 @@
 "use client";
 
-import { useCreateServiceMutation } from "@/redux/api/serviceApi";
+import HashLoading from "@/components/ui/HashLoading";
+import {
+  useCreateServiceMutation,
+  useGetSingleServiceQuery,
+  useUpdateServiceMutation,
+} from "@/redux/api/serviceApi";
 import { courseYupSchema } from "@/schemas/course";
 import { getUserInfo } from "@/services/auth.service";
 import { IService } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { BiSolidRightArrow } from "react-icons/bi";
@@ -27,7 +32,9 @@ type FormValues = {
   price: IPrice[];
 };
 
-const AddService = () => {
+const UpdateServicePage = ({ params }: { params: { id: string } }) => {
+  const id = params?.id;
+
   const router = useRouter();
   const {
     handleSubmit,
@@ -43,7 +50,22 @@ const AddService = () => {
   const userInfo: any = getUserInfo();
   const userId = userInfo?.id;
 
-  const [createService] = useCreateServiceMutation();
+  const { data: serviceData } = useGetSingleServiceQuery(id);
+  const [updateService] = useUpdateServiceMutation();
+
+  
+  useEffect(() => {
+    if (serviceData?.price) {
+      serviceData?.price.forEach((price: any) => {
+        append(price);
+      });
+    }
+  }, [serviceData?.price, append]);
+
+  if (!serviceData) {
+    return <HashLoading />;
+  }
+  
 
   const onSubmit = async (data: any) => {
     try {
@@ -56,6 +78,8 @@ const AddService = () => {
         newPrice.push(customizedPrice);
       });
 
+
+
       const service = {
         instructorId: userId,
         subject: data.subject,
@@ -67,11 +91,13 @@ const AddService = () => {
         classtime: data.classtime,
       };
 
-      const res = await createService({ ...service }).unwrap();
-      // console.log(res);
+    //   console.log(service);
+      const res = await updateService({ id, ...service }).unwrap();
+    //   console.log(res);
+
       if (res) {
-        toast.success("Course added successfully !");
-        router.push("/dashboard/services");
+        toast.success("Course updated successfully !");
+        router.push("/service-list");
         reset();
       }
     } catch (error) {
@@ -79,11 +105,14 @@ const AddService = () => {
     }
   };
 
+
+  
+
   return (
     <div className="min-h-screen">
       <div className="flex items-center justify-between mb-5 px-10">
         <h1 className="lg:text-3xl text-2xl uppercase text-center font-bold">
-          Add Service
+          Update Service
         </h1>
         <Link href="/dashboard/services">
           <button className="btn btn-sm bg-cDeepBlue text-gray-100 hover:bg-cOrange py-2 w-40 rounded-full flex items-center justify-center">
@@ -110,7 +139,7 @@ const AddService = () => {
                 name="subject"
                 control={control}
                 rules={{ required: "Subject is required" }}
-                defaultValue=""
+                defaultValue={serviceData?.subject}
                 render={({ field }) => (
                   <input
                     {...field}
@@ -136,7 +165,7 @@ const AddService = () => {
                 name="description"
                 control={control}
                 rules={{ required: "Description is required" }}
-                defaultValue=""
+                defaultValue={serviceData?.description}
                 render={({ field }) => (
                   <textarea
                     {...field}
@@ -163,6 +192,7 @@ const AddService = () => {
                 name="level"
                 control={control}
                 rules={{ required: "Level is required" }}
+                defaultValue={serviceData?.level}
                 render={({ field }) => (
                   <select
                     {...field}
@@ -198,6 +228,7 @@ const AddService = () => {
                 name="location"
                 control={control}
                 rules={{ required: "Location is required" }}
+                defaultValue={serviceData?.location}
                 render={({ field }) => (
                   <input
                     {...field}
@@ -222,6 +253,7 @@ const AddService = () => {
               <Controller
                 name="seats"
                 control={control}
+                defaultValue={serviceData?.seats}
                 rules={{
                   required:
                     "Seats is required & value should be greater than 0",
@@ -252,6 +284,7 @@ const AddService = () => {
                 name="classtime"
                 control={control}
                 rules={{ required: "Classtime is required" }}
+                defaultValue={serviceData?.classtime}
                 render={({ field }) => (
                   <input
                     {...field}
@@ -281,6 +314,7 @@ const AddService = () => {
                   name={`price.${index}.amountPerWeek`}
                   control={control}
                   rules={{ required: "Price per week is required", min: 0 }}
+                  defaultValue={serviceData?.price[index]?.daysPerWeek}
                   render={({ field }) => (
                     <input
                       {...field}
@@ -301,6 +335,7 @@ const AddService = () => {
                   name={`price.${index}.daysPerWeek`}
                   control={control}
                   rules={{ required: "Days per week is required", min: 0 }}
+                  defaultValue={serviceData?.price[index]?.daysPerWeek}
                   render={({ field }) => (
                     <input
                       {...field}
@@ -354,4 +389,4 @@ const AddService = () => {
   );
 };
 
-export default AddService;
+export default UpdateServicePage;

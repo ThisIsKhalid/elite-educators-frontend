@@ -1,18 +1,13 @@
 "use client";
 
-import HashLoading from "@/components/ui/HashLoading";
-import {
-  useCreateServiceMutation,
-  useGetSingleServiceQuery,
-  useUpdateServiceMutation,
-} from "@/redux/api/serviceApi";
+import { useCreateServiceMutation } from "@/redux/api/serviceApi";
 import { courseYupSchema } from "@/schemas/course";
 import { getUserInfo } from "@/services/auth.service";
 import { IService } from "@/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { BiSolidRightArrow } from "react-icons/bi";
@@ -32,9 +27,7 @@ type FormValues = {
   price: IPrice[];
 };
 
-const UpdateServicePage = ({ params }: { params: { id: string } }) => {
-  const id = params?.id;
-
+const AddService = () => {
   const router = useRouter();
   const {
     handleSubmit,
@@ -50,22 +43,7 @@ const UpdateServicePage = ({ params }: { params: { id: string } }) => {
   const userInfo: any = getUserInfo();
   const userId = userInfo?.id;
 
-  const { data: serviceData } = useGetSingleServiceQuery(id);
-  const [updateService] = useUpdateServiceMutation();
-
-  
-  useEffect(() => {
-    if (serviceData?.price) {
-      serviceData?.price.forEach((price: any) => {
-        append(price);
-      });
-    }
-  }, [serviceData?.price, append]);
-
-  if (!serviceData) {
-    return <HashLoading />;
-  }
-  
+  const [createService] = useCreateServiceMutation();
 
   const onSubmit = async (data: any) => {
     try {
@@ -78,8 +56,6 @@ const UpdateServicePage = ({ params }: { params: { id: string } }) => {
         newPrice.push(customizedPrice);
       });
 
-
-
       const service = {
         instructorId: userId,
         subject: data.subject,
@@ -91,13 +67,11 @@ const UpdateServicePage = ({ params }: { params: { id: string } }) => {
         classtime: data.classtime,
       };
 
-    //   console.log(service);
-      const res = await updateService({ id, ...service }).unwrap();
-    //   console.log(res);
-
+      const res = await createService({ ...service }).unwrap();
+      // console.log(res);
       if (res) {
-        toast.success("Course updated successfully !");
-        router.push("/dashboard/services");
+        toast.success("Course added successfully !");
+        router.push("/service-list");
         reset();
       }
     } catch (error) {
@@ -105,14 +79,11 @@ const UpdateServicePage = ({ params }: { params: { id: string } }) => {
     }
   };
 
-
-  
-
   return (
     <div className="min-h-screen">
       <div className="flex items-center justify-between mb-5 px-10">
         <h1 className="lg:text-3xl text-2xl uppercase text-center font-bold">
-          Update Service
+          Add Service
         </h1>
         <Link href="/dashboard/services">
           <button className="btn btn-sm bg-cDeepBlue text-gray-100 hover:bg-cOrange py-2 w-40 rounded-full flex items-center justify-center">
@@ -139,7 +110,7 @@ const UpdateServicePage = ({ params }: { params: { id: string } }) => {
                 name="subject"
                 control={control}
                 rules={{ required: "Subject is required" }}
-                defaultValue={serviceData?.subject}
+                defaultValue=""
                 render={({ field }) => (
                   <input
                     {...field}
@@ -165,7 +136,7 @@ const UpdateServicePage = ({ params }: { params: { id: string } }) => {
                 name="description"
                 control={control}
                 rules={{ required: "Description is required" }}
-                defaultValue={serviceData?.description}
+                defaultValue=""
                 render={({ field }) => (
                   <textarea
                     {...field}
@@ -192,7 +163,6 @@ const UpdateServicePage = ({ params }: { params: { id: string } }) => {
                 name="level"
                 control={control}
                 rules={{ required: "Level is required" }}
-                defaultValue={serviceData?.level}
                 render={({ field }) => (
                   <select
                     {...field}
@@ -228,7 +198,6 @@ const UpdateServicePage = ({ params }: { params: { id: string } }) => {
                 name="location"
                 control={control}
                 rules={{ required: "Location is required" }}
-                defaultValue={serviceData?.location}
                 render={({ field }) => (
                   <input
                     {...field}
@@ -253,7 +222,6 @@ const UpdateServicePage = ({ params }: { params: { id: string } }) => {
               <Controller
                 name="seats"
                 control={control}
-                defaultValue={serviceData?.seats}
                 rules={{
                   required:
                     "Seats is required & value should be greater than 0",
@@ -284,7 +252,6 @@ const UpdateServicePage = ({ params }: { params: { id: string } }) => {
                 name="classtime"
                 control={control}
                 rules={{ required: "Classtime is required" }}
-                defaultValue={serviceData?.classtime}
                 render={({ field }) => (
                   <input
                     {...field}
@@ -314,7 +281,6 @@ const UpdateServicePage = ({ params }: { params: { id: string } }) => {
                   name={`price.${index}.amountPerWeek`}
                   control={control}
                   rules={{ required: "Price per week is required", min: 0 }}
-                  defaultValue={serviceData?.price[index]?.daysPerWeek}
                   render={({ field }) => (
                     <input
                       {...field}
@@ -335,7 +301,6 @@ const UpdateServicePage = ({ params }: { params: { id: string } }) => {
                   name={`price.${index}.daysPerWeek`}
                   control={control}
                   rules={{ required: "Days per week is required", min: 0 }}
-                  defaultValue={serviceData?.price[index]?.daysPerWeek}
                   render={({ field }) => (
                     <input
                       {...field}
@@ -389,4 +354,4 @@ const UpdateServicePage = ({ params }: { params: { id: string } }) => {
   );
 };
 
-export default UpdateServicePage;
+export default AddService;

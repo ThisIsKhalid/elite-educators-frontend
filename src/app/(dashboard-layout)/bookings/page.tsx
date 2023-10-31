@@ -1,6 +1,7 @@
 "use client";
 
-import BookingList from "@/components/ui/dashboard/BookingList";
+import BookingList from "../../../components/ui/dashboard/BookingList";
+
 
 const BookingsPage = () => {
   return (

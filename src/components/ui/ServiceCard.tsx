@@ -1,19 +1,20 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import { addToCart } from "@/redux/features/service/serviceSlice";
+import { addToCart, removeFromCart } from "@/redux/features/service/serviceSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { BsCart2, BsStarFill } from "react-icons/bs";
+import { BsCart2, BsCartCheck, BsStarFill } from "react-icons/bs";
 import profile from "../../assets/user-profile.png";
 import BookingModal from "./BookingModal";
 
 const ServiceCard = ({ service }: any) => {
   const cartData = useAppSelector((state) => state.service.services);
   const dispatch = useAppDispatch();
+  const [isInCart, setIsInCart] = useState(false);
 
   const {
     _id,
@@ -33,15 +34,18 @@ const ServiceCard = ({ service }: any) => {
   }
 
   const handleAddToCart = () => {
-    if (cartData.length >= 0) {
-      const check = cartData.find((item) => item._id === _id);
-      if (check) {
-        return toast.error("Already added to cart");
-      } else {
-        dispatch(addToCart(service));
-        return toast.success("Added to cart");
-      }
-    } 
+    const check = cartData.find((item) => item._id === _id);
+    if (check) {
+      // If the item is in the cart, remove it
+      dispatch(removeFromCart(service));
+      toast.success("Removed from cart");
+      setIsInCart(false);
+    } else {
+      // If the item is not in the cart, add it
+      dispatch(addToCart(service));
+      toast.success("Added to cart");
+      setIsInCart(true);
+    }
   };
 
   return (
@@ -55,9 +59,9 @@ const ServiceCard = ({ service }: any) => {
         <button
           onClick={handleAddToCart}
           className="tooltip tooltip-left bg-cDeepBlue text-white text-2xl absolute top-0 right-0 border-l border-b rounded-es-lg px-2 py-1"
-          data-tip="Add To Cart"
+          data-tip={isInCart ? "Remove From Cart" : "Add To Cart"}
         >
-          <BsCart2 />
+          {isInCart ? <BsCartCheck /> : <BsCart2 />}
         </button>
 
         <div className="p-6">

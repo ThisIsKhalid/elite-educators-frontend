@@ -11,7 +11,7 @@ import { ImProfile } from "react-icons/im";
 import { TbBrandBooking } from "react-icons/tb";
 
 const Sidebar = () => {
-  const [isShrunk, setIsShrunk] = useState(true);
+  const [isShrunk, setIsShrunk] = useState(false);
 
   const toggleSidebarWidth = () => {
     setIsShrunk(!isShrunk);
@@ -55,7 +55,7 @@ const Sidebar = () => {
           )}
         </Link>
         <Link
-          href="/dashboard/profile"
+          href="/profile"
           className="flex items-center  gap-3 hover:bg-gray-800 py-2 pl-2 rounded-lg"
         >
           {isShrunk ? (
@@ -72,7 +72,7 @@ const Sidebar = () => {
           loggedUser?.role === "super_admin") && (
           <>
             <Link
-              href="/dashboard/services"
+              href="/service-list"
               className="flex items-center  gap-3 hover:bg-gray-800 py-2 pl-2 rounded-lg"
             >
               {isShrunk ? (
@@ -85,7 +85,7 @@ const Sidebar = () => {
               )}
             </Link>
             <Link
-              href="/dashboard/users"
+              href="/users"
               className="flex items-center  gap-3 hover:bg-gray-800 py-2 pl-2 rounded-lg"
             >
               {isShrunk ? (
@@ -100,7 +100,7 @@ const Sidebar = () => {
           </>
         )}
         <Link
-          href="/dashboard/bookings"
+          href="/bookings"
           className="flex items-center  gap-3 hover:bg-gray-800 py-2 pl-2 rounded-lg"
         >
           {isShrunk ? (

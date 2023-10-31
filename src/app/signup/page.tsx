@@ -135,6 +135,12 @@ const SignUpPage = () => {
           </Link>{" "}
           here.
         </p>
+        <p>
+          Back to{" "}
+          <Link href="/" className="text-cBlue font-semibold">
+            Home
+          </Link>
+        </p>
       </div>
     </div>
   );

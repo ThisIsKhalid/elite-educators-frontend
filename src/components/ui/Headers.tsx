@@ -46,7 +46,7 @@ const Headers = () => {
 
   return (
     <>
-      <div
+      {/* <div
         style={{
           display: "flex",
           alignItems: "center",
@@ -74,54 +74,49 @@ const Headers = () => {
             Subscribe now
           </span>
         </p>
-      </div>
+      </div> */}
 
       <div className="flex items-center justify-between px-5 bg-[#FFFFFF]">
         <div>
           <Image src={logo} alt="logo" width={160} height={80} style={{}} />
         </div>
-        <div className="relative md:flex hidden">
-          <input
-            type="text"
-            placeholder="What do you want to learn?"
-            className="border border-cBlack lg:w-96 input focus:outline-none focus:border-cOrange pl-10"
-          />
-          <span className="absolute left-3 top-4 text-lg">
-            <BiSearch />
-          </span>
+        <div className="md:flex hidden gap-10 items-center text-base">
+          <CustomLink href="/" title="Home" className="" />
+          <CustomLink href="/services" title="Services" className="" />
+          <CustomLink href="/events" title="Events" className="" />
+          {userLoggedIn ? (
+            <>
+              <CustomLink
+                href="/dashboard"
+                title="Dashboard"
+                className=""
+              />
+            </>
+          ) : (
+            <>
+              <CustomLink href="/signin" title="Signin" className="" />
+            </>
+          )}
         </div>
         <div>
-          <div className="md:flex hidden gap-10 items-center text-base">
-            <nav>
-              <CustomLink href="/" title="Home" className="mr-4" />
-              <CustomLink href="/services" title="Services" className="mx-4" />
-              <CustomLink href="/events" title="Events" className="mx-4" />
-
+          <div className="md:flex hidden items-center gap-3 text-base mb-2">
+            
               {/* <CustomLink href="/" title="Tutors" className="mx-4" />
               <CustomLink href="/" title="About" className="mx-4" /> */}
-              <CustomLink href="/cart" title="Cart" className="mx-4" />
+              <Link href="/cart" className="text-xl font-semibold">
+                <BsCart2 />
+              </Link>
 
-              {userLoggedIn ? (
+              {userLoggedIn && (
                 <>
-                  <CustomLink
-                    href="/dashboard"
-                    title="Dashboard"
-                    className="mx-4"
-                  />
                   <button
                     onClick={logout}
-                    className="btn btn-xs bg-cBlack text-gray-100 hover:bg-cBlue ml-4"
+                    className="btn btn-xs bg-cBlack text-gray-100 hover:bg-cBlue"
                   >
                     Signout
                   </button>
                 </>
-              ) : (
-                <>
-                  <CustomLink href="/signin" title="Signin" className="ml-4" />
-                  <CustomLink href="/signup" title="Signup" className="ml-4" />
-                </>
               )}
-            </nav>
           </div>
           <div className="dropdown dropdown-bottom dropdown-end flex md:hidden">
             <label tabIndex={0} className="text-xl">
