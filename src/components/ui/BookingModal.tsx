@@ -3,13 +3,16 @@
 import { useAddBookingMutation } from "@/redux/api/bookingApi";
 import { getUserInfo } from "@/services/auth.service";
 import { IBooking } from "@/types";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { ImCancelCircle } from "react-icons/im";
+import Swal from "sweetalert2";
 
 const BookingModal = ({ service }: any) => {
   const loggedUser: any = getUserInfo();
   const [addBooking] = useAddBookingMutation();
+  const router = useRouter();
 
   const { _id, subject, price, instructorId } = service;
 
@@ -61,8 +64,19 @@ const BookingModal = ({ service }: any) => {
       };
 
       const res = await addBooking({ ...data }).unwrap();
-      if (res) {
-        toast.success("Booking successful");
+      if (res.id) {
+        Swal.fire({
+          title: "Booking Successful",
+          text: "Please check your booking list",
+          icon: "success",
+          showCancelButton: true,
+          confirmButtonText: "Go to Bookings",
+          cancelButtonText: "Stay here",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            router.push("/bookings");
+          }
+        });
       }
     }
   };
