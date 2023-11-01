@@ -1,5 +1,7 @@
 "use client";
 
+import { SingleImageDropzone } from "@/components/ui/SingleImageDropzone";
+import { useEdgeStore } from "@/lib/edgestore";
 import { useCreateServiceMutation } from "@/redux/api/serviceApi";
 import { courseYupSchema } from "@/schemas/course";
 import { getUserInfo } from "@/services/auth.service";
@@ -28,6 +30,14 @@ type FormValues = {
 };
 
 const AddService = () => {
+  const [file, setFile] = useState<File>();
+  const [urls, setUrls] = useState<{
+    url: string;
+    thumbnailUrl: string | null;
+  }>();
+  const [progress, setProgress] = useState<number>(0);
+  const { edgestore } = useEdgeStore();
+
   const router = useRouter();
   const {
     handleSubmit,
@@ -46,36 +56,47 @@ const AddService = () => {
   const [createService] = useCreateServiceMutation();
 
   const onSubmit = async (data: any) => {
-    try {
-      let newPrice: IPrice[] = [];
-      data?.price?.forEach((price: any) => {
-        const customizedPrice = {
-          amountPerWeek: Number(price.amountPerWeek),
-          daysPerWeek: Number(price.daysPerWeek),
-        };
-        newPrice.push(customizedPrice);
+    if (file) {
+      const image = await edgestore.myPublicImages.upload({
+        file,
+        onProgressChange: (progress) => {
+          setProgress(progress);
+        },
       });
 
-      const service = {
-        instructorId: userId,
-        subject: data.subject,
-        description: data.description,
-        price: newPrice,
-        level: data.level,
-        location: data.location,
-        seats: Number(data.seats),
-        classtime: data.classtime,
-      };
+      try {
+        let newPrice: IPrice[] = [];
+        data?.price?.forEach((price: any) => {
+          const customizedPrice = {
+            amountPerWeek: Number(price.amountPerWeek),
+            daysPerWeek: Number(price.daysPerWeek),
+          };
+          newPrice.push(customizedPrice);
+        });
 
-      const res = await createService({ ...service }).unwrap();
-      // console.log(res);
-      if (res) {
-        toast.success("Course added successfully !");
-        router.push("/service-list");
-        reset();
+        const service = {
+          instructorId: userId,
+          subject: data.subject,
+          description: data.description,
+          price: newPrice,
+          level: data.level,
+          location: data.location,
+          seats: Number(data.seats),
+          classtime: data.classtime,
+          image: image?.url,
+        };
+        console.log(service);
+
+        const res = await createService({ ...service }).unwrap();
+        // console.log(res);
+        if (res) {
+          toast.success("Course added successfully !");
+          router.push("/service-list");
+          reset();
+        }
+      } catch (error) {
+        toast.error("Something went wrong");
       }
-    } catch (error) {
-      toast.error("Something went wrong");
     }
   };
 
@@ -280,7 +301,7 @@ const AddService = () => {
                 <Controller
                   name={`price.${index}.amountPerWeek`}
                   control={control}
-                  rules={{ required: "Price per week is required", min: 0 }}
+                  rules={{ required: "Price per week is required" }}
                   render={({ field }) => (
                     <input
                       {...field}
@@ -300,7 +321,7 @@ const AddService = () => {
                 <Controller
                   name={`price.${index}.daysPerWeek`}
                   control={control}
-                  rules={{ required: "Days per week is required", min: 0 }}
+                  rules={{ required: "Days per week is required", min: 2 }}
                   render={({ field }) => (
                     <input
                       {...field}
@@ -320,6 +341,23 @@ const AddService = () => {
                 </button>
               </div>
             ))}
+
+            <div className="">
+              <label
+                htmlFor="image"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Image
+              </label>
+              <SingleImageDropzone
+                width={200}
+                height={200}
+                value={file}
+                onChange={(file) => {
+                  setFile(file);
+                }}
+              />
+            </div>
           </div>
 
           <div className="flex gap-5 items-center mt-5">

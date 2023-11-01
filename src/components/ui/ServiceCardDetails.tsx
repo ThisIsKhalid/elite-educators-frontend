@@ -11,7 +11,7 @@ const ServiceCardDetails = ({ id }: any) => {
   const { data, isLoading } = useGetSingleServiceQuery(id);
 
   if (isLoading) return <HashLoading />;
-  // console.log(data);
+  console.log(data);
   const {
     _id,
     subject,

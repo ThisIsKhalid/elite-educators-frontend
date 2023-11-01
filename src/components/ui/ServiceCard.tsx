@@ -26,6 +26,7 @@ const ServiceCard = ({ service }: any) => {
     isAvailable,
     rating,
     instructorId,
+    image
   } = service;
 
   const stars = [];
@@ -51,10 +52,12 @@ const ServiceCard = ({ service }: any) => {
   return (
     <div className="transition  ease-in-out delay-150 duration-300">
       <div className="max-w-2xl overflow-hidden  rounded-lg shadow-md bg-cDeepBlue relative">
-        <img
+        <Image
           className="object-cover w-full h-64"
-          src="https://images.unsplash.com/photo-1550439062-609e1531270e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-          alt="Article"
+          src={image}
+          alt="service image"
+          width={200}
+          height={200}
         />
         <button
           onClick={handleAddToCart}
