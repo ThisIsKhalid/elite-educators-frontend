@@ -93,7 +93,7 @@ const Sidebar = () => {
               ) : (
                 <>
                   <FaPeopleGroup className="text-2xl" />
-                  <h1 className={`font-bold text-base`}>Clients</h1>
+                  <h1 className={`font-bold text-base`}>Members</h1>
                 </>
               )}
             </Link>

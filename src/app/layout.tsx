@@ -3,6 +3,7 @@ import ToasterProvider from "@/lib/ToasterProvider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,9 @@ export default function RootLayout({
     <Providers>
       <html lang="en" data-theme="light">
         <body className={inter.className} suppressHydrationWarning={true}>
-          <ToasterProvider>{children}</ToasterProvider>
+          <ToasterProvider>
+            <EdgeStoreProvider>{children}</EdgeStoreProvider>
+          </ToasterProvider>
         </body>
       </html>
     </Providers>

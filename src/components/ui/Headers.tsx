@@ -1,15 +1,22 @@
 "use client";
 
 import { authKey } from "@/constants/storageKey";
-import { isLoggedIn, removeUserInfo } from "@/services/auth.service";
+import { useGetBookingByUserIdQuery } from "@/redux/api/bookingApi";
+import {
+  getUserInfo,
+  isLoggedIn,
+  removeUserInfo,
+} from "@/services/auth.service";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { BiSearch } from "react-icons/bi";
-import { GiHamburgerMenu } from "react-icons/gi";
-import logo from "../../assets/elite-educators.png";
 import toast from "react-hot-toast";
+import { BiSearch } from "react-icons/bi";
 import { BsCart2 } from "react-icons/bs";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoNotificationsOutline } from "react-icons/io5";
+import logo from "../../assets/elite-educators.png";
+import NotificationModel from "./NotificationModel";
 
 type CustomLinkProps = {
   href: string;
@@ -43,6 +50,22 @@ const Headers = () => {
     toast.success("Logout successfully");
     router.push("/signin");
   };
+
+  const loggedUser: any = getUserInfo();
+  const { id, role } = loggedUser;
+  // console.log(role);
+  const query: Record<string, any> = {};
+
+  const { data } = useGetBookingByUserIdQuery({
+    id,
+    ...query,
+  });
+
+  const bookings = data?.services;
+
+  const statusTrueBookings = bookings?.filter(
+    (booking: any) => booking.status === true
+  );
 
   return (
     <>
@@ -86,11 +109,7 @@ const Headers = () => {
           <CustomLink href="/events" title="Events" className="" />
           {userLoggedIn ? (
             <>
-              <CustomLink
-                href="/dashboard"
-                title="Dashboard"
-                className=""
-              />
+              <CustomLink href="/dashboard" title="Dashboard" className="" />
             </>
           ) : (
             <>
@@ -100,23 +119,44 @@ const Headers = () => {
         </div>
         <div>
           <div className="md:flex hidden items-center gap-3 text-base mb-2">
-            
-              {/* <CustomLink href="/" title="Tutors" className="mx-4" />
+            {/* <CustomLink href="/" title="Tutors" className="mx-4" />
               <CustomLink href="/" title="About" className="mx-4" /> */}
-              <Link href="/cart" className="text-xl font-semibold">
-                <BsCart2 />
-              </Link>
+            <Link href="/cart" className="text-xl font-bold">
+              <BsCart2 />
+            </Link>
 
-              {userLoggedIn && (
-                <>
-                  <button
-                    onClick={logout}
-                    className="btn btn-xs bg-cBlack text-gray-100 hover:bg-cBlue"
-                  >
-                    Signout
-                  </button>
-                </>
-              )}
+            {userLoggedIn && role === "user" && (
+              <div
+                className="text-xl font-bold relative cursor-pointer"
+                onClick={() => {
+                  const dialog = document.getElementById(
+                    "notification_modal"
+                  ) as HTMLDialogElement;
+                  if (dialog) {
+                    dialog.showModal();
+                  }
+                }}
+              >
+                <IoNotificationsOutline />
+                <span className="absolute -top-4 left-3 text-cOrange font-mono">
+                  {statusTrueBookings?.length}
+                </span>
+              </div>
+            )}
+            {/* Open the modal using document.getElementById('ID').showModal() method */}
+            <NotificationModel statusTrueBookings={statusTrueBookings} />
+            {/* ------------------- */}
+
+            {userLoggedIn && (
+              <>
+                <button
+                  onClick={logout}
+                  className="btn btn-xs bg-cBlack text-gray-100 hover:bg-cBlue"
+                >
+                  Signout
+                </button>
+              </>
+            )}
           </div>
           <div className="dropdown dropdown-bottom dropdown-end flex md:hidden">
             <label tabIndex={0} className="text-xl">

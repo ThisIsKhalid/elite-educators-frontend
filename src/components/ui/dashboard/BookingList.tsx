@@ -78,9 +78,7 @@ const BookingList = () => {
           <thead className="bg-cBlue text-gray-100 lg:text-base">
             <tr>
               <th>Serial</th>
-              {
-                loggedUser?.role === "admin" && <th>User</th>
-              }
+              {loggedUser?.role === "admin" && <th>User</th>}
               <th>Subject</th>
               <th>Start Date</th>
               <th>End Date</th>
@@ -96,9 +94,9 @@ const BookingList = () => {
               bookingsData?.map((booking: any, index: number) => (
                 <tr key={booking?._id}>
                   <th>{index + 1}</th>
-                  {
-                    loggedUser?.role === "admin" && <td>{booking?.userId?.name}</td>
-                  }
+                  {loggedUser?.role === "admin" && (
+                    <td>{booking?.userId?.name}</td>
+                  )}
                   <td>{booking?.serviceId?.subject}</td>
                   <td>{booking?.startDate}</td>
                   <td>{booking?.endDate}</td>
@@ -115,7 +113,9 @@ const BookingList = () => {
                     <td>
                       <button
                         onClick={() => handleStatusChange(booking?._id)}
-                        className="border border-cBlue px-3 rounded-lg text-cBlack font-semibold"
+                        className={`border  px-3 rounded-lg text-cBlack font-semibold ${
+                          booking?.status ? "btn-disabled border-gray-500 text-gray-400" : "border-cBlue"
+                        } `}
                       >
                         Accept
                       </button>

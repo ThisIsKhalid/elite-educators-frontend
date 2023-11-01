@@ -1,26 +1,32 @@
 "use client";
 
+import { SingleImageDropzone } from "@/components/ui/SingleImageDropzone";
+import { useEdgeStore } from "@/lib/edgestore";
 import { useUserSignupMutation } from "@/redux/api/authApi";
+import { storeUserInfo } from "@/services/auth.service";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import loginImage from "../../assets/Sign up-pana.svg";
-import { storeUserInfo } from "@/services/auth.service";
 import toast from "react-hot-toast";
+import loginImage from "../../assets/Sign up-pana.svg";
 
 type FormValues = {
   name: string;
   email: string;
   password: string;
   phonenumber: string;
-  // profileImgUrl: string;
 };
 
 const SignUpPage = () => {
-  const preset_key = "rs0yclsi";
-  const cloud_name = "dz8rx1vk5";
-
+  const [file, setFile] = useState<File>();
+  const [urls, setUrls] = useState<{
+    url: string;
+    thumbnailUrl: string | null;
+  }>();
+  const [progress, setProgress] = useState<number>(0);
+  const { edgestore } = useEdgeStore();
 
   const {
     register,
@@ -32,19 +38,42 @@ const SignUpPage = () => {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
-    console.log(data);
-    try {
-      const res = await userSignup({ ...data }).unwrap();
-      // console.log(res);
+    if (file) {
+      const res = await edgestore.myPublicImages.upload({
+        file,
+        onProgressChange: (progress) => {
+          setProgress(progress);
+        },
+      });
 
-      if (res?.accessToken) {
-        storeUserInfo({ accessToken: res?.accessToken });
-        toast.success("Signup successful");
-        router.push("/");
+      // setUrls({
+      //   url: res.url,
+      //   thumbnailUrl: res.thumbnailUrl,
+      // });
+      if(!res.thumbnailUrl){
+        toast.error("Image upload failed");
       }
-    } catch (error: any) {
-      const errorMessage = error?.data?.message || "Signup failed";
-      toast.error(errorMessage);
+
+      const newData = {
+        ...data,
+        profileImgUrl: res?.thumbnailUrl,
+      };
+      // console.log(newData);
+
+      try {
+          const res = await userSignup({ ...newData }).unwrap();
+          // console.log(res);
+
+          if (res?.accessToken) {
+            storeUserInfo({ accessToken: res?.accessToken });
+            toast.success("Signup successful");
+            router.push("/");
+          }
+        
+      } catch (error: any) {
+        const errorMessage = error?.data?.message || "Signup failed";
+        toast.error(errorMessage);
+      }
     }
   };
 
@@ -107,18 +136,25 @@ const SignUpPage = () => {
               <p>{errors.phonenumber && <span>This field is required</span>}</p>
             </div>
 
-            {/* <div className="mb-3">
+            <div className="mb-3">
               <label className="label">Image</label>
-              <input
-                type="file"
-                placeholder="Your Profile Image"
-                className="border border-cBlack file-input focus:outline focus:outline-cOrange focus:border-none lg:w-3/4 w-full"
-                {...register("profileImgUrl", { required: true })}
+              <SingleImageDropzone
+                width={200}
+                height={200}
+                value={file}
+                onChange={(file) => {
+                  setFile(file);
+                }}
               />
-              <p>
-                {errors.profileImgUrl && <span>This field is required</span>}
-              </p>
-            </div> */}
+              <div className="h-[6px] lg:w-3/4 w-full border rounded-xl overflow-hidden mt-2">
+                <div
+                  className="h-full bg-cBlack transition-all duration-150"
+                  style={{
+                    width: `${progress}%`,
+                  }}
+                />
+              </div>
+            </div>
 
             <button
               type="submit"
@@ -127,6 +163,11 @@ const SignUpPage = () => {
               Signup
             </button>
           </form>
+          {urls?.thumbnailUrl && (
+            <Link href={urls.thumbnailUrl} target="_blank">
+              Url
+            </Link>
+          )}
         </div>
         <p className="mt-5">
           Already have an account? Please{" "}
