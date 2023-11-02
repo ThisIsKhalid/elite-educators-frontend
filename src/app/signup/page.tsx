@@ -1,6 +1,5 @@
 "use client";
 
-import { SingleImageDropzone } from "@/components/ui/SingleImageDropzone";
 import { useEdgeStore } from "@/lib/edgestore";
 import { useUserSignupMutation } from "@/redux/api/authApi";
 import { storeUserInfo } from "@/services/auth.service";
@@ -21,10 +20,6 @@ type FormValues = {
 
 const SignUpPage = () => {
   const [file, setFile] = useState<File>();
-  const [urls, setUrls] = useState<{
-    url: string;
-    thumbnailUrl: string | null;
-  }>();
   const [progress, setProgress] = useState<number>(0);
   const { edgestore } = useEdgeStore();
 
@@ -38,7 +33,7 @@ const SignUpPage = () => {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
-    if (file && file.size > 0 && file !== undefined) {
+    if (file && file !== undefined && file !== null) {
       const res = await edgestore.myPublicImages.upload({
         file,
         onProgressChange: (progress) => {
@@ -46,32 +41,26 @@ const SignUpPage = () => {
         },
       });
 
-      // setUrls({
-      //   url: res.url,
-      //   thumbnailUrl: res.thumbnailUrl,
-      // });
-      if (!res.thumbnailUrl) {
-        toast.error("Image upload failed");
-      }
+      if (res.thumbnailUrl) {
+        const newData = {
+          ...data,
+          profileImgUrl: res.thumbnailUrl || "",
+        };
+        console.log(newData);
 
-      const newData = {
-        ...data,
-        profileImgUrl: res.thumbnailUrl || "",
-      };
-      console.log(newData);
+        try {
+          const res = await userSignup({ ...newData }).unwrap();
+          console.log(res);
 
-      try {
-        const res = await userSignup({ ...newData }).unwrap();
-        console.log(res);
-
-        if (res?.accessToken) {
-          storeUserInfo({ accessToken: res?.accessToken });
-          toast.success("Signup successful");
-          router.push("/");
+          if (res?.accessToken) {
+            storeUserInfo({ accessToken: res?.accessToken });
+            toast.success("Signup successful");
+            router.push("/");
+          }
+        } catch (error: any) {
+          const errorMessage = error?.data?.message || "Signup failed";
+          toast.error(errorMessage);
         }
-      } catch (error: any) {
-        const errorMessage = error?.data?.message || "Signup failed";
-        toast.error(errorMessage);
       }
     }
   };
@@ -137,12 +126,15 @@ const SignUpPage = () => {
 
             <div className="mb-3">
               <label className="label">Image</label>
-              <SingleImageDropzone
-                width={200}
-                height={200}
-                value={file}
-                onChange={(file) => {
-                  setFile(file);
+              <input
+                type="file"
+                placeholder="Your Profile Image"
+                className="border border-cBlack file-input focus:outline focus:outline-cOrange focus:border-none lg:w-3/4 w-full"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    setFile(file);
+                  }
                 }}
               />
               <div className="h-[6px] lg:w-3/4 w-full border rounded-xl overflow-hidden mt-2">
@@ -162,11 +154,6 @@ const SignUpPage = () => {
               Signup
             </button>
           </form>
-          {urls?.thumbnailUrl && (
-            <Link href={urls.thumbnailUrl} target="_blank">
-              Url
-            </Link>
-          )}
         </div>
         <p className="mt-5">
           Already have an account? Please{" "}
