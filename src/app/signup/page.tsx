@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import loginImage from "../../assets/Sign up-pana.svg";
+import loginImage from "../../assets/Signup.svg";
 
 type FormValues = {
   name: string;
@@ -38,7 +38,7 @@ const SignUpPage = () => {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
-    if (file) {
+    if (file && file.size > 0 && file !== undefined) {
       const res = await edgestore.myPublicImages.upload({
         file,
         onProgressChange: (progress) => {
@@ -50,26 +50,25 @@ const SignUpPage = () => {
       //   url: res.url,
       //   thumbnailUrl: res.thumbnailUrl,
       // });
-      if(!res.thumbnailUrl){
+      if (!res.thumbnailUrl) {
         toast.error("Image upload failed");
       }
 
       const newData = {
         ...data,
-        profileImgUrl: res?.thumbnailUrl,
+        profileImgUrl: res.thumbnailUrl || "",
       };
-      // console.log(newData);
+      console.log(newData);
 
       try {
-          const res = await userSignup({ ...newData }).unwrap();
-          // console.log(res);
+        const res = await userSignup({ ...newData }).unwrap();
+        console.log(res);
 
-          if (res?.accessToken) {
-            storeUserInfo({ accessToken: res?.accessToken });
-            toast.success("Signup successful");
-            router.push("/");
-          }
-        
+        if (res?.accessToken) {
+          storeUserInfo({ accessToken: res?.accessToken });
+          toast.success("Signup successful");
+          router.push("/");
+        }
       } catch (error: any) {
         const errorMessage = error?.data?.message || "Signup failed";
         toast.error(errorMessage);

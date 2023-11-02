@@ -44,7 +44,7 @@ const AllServicePage = () => {
   const services = data?.services;
   const meta = data?.meta;
 
-  // console.log(searchTerm);
+  console.log(services);
 
   const handleAvailabilityChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
