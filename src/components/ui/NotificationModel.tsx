@@ -28,16 +28,18 @@ const NotificationModel = ({
               className="text-base flex items-center justify-between gap-2"
               key={booking?._id}
             >
-              <p className="flex items-center gap-2">
+              <div className="flex items-center gap-2">
                 <span className="font-bold">
                   <BiRightArrow />
                 </span>{" "}
-                Your{" "}
-                <span className="font-semibold">
-                  {booking?.serviceId?.subject}
-                </span>{" "}
-                subject is accepted
-              </p>
+                <p>
+                  Your{" "}
+                  <span className="font-semibold">
+                    {booking?.serviceId?.subject}
+                  </span>{" "}
+                  subject is accepted
+                </p>
+              </div>
               <Link
                 onClick={() => {
                   const dialog = document.getElementById(
@@ -49,7 +51,7 @@ const NotificationModel = ({
                 }}
                 href={`/services/checkout/${booking?._id}`}
               >
-                <button className="btn btn-sm bg-cBlue text-white hover:bg-cOrange">
+                <button className="btn btn-sm text-xs bg-cBlue text-white hover:bg-cOrange">
                   Pay Now
                 </button>
               </Link>

@@ -136,15 +136,12 @@ const Headers = () => {
                   }
                 }}
               >
-                <IoNotificationsOutline className='' />
+                <IoNotificationsOutline className="" />
                 <span className="absolute -top-3 left-3 text-cOrange font-mono text-base">
                   {statusTrueBookings?.length}
                 </span>
               </div>
             )}
-            {/* Open the modal using document.getElementById('ID').showModal() method */}
-            <NotificationModel statusTrueBookings={statusTrueBookings} />
-            {/* ------------------- */}
 
             {userLoggedIn && (
               <>
@@ -157,6 +154,7 @@ const Headers = () => {
               </>
             )}
           </div>
+
           <div className="dropdown dropdown-bottom dropdown-end flex md:hidden">
             <label tabIndex={0} className="text-xl">
               <GiHamburgerMenu />
@@ -174,15 +172,28 @@ const Headers = () => {
               <li>
                 <CustomLink href="/events" title="Events" />
               </li>
-              {/* <li>
-                <CustomLink href="/" title="Tutors" />
+              <li>
+                <CustomLink href="/cart" title="Cart" />
               </li>
               <li>
-                <CustomLink href="/" title="About" />
-              </li> */}
+                <button
+                  onClick={() => {
+                    const dialog = document.getElementById(
+                      "notification_modal"
+                    ) as HTMLDialogElement;
+                    if (dialog) {
+                      dialog.showModal();
+                    }
+                  }}
+                >
+                  Notificaton
+                </button>
+              </li>
               {userLoggedIn ? (
                 <>
-                  <CustomLink href="/dashboard" title="Dashboard" />
+                  <li>
+                    <CustomLink href="/dashboard" title="Dashboard" />
+                  </li>
                   <button
                     onClick={logout}
                     className="btn btn-xs bg-cBlack text-gray-100 hover:bg-cBlue"
@@ -202,6 +213,9 @@ const Headers = () => {
               )}
             </ul>
           </div>
+          {/* Open the modal using document.getElementById('ID').showModal() method */}
+          <NotificationModel statusTrueBookings={statusTrueBookings} />
+          {/* ------------------- */}
         </div>
       </div>
     </>

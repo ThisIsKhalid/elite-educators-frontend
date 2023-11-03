@@ -9,7 +9,7 @@ const EventsPage = () => {
     <div>
       <CourseBanner title="Events" />
 
-      <div className='mt-5 flex flex-col gap-5'>
+      <div className='mt-5 flex flex-col gap-5 px-5'>
         <EventCard />
         <EventCard />
         <EventCard />
