@@ -11,7 +11,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { BiSearch } from "react-icons/bi";
 import { BsCart2 } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoNotificationsOutline } from "react-icons/io5";
@@ -137,8 +136,8 @@ const Headers = () => {
                   }
                 }}
               >
-                <IoNotificationsOutline />
-                <span className="absolute -top-4 left-3 text-cOrange font-mono">
+                <IoNotificationsOutline className='' />
+                <span className="absolute -top-3 left-3 text-cOrange font-mono text-base">
                   {statusTrueBookings?.length}
                 </span>
               </div>

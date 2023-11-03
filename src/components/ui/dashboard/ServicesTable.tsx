@@ -69,7 +69,7 @@ const CoursesTable = () => {
                 <td>{service?.instructorId?.name}</td>
                 <td>
                   <Link
-                    href={`/dashboard/services/update-service/${service?._id}`}
+                    href={`service-list/update-service/${service?._id}`}
                   >
                     <button className="text-xl text-cBlue">
                       <AiOutlineEdit />

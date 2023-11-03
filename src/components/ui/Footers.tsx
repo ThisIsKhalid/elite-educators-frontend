@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 const Footer = () => {
 
   return (
-    <section className='bg-white'>
+    <section className='bg-white pt-4'>
       <div className="container mx-auto bg-cDeepBlue pt-10 pb-5 md:rounded-t-3xl px-10 text-white">
         <div className="grid lg:grid-cols-5 grid-cols-2  gap-3">
           <div className="col-span-2">

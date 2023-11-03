@@ -7,11 +7,11 @@ import {
   useGetBookingByUserIdQuery,
 } from "@/redux/api/bookingApi";
 import { getUserInfo } from "@/services/auth.service";
+import { IBooking } from "@/types";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import BreadCrumb from "../BreadCrumb";
-import { IBooking } from "@/types";
 
 const BookingList = () => {
   const loggedUser: any = getUserInfo();
@@ -31,8 +31,11 @@ const BookingList = () => {
   query["sortBy"] = sortBy;
   query["sortOrder"] = sortOrder;
 
-  const { data: dataByUserId, isLoading } = useGetBookingByUserIdQuery({ id, ...query });
-  const {data: allData} = useGetAllBookingsQuery({...query})
+  const { data: dataByUserId, isLoading } = useGetBookingByUserIdQuery({
+    id,
+    ...query,
+  });
+  const { data: allData } = useGetAllBookingsQuery({ ...query });
   const [deleteBooking] = useDeleteBookingMutation();
   const [bookingStatusChange] = useBookingStatusChangeMutation();
 
@@ -42,10 +45,10 @@ const BookingList = () => {
   const allBookings = allData?.bookings;
 
   let bookingsData: any = [];
-  if(loggedUser?.role === "user") {
-    bookingsData = bookings
+  if (loggedUser?.role === "user") {
+    bookingsData = bookings;
   } else {
-    bookingsData = allBookings
+    bookingsData = allBookings;
   }
 
   // console.log(bookingsData);
@@ -85,7 +88,7 @@ const BookingList = () => {
               <th>Amount/Week</th>
               <th>Days/Week</th>
               <th>Status</th>
-              {role === "admin" && <th>Accept</th>}
+              {(role === "admin" || role === "super_admin") && <th>Accept</th>}
               <th>Cancel</th>
             </tr>
           </thead>
@@ -109,12 +112,14 @@ const BookingList = () => {
                       <span className="text-cOrange">Pending</span>
                     )}
                   </td>
-                  {role === "admin" && (
+                  {(role === "admin" || role === "super_admin") && (
                     <td>
                       <button
                         onClick={() => handleStatusChange(booking?._id)}
                         className={`border  px-3 rounded-lg text-cBlack font-semibold ${
-                          booking?.status ? "btn-disabled border-gray-500 text-gray-400" : "border-cBlue"
+                          booking?.status
+                            ? "btn-disabled border-gray-500 text-gray-400"
+                            : "border-cBlue"
                         } `}
                       >
                         Accept

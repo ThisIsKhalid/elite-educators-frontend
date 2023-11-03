@@ -51,6 +51,7 @@ const BookingModal = ({ service }: any) => {
     const batchdata = {
       daysPerWeek: selectedPrice?.daysPerWeek,
       amountPerWeek: selectedPrice?.amountPerWeek,
+      _id: selectedPrice?._id,
     };
 
     if (loggedUser) {
