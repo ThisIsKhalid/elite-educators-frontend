@@ -4,6 +4,8 @@ import SectionTitle from "../SectionTitle";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { BiSolidRightArrow } from "react-icons/bi";
+import Button from "../Button";
 
 const ExperiencedTeacher = () => {
   const teachers = Array(8).fill({
@@ -46,7 +48,7 @@ const ExperiencedTeacher = () => {
           className="mySwiper"
         >
           {teachers?.map((teacher, index) => (
-            <SwiperSlide key={index+1}>
+            <SwiperSlide key={index + 1}>
               <div
                 key={index}
                 className="w-64 rounded-lg bg-gray-100 border border-cDeepBlue mx-auto"
@@ -73,7 +75,16 @@ const ExperiencedTeacher = () => {
           ))}
         </Swiper>
       </div>
+      <div className="flex items-center justify-center mt-5 gap-5">
+        <Button text="Browse More" />
 
+        <button className="btn py-3 w-40 rounded-full flex items-center justify-center">
+          <span className="text-cOrange mr-3">
+            <BiSolidRightArrow />
+          </span>{" "}
+          Be Tutor
+        </button>
+      </div>
     </div>
   );
 };
