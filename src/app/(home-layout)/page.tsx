@@ -1,5 +1,6 @@
 "use client";
 
+import ExperiencedTeacher from "@/components/ui/home/ExperiencedTeacher";
 import FeedBackForm from "@/components/ui/home/FeedbackForm";
 import PopulerServices from "@/components/ui/home/PopulerServices";
 import Servey from "@/components/ui/home/Servey";
@@ -18,6 +19,7 @@ const HomePage = () => {
       <UpComingServices />
       <UpcomingEvents />
       {/* <OurFeature /> */}
+      <ExperiencedTeacher />
       <StudentsReview />
       <FeedBackForm />
     </div>

@@ -68,21 +68,21 @@ const StudentsReview = () => {
         >
           {reviews?.map((review: any) => (
             <SwiperSlide key={review.id}>
-              <div className="flex flex-col bg-cBlue rounded-xl p-5 h-44">
+              <div className="flex flex-col border bg-gray-50 shadow-lg border-cDeepBlue rounded-xl p-5 h-44 text-cDeepBlue">
                 <div className="flex items-center">
                   <Image src={person} alt="person" width={50} height={50} />
                   <div className="ml-3">
-                    <h1 className="text-white font-semibold">
+                    <h1 className=" font-semibold">
                       {review?.studentId?.name}
                     </h1>
-                    <p className="text-white">{review?.studentId?.email}</p>
+                    <p className="">{review?.studentId?.email}</p>
                   </div>
                 </div>
                 <div className="text-left mt-3 text-sm">
-                  <p className="text-white">
+                  <p className="">
                     Rating: <span className="font-semibold text-base ">{review?.rating}</span>
                   </p>
-                  <p className="text-white">{review.description.slice(0, 120)}...</p>
+                  <p className="">{review.description.slice(0, 120)}...</p>
                 </div>
               </div>
             </SwiperSlide>

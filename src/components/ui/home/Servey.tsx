@@ -21,7 +21,7 @@ const Survey = () => {
   }, [inView, counterOn]);
 
   return (
-    <div className="grid lg:grid-cols-4 grid-cols-1 gap-10 py-20">
+    <div className="grid lg:grid-cols-4 grid-cols-2 gap-10 py-20">
       <div className="text-center">
         <h1 className="text-4xl text-cBlack font-semibold">
           <CountUp
