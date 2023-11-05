@@ -17,7 +17,7 @@ const HomePage = () => {
       <PopulerServices />
       <UpComingServices />
       <UpcomingEvents />
-      <OurFeature />
+      {/* <OurFeature /> */}
       <StudentsReview />
       <FeedBackForm />
     </div>

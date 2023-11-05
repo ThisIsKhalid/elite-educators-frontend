@@ -198,7 +198,7 @@ const AllServicePage = () => {
         </>
       ) : (
         <>
-          <div className="grid lg:grid-cols-3 grid-cols-1 gap-5 my-10 px-5">
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 my-10 px-5">
             {services?.map((service: any) => (
               <ServiceCard key={service._id} service={service} />
             ))}

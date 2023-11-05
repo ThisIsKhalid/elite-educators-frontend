@@ -2,9 +2,12 @@
 
 import HashLoading from "@/components/ui/HashLoading";
 import { useGetSingleBookingQuery } from "@/redux/api/bookingApi";
+import { usePaymentOrderMutation } from "@/redux/api/orderApi";
 import { useGetSingleServiceQuery } from "@/redux/api/serviceApi";
+import axios from "axios";
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 type FormValues = {
   name: string;
@@ -19,6 +22,8 @@ const CheckoutPage = ({ id }: any) => {
   const { data: serviceData, isLoading: serviceLoading } =
     useGetSingleServiceQuery(bookingData?.serviceId?._id);
 
+  const [paymentOrder] = usePaymentOrderMutation();
+
   const {
     register,
     handleSubmit,
@@ -28,7 +33,7 @@ const CheckoutPage = ({ id }: any) => {
   if (bookingLoading || serviceLoading) {
     return <HashLoading />;
   }
-    // console.log(bookingData);
+  // console.log(bookingData);
   //   console.log(serviceData);
   const { image, subject } = serviceData;
 
@@ -39,20 +44,32 @@ const CheckoutPage = ({ id }: any) => {
       serviceId: bookingData?.serviceId?._id,
       batchId: bookingData?.batch?._id,
     };
-    console.log(newData);
+    // console.log(newData);
+    axios
+      .post("http://localhost:5000/api/v1/orders/payment-order", newData)
+      .then((response) => {
+        window.location.replace(response.data.url);
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${error?.message}`,
+        });
+      });
   };
 
   return (
     <div className="relative">
       <div
         style={{ backgroundImage: `url(${image})` }}
-        className="bg-cover bg-center h-screen w-screen absolute"
+        className="bg-cover bg-center w-full h-full absolute"
       ></div>
-      <div className="bg-black opacity-60 h-screen w-screen absolute"></div>
+      <div className="bg-black opacity-60 h-full w-full absolute"></div>
       <div className="relative z-10">
-        <div className="container mx-auto">
+        <div className="container mx-auto py-10">
           <div className="flex items-center justify-center h-screen">
-            <div className="md:w-1/2 w-full mx-5">
+            <div className="md:w-1/2 w-full">
               <div className="bg-white p-5 rounded-lg">
                 <h3 className="font-bold text-lg uppercase text-center">
                   Checkout
