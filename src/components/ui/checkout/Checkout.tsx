@@ -46,7 +46,10 @@ const CheckoutPage = ({ id }: any) => {
     };
     // console.log(newData);
     axios
-      .post("http://localhost:5000/api/v1/orders/payment-order", newData)
+      .post(
+        "https://elite-educators-backend.vercel.app/api/v1/orders/payment-order",
+        newData
+      )
       .then((response) => {
         window.location.replace(response.data.url);
       })
