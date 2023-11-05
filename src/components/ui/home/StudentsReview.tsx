@@ -27,8 +27,8 @@ const StudentsReview = () => {
 
   return (
     <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 items-center py-20 px-5">
-      <div className="flex flex-col mx-auto">
-        <div className="flex items-center">
+      <div className="flex flex-col mx-auto text-center md:text-left">
+        <div className="flex items-center justify-center md:justify-start">
           <div className="border-b-2 w-20 border-cOrange mr-3"></div>
           <p className="text-cOrange">Reviews from who got our any service</p>
         </div>
@@ -56,8 +56,8 @@ const StudentsReview = () => {
           modules={[Autoplay]}
           breakpoints={{
             768: {
-              slidesPerView: 1,
-              spaceBetween: 20,
+              slidesPerView: 3,
+              spaceBetween: 5,
             },
             1024: {
               slidesPerView: 2,

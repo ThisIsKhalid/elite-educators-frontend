@@ -2,6 +2,7 @@
 
 import ExperiencedTeacher from "@/components/ui/home/ExperiencedTeacher";
 import FeedBackForm from "@/components/ui/home/FeedbackForm";
+import FindTeacher from "@/components/ui/home/FindTeacher";
 import PopulerServices from "@/components/ui/home/PopulerServices";
 import Servey from "@/components/ui/home/Servey";
 import OurFeature from "@/components/ui/home/SpecialFeatures";
@@ -20,6 +21,7 @@ const HomePage = () => {
       <UpcomingEvents />
       {/* <OurFeature /> */}
       <ExperiencedTeacher />
+      <FindTeacher />
       <StudentsReview />
       <FeedBackForm />
     </div>
