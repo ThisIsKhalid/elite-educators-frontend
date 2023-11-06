@@ -12,7 +12,7 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   
   
   return (
-    <section>
+    <section className="max-w-screen-2xl mx-auto">
       <Headers />
       <Contents>{children}</Contents>
       <Footers />

@@ -5,7 +5,7 @@ import HashLoading from "@/components/ui/HashLoading";
 import ServiceCard from "@/components/ui/ServiceCard";
 import { useGetServicesQuery } from "@/redux/api/serviceApi";
 import { useDebounced } from "@/redux/hooks";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { BiSort } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
 import { GrPowerReset } from "react-icons/gr";
@@ -71,13 +71,20 @@ const AllServicePage = () => {
     setSortOrder("");
   };
 
+  const handlePageChange = (pageNumber: number) => {
+    if (pageNumber < 1) return;
+    if (meta?.total && pageNumber > meta.total/size) return;
+
+    setPage(pageNumber);
+  };
+
   if (isLoading) return <HashLoading />;
 
   return (
     <div className="">
       <CourseBanner title="Services" />
 
-      <div className="bg-gray-700 w-full py-3 flex items-center justify-between gap-2 px-5">
+      <div className="bg-cDeepBlue w-full pb-3 flex items-center justify-between gap-2 px-5">
         <div className="relative">
           <input
             type="text"
@@ -205,6 +212,27 @@ const AllServicePage = () => {
           </div>
         </>
       )}
+
+      {/* pagination */}
+      <div className="flex items-center justify-center">
+        <div className="join border border-cDeepBlue hover:border-cDeepBlue">
+          <button
+            className="join-item btn btn-sm"
+            onClick={() => handlePageChange(page - 1)}
+          >
+            «
+          </button>
+          <button className="join-item btn btn-sm bg-cDeepBlue hover:bg-cDeepBlue hover:border-cDeepBlue border border-cDeepBlue text-white">
+            Page {page}
+          </button>
+          <button
+            className="join-item btn btn-sm"
+            onClick={() => handlePageChange(page + 1)}
+          >
+            »
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

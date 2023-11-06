@@ -1,7 +1,10 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import { addToCart, removeFromCart } from "@/redux/features/service/serviceSlice";
+import {
+  addToCart,
+  removeFromCart,
+} from "@/redux/features/service/serviceSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,7 +29,8 @@ const ServiceCard = ({ service }: any) => {
     isAvailable,
     rating,
     instructorId,
-    image
+    image,
+    location
   } = service;
 
   const stars = [];
@@ -50,114 +54,92 @@ const ServiceCard = ({ service }: any) => {
   };
 
   return (
-    <div className="transition  ease-in-out delay-150 duration-300">
-      <div className="max-w-2xl overflow-hidden  rounded-lg shadow-md bg-cDeepBlue relative">
+    <div className="card lg:card-side bg-gray-50 shadow-lg border border-cDeepBlue/10 lg:h-[300px] ">
+      <figure className="lg:w-1/2">
         <Image
-          className="object-cover w-full h-64"
+          className="object-cover h-full"
           src={image}
           alt="service image"
-          width={200}
-          height={200}
+          width={500}
+          height={1000}
         />
-        <button
-          onClick={handleAddToCart}
-          className="tooltip tooltip-left bg-cDeepBlue text-white text-2xl absolute top-0 right-0 border-l border-b rounded-es-lg px-2 py-1"
-          data-tip={isInCart ? "Remove From Cart" : "Add To Cart"}
-        >
-          {isInCart ? <BsCartCheck /> : <BsCart2 />}
-        </button>
+      </figure>
+      <div className="card-body p-5 justify-center">
+        <div className="flex items-center justify-between">
+          <p className="text-[8px] font-medium uppercase">
+            {isAvailable ? (
+              <span className="text-green-400 border border-cBlue p-1">
+                Available
+              </span>
+            ) : (
+              <span className="text-red-400 border border-cOrange p-1">
+                Not Available
+              </span>
+            )}
+          </p>
+        </div>
+        <div className="flex lg:flex-col flex-row lg:items-start items-center lg:justify-start justify-between">
+          <h1 className="text-2xl font-bold">{subject}</h1>
+          <p className="text-sm text-cOrange flex items-center justify-end">
+            <span className="flex items-center gap-1">
+              {stars.length > 0 ? stars : "0"}
+            </span>
+          </p>
+        </div>
+        <div className="my-2">
+          <p className=" text-sm text-cOrange">
+            <span className="text-gray-800 ">Level :</span> {level}
+          </p>
+          <p className="mt-2 text-sm text-cOrange">
+            <span className="text-gray-800 ">Location :</span> {location}
+          </p>
+        </div>
 
-        <div className="p-6">
-          <div>
-            <div className="flex items-center justify-between">
-              <p className="text-xs font-medium uppercase">
-                {isAvailable ? (
-                  <span className="text-green-400 border border-cBlue p-1">
-                    Available
-                  </span>
-                ) : (
-                  <span className="text-red-400 border border-cOrange p-1">
-                    Not Available
-                  </span>
-                )}
-              </p>
-            </div>
-            <a
-              href="#"
-              className="block mt-2 text-xl font-semibold text-white"
-              role="link"
-            >
-              {subject}
-            </a>
-
-            <div className="flex items-center justify-between">
-              <div className="">
-                <p className="mt-2 text-sm text-cOrange flex items-center">
-                  <span className="text-gray-100 mr-3">Rating :</span>
-                  <span className="flex items-center gap-1">
-                    {stars.length > 0 ? stars : "0"}
-                  </span>
-                </p>
-                <p className="mt-2 text-sm text-cOrange">
-                  <span className="text-gray-100 ">Level :</span> {level}
-                </p>
-              </div>
-
-              <div className="">
-                <p className="mt-2 text-sm text-cOrange">
-                  <span className="text-gray-100 ">Seat :</span> {seats}
-                </p>
-                <p className="mt-2 text-sm text-cOrange">
-                  <span className="text-gray-100 ">Enrolled :</span> {enrolled}
-                </p>
-              </div>
-            </div>
-            <div className="mt-2 text-sm text-gray-200 ">
-              <p className="text-gray-100">
-                Offered Service(per week) :{" "}
-                <span className="text-gray-300">
-                  There are {price.length} different type of service. Click on
-                  Book Now to see the details.
-                </span>
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-4">
+        <div className="flex lg:flex-col flex-row lg:items-start items-center lg:justify-start justify-between lg:gap-3">
+          <div className="">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <Image src={profile} alt="" height={25} objectFit="cover" />
+                <Image
+                  src={profile}
+                  alt=""
+                  height={25}
+                  objectFit="cover"
+                  className="border rounded-full border-cDeepBlue"
+                />
 
-                <p className="mx-2 text-sm text-gray-200">
+                <p className="ml-2 text-sm text-gray-800">
                   {instructorId?.name}
                 </p>
               </div>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => {
-                    const dialog = document.getElementById(
-                      _id
-                    ) as HTMLDialogElement;
-                    if (dialog) {
-                      dialog.showModal();
-                    }
-                  }}
-                  className="btn hover:bg-cBlue bg-cOrange btn-sm border-none text-gray-200"
-                >
-                  Book Now
-                </button>
-                <Link href={`/services/${_id}`}>
-                  <button className="btn btn-sm ">Details</button>
-                </Link>
-              </div>
             </div>
           </div>
-          {/* ------------------ */}
-          {/* Open the modal using document.getElementById('ID').showModal() method */}
-          <BookingModal service={service} />
-          {/* ------------------- */}
+
+          <div className="flex gap-2">
+            <button
+              onClick={() => {
+                const dialog = document.getElementById(
+                  _id
+                ) as HTMLDialogElement;
+                if (dialog) {
+                  dialog.showModal();
+                }
+              }}
+              className="btn hover:bg-cBlue  bg-cDeepBlue btn-sm border-none text-gray-200"
+            >
+              Book Now
+            </button>
+            <Link href={`/services/${_id}`}>
+              <button className="btn btn-sm border hover:border-cBlue border-cOrange">
+                Details
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
+      {/* ------------------ */}
+      {/* Open the modal using document.getElementById('ID').showModal() method */}
+      <BookingModal service={service} />
+      {/* ------------------- */}
     </div>
   );
 };

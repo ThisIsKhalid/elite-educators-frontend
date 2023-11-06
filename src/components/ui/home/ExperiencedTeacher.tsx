@@ -1,11 +1,11 @@
 import Image from "next/image";
-import userImage from "../../../assets/Untitled design1.png";
-import SectionTitle from "../SectionTitle";
+import { BiSolidRightArrow } from "react-icons/bi";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { BiSolidRightArrow } from "react-icons/bi";
+import userImage from "../../../assets/Untitled design1.png";
 import Button from "../Button";
+import SectionTitle from "../SectionTitle";
 
 const ExperiencedTeacher = () => {
   const teachers = Array(8).fill({
@@ -76,7 +76,7 @@ const ExperiencedTeacher = () => {
         </Swiper>
       </div>
       <div className="flex items-center justify-center mt-5 gap-5">
-        <Button text="Browse More" />
+        <Button text="Browse More" href="/tutors" />
 
         <button className="btn py-3 w-40 rounded-full flex items-center justify-center">
           <span className="text-cOrange mr-3">
