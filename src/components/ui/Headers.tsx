@@ -68,36 +68,6 @@ const Headers = () => {
 
   return (
     <>
-      {/* <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "#201A18",
-          height: 24,
-          backgroundColor: "#FED049",
-        }}
-      >
-        <p>
-          Hey, subscribe now for only{" "}
-          <span
-            style={{
-              fontWeight: "600",
-            }}
-          >
-            $4.5
-          </span>{" "}
-          -{" "}
-          <span
-            style={{
-              fontWeight: "600",
-            }}
-          >
-            Subscribe now
-          </span>
-        </p>
-      </div> */}
-
       <div className="flex items-center justify-between px-5 bg-[#FFFFFF]">
         <div>
           <Image src={logo} alt="logo" width={160} height={80} style={{}} />
@@ -155,63 +125,54 @@ const Headers = () => {
             )}
           </div>
 
-          <div className="dropdown dropdown-bottom dropdown-end flex md:hidden">
-            <label tabIndex={0} className="text-xl">
-              <GiHamburgerMenu />
+          <div className="flex md:hidden">
+            <label htmlFor="my-drawer" className="drawer-button">
+              <GiHamburgerMenu className="text-cDeepBlue text-xl" />
             </label>
-            <ul
-              tabIndex={0}
-              className="dropdown-content z-[1] menu p-2 shadow bg-gray-100 rounded-box w-52"
-            >
-              <li>
-                <CustomLink href="/" title="Home" />
-              </li>
-              <li>
-                <CustomLink href="/services" title="Services" />
-              </li>
-              <li>
-                <CustomLink href="/events" title="Events" />
-              </li>
-              <li>
-                <CustomLink href="/cart" title="Cart" />
-              </li>
-              <li>
-                <button
-                  onClick={() => {
-                    const dialog = document.getElementById(
-                      "notification_modal"
-                    ) as HTMLDialogElement;
-                    if (dialog) {
-                      dialog.showModal();
-                    }
-                  }}
-                >
-                  Notificaton
-                </button>
-              </li>
-              {userLoggedIn ? (
-                <>
+            <div className="drawer z-10">
+              <input
+                id="my-drawer"
+                type="checkbox"
+                className="drawer-toggle"
+              />
+              <div className="drawer-side">
+                <label
+                  htmlFor="my-drawer"
+                  aria-label="close sidebar"
+                  className="drawer-overlay"
+                ></label>
+                <ul className="menu p-4 w-1/2 min-h-full bg-gray-200 text-base-content">
+                  {/* Sidebar content here */}
                   <li>
-                    <CustomLink href="/dashboard" title="Dashboard" />
-                  </li>
-                  <button
-                    onClick={logout}
-                    className="btn btn-xs bg-cBlack text-gray-100 hover:bg-cBlue"
-                  >
-                    Signout
-                  </button>
-                </>
-              ) : (
-                <>
-                  <li>
-                    <CustomLink href="/signin" title="Signin" />
+                    <CustomLink href="/" title="Home" className="" />
                   </li>
                   <li>
-                    <CustomLink href="/signup" title="Signup" />
+                    <CustomLink href="/services" title="Services" className="" />
                   </li>
-                </>
-              )}
-            </ul>
+                  <li>
+                    <CustomLink href="/events" title="Events" className="" />
+                  </li>
+                  {userLoggedIn ? (
+                    <li>
+                      <CustomLink
+                        href="/dashboard"
+                        title="Dashboard"
+                        className=""
+                      />
+                    </li>
+                  ) : (
+                    <li>
+                      <CustomLink
+                        href="/signin"
+                        title="Signin"
+                        className=""
+                      />
+                    </li>
+                  )}
+
+                </ul>
+              </div>
+            </div>
           </div>
           {/* Open the modal using document.getElementById('ID').showModal() method */}
           <NotificationModel statusTrueBookings={statusTrueBookings} />
