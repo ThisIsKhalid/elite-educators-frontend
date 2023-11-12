@@ -26,7 +26,7 @@ const StudentsReview = () => {
   if (isLoading) return <HashLoading />;
 
   return (
-    <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 items-center py-20 px-5">
+    <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 items-center md:py-20 py-10 px-5">
       <div className="flex flex-col mx-auto text-center md:text-left">
         <div className="flex items-center justify-center md:justify-start">
           <div className="border-b-2 w-20 border-cOrange mr-3"></div>
@@ -80,7 +80,10 @@ const StudentsReview = () => {
                 </div>
                 <div className="text-left mt-3 text-sm">
                   <p className="">
-                    Rating: <span className="font-semibold text-base ">{review?.rating}</span>
+                    Rating:{" "}
+                    <span className="font-semibold text-base ">
+                      {review?.rating}
+                    </span>
                   </p>
                   <p className="">{review.description.slice(0, 120)}...</p>
                 </div>

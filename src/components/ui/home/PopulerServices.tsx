@@ -20,7 +20,7 @@ const PopulerServices = () => {
 
 
   return (
-    <div className="py-20 px-5">
+    <div className="md:py-20 py-10 px-5">
       <SectionTitle
         title="Our Populer Services"
         subtitle="Some of our most popular tutors are giving this services"
@@ -33,8 +33,8 @@ const PopulerServices = () => {
 
       <div className="flex items-center justify-center">
         <Link href="/services">
-          <button className="btn bg-gray-800 text-white btn-sm hover:bg-cBlue w-40 rounded-full flex items-center justify-center">
-            <span className="text-cOrange mr-3">
+          <button className="btn bg-cBlue text-white btn-sm hover:bg-cOrange w-40 rounded-full flex items-center justify-center">
+            <span className=" mr-3">
               <BiSolidRightArrow />
             </span>{" "}
             See More

@@ -24,7 +24,7 @@ const FeedBackForm = () => {
     toast.success("Thank you for your feedback");
   };
   return (
-    <div className="py-20 px-5">
+    <div className="md:py-20 py-10 px-5">
       <SectionTitle
         title="FeedBack or Suggestion"
         subtitle="We are always ready to hear from you and improve our services to you better. Please feel free to send us your feedback. If you have any suggestion, please let us know."
@@ -67,7 +67,7 @@ const FeedBackForm = () => {
             </div>
             <button
               type="submit"
-              className="btn md:w-3/4 mt-5 bg-cBlue text-white hover:bg-cOrange"
+              className="btn md:w-3/4 w-full mt-5 bg-cBlue text-white hover:bg-cOrange"
             >
               Send
             </button>

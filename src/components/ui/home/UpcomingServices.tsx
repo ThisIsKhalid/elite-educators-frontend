@@ -21,26 +21,26 @@ if (isLoading) return <HashLoading />;
   );
 
   return (
-    <div className="py-20 px-5">
+    <div className="md:py-20 py-10 px-5">
       <SectionTitle
         title="Upcoming Services"
         subtitle="Some of our most popular tutors are now making their services available for booking."
       />
-        {servicesWithoutPrice?.length === 0 ? (
-          <>
-            <p className="text-center text-xl font-semibold mt-5 text-red-500">
-              No upcoming services
-            </p>
-          </>
-        ) : (
-          <>
-            <div className="grid lg:grid-cols-3 grid-cols-1 gap-5 my-10">
-              {servicesWithoutPrice?.map((service: any) => (
-                <ServiceCard key={service._id} service={service} />
-              ))}
-            </div>
-          </>
-        )}
+      {servicesWithoutPrice?.length === 0 ? (
+        <>
+          <p className="text-center text-xl font-semibold mt-5 text-red-500">
+            No upcoming services
+          </p>
+        </>
+      ) : (
+        <>
+          <div className="grid lg:grid-cols-3 grid-cols-1 gap-5 my-10">
+            {servicesWithoutPrice?.map((service: any) => (
+              <ServiceCard key={service._id} service={service} />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };
