@@ -16,18 +16,29 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { IoNotificationsOutline } from "react-icons/io5";
 import logo from "../../assets/elite-educators.png";
 import NotificationModel from "./NotificationModel";
+import { useRef } from "react";
 
 type CustomLinkProps = {
   href: string;
   title: string;
   className?: string;
+  onClick?: () => void;
 };
 
-const CustomLink = ({ href, title, className = "" }: CustomLinkProps) => {
+const CustomLink = ({
+  href,
+  title,
+  className = "",
+  onClick,
+}: CustomLinkProps) => {
   const pathname = usePathname();
   // console.log(pathname);
   return (
-    <Link href={href} className={`${className} relative group`}>
+    <Link
+      href={href}
+      className={`${className} relative group`}
+      onClick={onClick}
+    >
       {title}
       <span
         className={`h-[2px] inline-block bg-cOrange absolute left-0 -bottom-0.5 group-hover:w-full transition-[width] ease-in-out duration-300
@@ -65,6 +76,13 @@ const Headers = () => {
   const statusTrueBookings = bookings?.filter(
     (booking: any) => booking.status === true
   );
+
+  const drawerCheckboxRef = useRef<HTMLInputElement>(null);
+  const closeDrawer = () => {
+    if (drawerCheckboxRef.current) {
+      drawerCheckboxRef.current.checked = false;
+    }
+  };
 
   return (
     <>
@@ -131,6 +149,7 @@ const Headers = () => {
             </label>
             <div className="drawer z-10">
               <input
+                ref={drawerCheckboxRef}
                 id="my-drawer"
                 type="checkbox"
                 className="drawer-toggle"
@@ -141,20 +160,36 @@ const Headers = () => {
                   aria-label="close sidebar"
                   className="drawer-overlay"
                 ></label>
-                <ul className="menu p-4 w-1/2 min-h-full bg-gray-200 text-base-content">
+                <ul className="menu p-4 w-1/2 min-h-full bg-cDeepBlue  text-white">
                   {/* Sidebar content here */}
                   <li>
-                    <CustomLink href="/" title="Home" className="" />
+                    <CustomLink
+                      onClick={closeDrawer}
+                      href="/"
+                      title="Home"
+                      className=""
+                    />
                   </li>
                   <li>
-                    <CustomLink href="/services" title="Services" className="" />
+                    <CustomLink
+                      onClick={closeDrawer}
+                      href="/services"
+                      title="Services"
+                      className=""
+                    />
                   </li>
                   <li>
-                    <CustomLink href="/events" title="Events" className="" />
+                    <CustomLink
+                      onClick={closeDrawer}
+                      href="/events"
+                      title="Events"
+                      className=""
+                    />
                   </li>
                   {userLoggedIn ? (
                     <li>
                       <CustomLink
+                        onClick={closeDrawer}
                         href="/dashboard"
                         title="Dashboard"
                         className=""
@@ -163,13 +198,13 @@ const Headers = () => {
                   ) : (
                     <li>
                       <CustomLink
+                        onClick={closeDrawer}
                         href="/signin"
                         title="Signin"
                         className=""
                       />
                     </li>
                   )}
-
                 </ul>
               </div>
             </div>
