@@ -54,7 +54,7 @@ const ServiceCard = ({ service }: any) => {
   };
 
   return (
-    <div className="  bg-gray-100 rounded-lg border border-gray-200 shadow-lg flex text-cDeepBlue">
+    <div className="  bg-gray-100 rounded-lg border border-cDeepBlue/20 shadow-lg flex text-cDeepBlue">
       <div className=" w-1/2">
         <div className="">
           <Image src={image} alt="service image" width={450} height={550} />

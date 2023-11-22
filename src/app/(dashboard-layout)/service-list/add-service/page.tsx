@@ -1,6 +1,7 @@
 "use client";
 
 import { SingleImageDropzone } from "@/components/ui/SingleImageDropzone";
+import SyncLoading from "@/components/ui/SyncLoading";
 import { useEdgeStore } from "@/lib/edgestore";
 import { useCreateServiceMutation } from "@/redux/api/serviceApi";
 import { courseYupSchema } from "@/schemas/course";
@@ -53,7 +54,7 @@ const AddService = () => {
   const userInfo: any = getUserInfo();
   const userId = userInfo?.id;
 
-  const [createService] = useCreateServiceMutation();
+  const [createService, {isLoading}] = useCreateServiceMutation();
 
   const onSubmit = async (data: any) => {
     if (file) {
@@ -376,7 +377,13 @@ const AddService = () => {
               type="submit"
               className="btn btn-sm bg-cBlue text-gray-100 hover:bg-cOrange w-40 rounded-full flex items-center justify-center"
             >
-              Submit
+              {isLoading ? (
+                <>
+                  <SyncLoading />
+                </>
+              ) : (
+                "Add Service"
+              )}
             </button>
           </div>
         </form>

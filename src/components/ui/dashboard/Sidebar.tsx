@@ -33,12 +33,6 @@ const Sidebar = () => {
           <BsBoxArrowInLeft className="text-gray-100 text-xl" />
         )}
       </button>
-      <Link
-        href="/"
-        className="text-gray-100 text-2xl absolute bottom-10 left-1/2 -translate-x-1/2"
-      >
-        <BiHomeAlt />
-      </Link>
 
       {/* ----------------main part------------- */}
       <div className="text-gray-200 mt-5">
@@ -109,6 +103,19 @@ const Sidebar = () => {
             <>
               <TbBrandBooking className="text-2xl" />
               <h1 className={`font-bold text-base`}>Bookings</h1>
+            </>
+          )}
+        </Link>
+        <Link
+          href="/"
+          className="flex items-center  gap-3 hover:bg-gray-800 py-2 pl-2 rounded-lg"
+        >
+          {isShrunk ? (
+            <BiHomeAlt className="text-2xl" />
+          ) : (
+            <>
+              <BiHomeAlt className="text-2xl" />
+              <h1 className={`font-bold text-base`}>Home</h1>
             </>
           )}
         </Link>
