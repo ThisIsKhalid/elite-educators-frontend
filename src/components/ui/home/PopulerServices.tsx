@@ -20,15 +20,18 @@ const PopulerServices = () => {
 
 
   return (
-    <div className="md:py-20 py-10 px-5">
+    <div className="md:py-20 py-10 px-5 ">
       <SectionTitle
         title="Our Populer Services"
         subtitle="Some of our most popular tutors are giving this services"
       />
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 my-10">
-        {services?.map((service: any) => (
+      <div className="grid grid-cols-3 my-10">
+        {/* {services?.map((service: any) => (
           <ServiceCard key={service._id} service={service} />
-        ))}
+        ))} */}
+        {services !== undefined && services?.length > 0 && (
+          <ServiceCard key={services[0]._id} service={services[0]} />
+        )}
       </div>
 
       <div className="flex items-center justify-center">

@@ -54,66 +54,36 @@ const ServiceCard = ({ service }: any) => {
   };
 
   return (
-    <div className="card lg:card-side bg-gray-50 shadow-lg border border-cDeepBlue/10 lg:h-[300px] ">
-      <figure className="lg:w-1/2">
-        <Image
-          className="object-cover h-full"
-          src={image}
-          alt="service image"
-          width={500}
-          height={1000}
-        />
-      </figure>
-      <div className="card-body p-5 justify-center">
-        <div className="flex items-center justify-between">
-          <p className="text-[8px] font-medium uppercase">
-            {isAvailable ? (
-              <span className="text-green-400 border border-cBlue p-1">
-                Available
-              </span>
-            ) : (
-              <span className="text-red-400 border border-cOrange p-1">
-                Not Available
-              </span>
-            )}
-          </p>
+    <div className="  bg-gray-100 rounded-lg border border-gray-200 shadow-lg flex text-cDeepBlue">
+      <div className=" w-1/2">
+        <div className="">
+          <Image src={image} alt="service image" width={450} height={550} />
         </div>
-        <div className="flex lg:flex-col flex-row lg:items-start items-center lg:justify-start justify-between">
-          <h1 className="text-2xl font-bold">{subject}</h1>
-          <p className="text-sm text-cOrange flex items-center justify-end">
-            <span className="flex items-center gap-1">
-              {stars.length > 0 ? stars : "0"}
-            </span>
-          </p>
-        </div>
-        <div className="my-2">
-          <p className=" text-sm text-cOrange">
-            <span className="text-gray-800 ">Level :</span> {level}
-          </p>
-          <p className="mt-2 text-sm text-cOrange">
-            <span className="text-gray-800 ">Location :</span> {location}
-          </p>
-        </div>
+      </div>
+      <div className=" w-1/2 flex items-center">
+        <div className="flex flex-col space-y-2 text-base">
+          <p className="flex gap-1 text-sm">{stars}</p>
+          <h2 className="text-2xl font-bold">{subject}</h2>
 
-        <div className="flex lg:flex-col flex-row lg:items-start items-center lg:justify-start justify-between lg:gap-3">
-          <div className="">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <Image
-                  src={profile}
-                  alt=""
-                  height={25}
-                  objectFit="cover"
-                  className="border rounded-full border-cDeepBlue"
-                />
-
-                <p className="ml-2 text-sm text-gray-800">
-                  {instructorId?.name}
-                </p>
-              </div>
-            </div>
+          <p className="">
+            <span className="font-semibold">Level:</span> {level}
+          </p>
+          <p className="">
+            <span className="font-semibold">Location:</span>{" "}
+            {location.slice(0, 20)}
+          </p>
+          <div className="flex items-center justify-between">
+            <p className="">
+              <span className="font-semibold">Seats:</span> {seats}
+            </p>
+            <p className="">
+              <span className="font-semibold">Enrolled:</span> {enrolled}
+            </p>
           </div>
-
+          <p className="">
+            <span className="font-semibold">Instructor:</span>{" "}
+            {instructorId?.name}
+          </p>
           <div className="flex gap-2">
             <button
               onClick={() => {
@@ -124,19 +94,18 @@ const ServiceCard = ({ service }: any) => {
                   dialog.showModal();
                 }
               }}
-              className="btn hover:bg-cBlue  bg-cDeepBlue btn-sm border-none text-gray-200"
+              className="btn bg-cBlue hover:bg-cOrange btn-sm border-none text-gray-200"
             >
               Book Now
             </button>
             <Link href={`/services/${_id}`}>
-              <button className="btn btn-sm border hover:border-cBlue border-cOrange">
+              <button className="btn btn-sm border hover:border-cOrange border-black">
                 Details
               </button>
             </Link>
           </div>
         </div>
       </div>
-      {/* ------------------ */}
       {/* Open the modal using document.getElementById('ID').showModal() method */}
       <BookingModal service={service} />
       {/* ------------------- */}
