@@ -10,6 +10,7 @@ import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import loginImage from "../../assets/Signup.svg";
+import SyncLoading from "@/components/ui/SyncLoading";
 
 type FormValues = {
   name: string;
@@ -23,6 +24,8 @@ const SignUpPage = () => {
   const [progress, setProgress] = useState<number>(0);
   const { edgestore } = useEdgeStore();
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -33,6 +36,8 @@ const SignUpPage = () => {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
+    setIsSubmitting(true);
+
     if (file && file !== undefined && file !== null) {
       const res = await edgestore.myPublicImages.upload({
         file,
@@ -50,15 +55,18 @@ const SignUpPage = () => {
 
         try {
           const res = await userSignup({ ...newData }).unwrap();
-          console.log(res);
+          // console.log(res);
 
           if (res?.accessToken) {
             storeUserInfo({ accessToken: res?.accessToken });
             toast.success("Signup successful");
+
+            setIsSubmitting(false);
             router.push("/");
           }
         } catch (error: any) {
           const errorMessage = error?.data?.message || "Signup failed";
+          setIsSubmitting(false);
           toast.error(errorMessage);
         }
       }
@@ -66,7 +74,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="min-h-screen grid md:grid-cols-2 grid-cols-1 items-center px-5">
+    <div className="min-h-screen grid md:grid-cols-2 grid-cols-1 items-center px-5 py-10">
       <div className="mx-auto">
         <Image src={loginImage} alt="login" width={500} />
       </div>
@@ -151,7 +159,7 @@ const SignUpPage = () => {
               type="submit"
               className="btn md:w-3/4 bg-cBlue text-white hover:bg-cOrange"
             >
-              Signup
+              {isSubmitting ? <><SyncLoading /></> : "Sign Up"}
             </button>
           </form>
         </div>

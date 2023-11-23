@@ -12,6 +12,8 @@ import { useUserloginMutation } from "@/redux/api/authApi";
 import { useRouter } from "next/navigation";
 import { storeUserInfo } from "@/services/auth.service";
 import toast from "react-hot-toast";
+import { useState } from "react";
+import SyncLoading from "@/components/ui/SyncLoading";
 
 type FormValues = {
   id: string;
@@ -21,8 +23,10 @@ type FormValues = {
 const SignInPage = () => {
   const [userlogin] = useUserloginMutation();
   const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit: SubmitHandler<FormValues> = async (data: any) => {
+    setIsSubmitting(true);
     try {
       const res = await userlogin({...data}).unwrap();
       // console.log(res);
@@ -30,16 +34,19 @@ const SignInPage = () => {
       if (res?.accessToken) {
         storeUserInfo({ accessToken: res?.accessToken });
         toast.success("Signup successful");
+
+        setIsSubmitting(false);
         router.push("/");
       }
 
     } catch (error: any) {
       const errorMessage = error?.data?.message || "Signup failed";
+      setIsSubmitting(false);
       toast.error(errorMessage);
     }
   };
   return (
-    <div className="min-h-screen grid md:grid-cols-2 grid-cols-1 items-center px-5">
+    <div className="min-h-screen grid md:grid-cols-2 grid-cols-1 items-center px-5 py-10">
       <div className="mx-auto">
         <Image src={loginImage} alt="login" width={500} />
       </div>
@@ -71,7 +78,7 @@ const SignInPage = () => {
               type="submit"
               className="btn md:w-3/4 mt-5 bg-cBlue text-white hover:bg-cOrange"
             >
-              SignIn
+              {isSubmitting ? <><SyncLoading /></> : "Sign In"}
             </button>
           </Form>
         </div>
