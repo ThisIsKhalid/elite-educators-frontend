@@ -54,13 +54,19 @@ const ServiceCard = ({ service }: any) => {
   };
 
   return (
-    <div className="  bg-gray-100 rounded-lg border border-cDeepBlue/20 shadow-lg flex text-cDeepBlue">
+    <div className=" h-72 bg-gray-100 rounded-lg border border-cDeepBlue/20 shadow-lg flex text-cDeepBlue">
       <div className=" w-1/2">
-        <div className="">
-          <Image src={image} alt="service image" width={450} height={550} />
+        <div className="relative w-full h-full">
+          <Image
+            src={image}
+            alt="service image"
+            
+            objectFit="cover"
+            fill={true}
+          />
         </div>
       </div>
-      <div className=" w-1/2 flex items-center">
+      <div className=" w-1/2 flex items-center p-3">
         <div className="flex flex-col space-y-2 text-base">
           <p className="flex gap-1 text-sm">{stars}</p>
           <h2 className="text-2xl font-bold">{subject}</h2>
