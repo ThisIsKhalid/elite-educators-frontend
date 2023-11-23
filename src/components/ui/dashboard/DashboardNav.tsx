@@ -31,7 +31,7 @@ const DashboardNav = () => {
             {/* Sidebar content here */}
             <li>
               <Link
-                href="/dashboard/profile"
+                href="/profile"
                 className="flex items-center text-white gap-3 py-2 pl-2 rounded-lg"
               >
                 <AiOutlineProfile className="text-2xl" />
@@ -43,15 +43,15 @@ const DashboardNav = () => {
                 loggedUser?.role === "super_admin") && (
                 <>
                   <Link
-                    href="/dashboard/services"
-                    className="flex items-center  gap-3 hover:bg-gray-800 py-2 pl-2 rounded-lg"
+                    href="/service-list"
+                    className="flex items-center text-white  gap-3 hover:bg-gray-800 py-2 pl-2 rounded-lg"
                   >
                     <AiOutlineProfile className="text-2xl" />
                     <h1 className={`font-bold text-base`}>Services</h1>
                   </Link>
                   <Link
-                    href="/dashboard/users"
-                    className="flex items-center  gap-3 hover:bg-gray-800 py-2 pl-2 rounded-lg"
+                    href="/users"
+                    className="flex items-center  gap-3 text-white hover:bg-gray-800 py-2 pl-2 rounded-lg"
                   >
                     <FaPeopleGroup className="text-2xl" />
                     <h1 className={`font-bold text-base`}>Clients</h1>
@@ -61,7 +61,7 @@ const DashboardNav = () => {
             </li>
             <li>
               <Link
-                href="/dashboard/bookings"
+                href="/bookings"
                 className="flex items-center text-white  gap-3 hover:bg-gray-800 py-2 pl-2 rounded-lg"
               >
                 <TbBrandBooking className="text-2xl" />

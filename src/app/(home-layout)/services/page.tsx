@@ -84,17 +84,17 @@ const AllServicePage = () => {
     <div className="">
       <CourseBanner title="Services" />
 
-      <div className="bg-cDeepBlue w-full pb-3 flex items-center justify-between gap-2 px-5">
-        <div className="relative">
+      <div className="lg:w-3/4 w-[90%] mx-auto rounded-lg bg-gray-200 py-3 flex md:flex-row flex-col items-center justify-between gap-2 px-5 mt-5">
+        <div className="relative w-full md:w-[40%] lg:w-1/2">
           <input
             type="text"
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="subject, location, tutor.."
-            className="input input-sm md:input-md input-bordered lg:w-72 w-full md:pl-10 pl-6"
+            className="input input-sm md:input-md border-cBlack outline-none focus:outline-cOrange focus:border-none lg:w-72 w-full md:pl-10 pl-8"
           />
           <BsSearch className="absolute top-1/2 md:left-4 left-2 -translate-y-1/2" />
         </div>
-        <div className="flex items-center lg:gap-5 gap-2">
+        <div className="flex items-center space-x-2">
           <div>
             <select
               id="level"
@@ -115,7 +115,7 @@ const AllServicePage = () => {
               </option>
             </select>
           </div>
-          <div>
+          <div className="">
             <select
               id="availability"
               onChange={handleAvailabilityChange}
@@ -140,6 +140,44 @@ const AllServicePage = () => {
               </option>
             </select>
           </div>
+          <div className="flex items-center gap-2">
+            {/* <div
+              onClick={() => {
+                if (sortBy === "level") {
+                  setSortOrder((prevSortOrder) =>
+                    prevSortOrder === "asc" ? "desc" : "asc"
+                  );
+                } else {
+                  setSortBy("level");
+                  setSortOrder("desc");
+                }
+              }}
+              className="flex items-center gap-1 border-2 py-1 px-3 border-gray-300 cursor-pointer"
+            >
+              <h1 className="text-base font-semibold">Level</h1>
+              <button>
+                <BiSort />
+              </button>
+            </div> */}
+            <div
+              onClick={() => {
+                if (sortBy === "rating") {
+                  setSortOrder((prevSortOrder) =>
+                    prevSortOrder === "asc" ? "desc" : "asc"
+                  );
+                } else {
+                  setSortBy("rating");
+                  setSortOrder("desc");
+                }
+              }}
+              className="flex items-center gap-1 border rounded-lg md:py-[10px] py-[3px] px-3 border-cBlack cursor-pointer text-cBlack bg-white"
+            >
+              <h1 className="">Rating</h1>
+              <button>
+                <BiSort />
+              </button>
+            </div>
+          </div>
           <div>
             {(availability !== null ||
               level !== "" ||
@@ -154,46 +192,6 @@ const AllServicePage = () => {
               </button>
             )}
           </div>
-        </div>
-      </div>
-
-      {/*  rating and sorting */}
-      <div className="my-5 flex items-center gap-3 justify-end px-10">
-        <div
-          onClick={() => {
-            if (sortBy === "level") {
-              setSortOrder((prevSortOrder) =>
-                prevSortOrder === "asc" ? "desc" : "asc"
-              );
-            } else {
-              setSortBy("level");
-              setSortOrder("desc");
-            }
-          }}
-          className="flex items-center gap-1 border-2 py-1 px-3 border-gray-300 cursor-pointer"
-        >
-          <h1 className="text-base font-semibold">Level</h1>
-          <button>
-            <BiSort />
-          </button>
-        </div>
-        <div
-          onClick={() => {
-            if (sortBy === "rating") {
-              setSortOrder((prevSortOrder) =>
-                prevSortOrder === "asc" ? "desc" : "asc"
-              );
-            } else {
-              setSortBy("rating");
-              setSortOrder("desc");
-            }
-          }}
-          className="flex items-center gap-1 border-2 py-1 px-3 border-gray-300 cursor-pointer"
-        >
-          <h1 className="text-base font-semibold">Rating</h1>
-          <button>
-            <BiSort />
-          </button>
         </div>
       </div>
 
