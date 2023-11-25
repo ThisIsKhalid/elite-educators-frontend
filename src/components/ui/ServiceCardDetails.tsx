@@ -6,6 +6,7 @@ import { useGetSingleServiceQuery } from "@/redux/api/serviceApi";
 import BookingModal from "./BookingModal";
 import HashLoading from "./HashLoading";
 import ServiceReview from "./ServiceReview";
+import { BsStarFill } from "react-icons/bs";
 
 const ServiceCardDetails = ({ id }: any) => {
   const { data, isLoading } = useGetSingleServiceQuery(id);
@@ -27,11 +28,17 @@ const ServiceCardDetails = ({ id }: any) => {
     classtime,
   } = data;
 
+  const stars = [];
+  for (let i = 1; i <= rating; i++) {
+    stars.push(<BsStarFill key={i} className="text-cOrange" />);
+  }
+
   return (
     <div className="min-h-screen py-14 md:px-24 px-5">
       <div className="grid lg:grid-cols-2 grid-cols-1 items-start gap-10">
         <div>
-          <div className="flex items-center gap-3">
+          <p className="flex gap-1 text-sm">{stars}</p>
+          <div className="flex items-center gap-3 mt-2">
             <h1 className="text-4xl font-bold uppercase">{subject}</h1>
             {
               <p className="text-xs font-medium uppercase">
@@ -47,49 +54,49 @@ const ServiceCardDetails = ({ id }: any) => {
               </p>
             }
           </div>
-          <h1 className="font-semibold mb-2">
-            <span className="font-medium text-cBlack">Instructor :</span>{" "}
+          <h1 className="font-semibold">
+            <span className="font-bold text-cBlack">Instructor :</span>{" "}
             <span className="text-cOrange">{instructorId?.name}</span>
           </h1>
-          <p className="text-gray-500">{description}</p>
-
-          <div className="mt-5 flex flex-col gap-2">
+          <div className="flex flex-col md:flex-row gap-2">
             <h1 className="font-semibold">
-              <span className="font-medium text-cBlack">Level :</span>{" "}
+              <span className="font-bold text-cBlack">Level :</span>{" "}
               <span className="text-cOrange">{level}</span>
             </h1>
             <h1 className="font-semibold">
-              <span className="font-medium text-cBlack">Rating :</span>{" "}
-              <span className="text-cOrange">{rating}</span>
-            </h1>
-            <h1 className="font-semibold">
-              <span className="font-medium text-cBlack">Enrolled :</span>{" "}
-              <span className="text-cOrange">{enrolled}</span>
-            </h1>
-            <h1 className="font-semibold">
-              <span className="font-medium text-cBlack">Location :</span>{" "}
-              <span className="text-cOrange">{location}</span>
-            </h1>
-            <h1 className="font-semibold">
-              <span className="font-medium text-cBlack">Seats :</span>{" "}
+              <span className="font-bold text-cBlack">Seats :</span>{" "}
               <span className="text-cOrange">{seats}</span>
             </h1>
             <h1 className="font-semibold">
-              <span className="font-medium text-cBlack">Classtime :</span>{" "}
-              <span className="text-cOrange">{classtime}</span>
+              <span className="font-bold text-cBlack">Enrolled :</span>{" "}
+              <span className="text-cOrange">{enrolled}</span>
             </h1>
 
+            <h1 className="font-semibold">
+              <span className="font-bold text-cBlack">Classtime :</span>{" "}
+              <span className="text-cOrange">{classtime}</span>
+            </h1>
+          </div>
+          <h1 className="font-semibold">
+            <span className="font-bold text-cBlack">Location :</span>{" "}
+            <span className="text-cOrange">{location}</span>
+          </h1>
+          <p className="text-gray-500 mt-2">{description}</p>
+
+          <div className="mt-5 flex flex-col gap-2">
             <div className="">
-              <h1 className="font-medium text-cBlack mb-2">Services :</h1>
-              {price?.map((priced: any) => (
-                <button
-                  className="text-base btn bg-cBlack text-gray-100 hover:bg-cDeepBlue"
-                  key={priced._id}
-                >
-                  Day/Week : {priced.daysPerWeek} - Price/Week :{" "}
-                  {priced.amountPerWeek}
-                </button>
-              ))}
+              <h1 className="font-bold text-cBlack mb-2">Services :</h1>
+              <div className="flex md:flex-row flex-col md:items-center gap-2">
+                {price?.map((priced: any) => (
+                  <button
+                    className="text-lg btn bg-gray-100 text-cDeepBlue border border-cDeepBlue"
+                    key={priced._id}
+                  >
+                    Day/Week : {priced.daysPerWeek} - Price/Week :{" "}
+                    {priced.amountPerWeek}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
