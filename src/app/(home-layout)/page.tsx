@@ -20,8 +20,8 @@ const HomePage = () => {
       <UpComingServices />
       <UpcomingEvents />
       {/* <OurFeature /> */}
-      <ExperiencedTeacher />
       <FindTeacher />
+      <ExperiencedTeacher />
       <StudentsReview />
       <FeedBackForm />
     </div>

@@ -21,7 +21,7 @@ if (isLoading) return <HashLoading />;
   );
 
   return (
-    <div className="md:py-20 py-10 px-5">
+    <div className="md:py-20 py-10 px-5 md:px-16">
       <SectionTitle
         title="Upcoming Services"
         subtitle="Some of our most popular tutors are now making their services available for booking."

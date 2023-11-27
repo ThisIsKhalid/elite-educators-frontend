@@ -9,20 +9,20 @@ import SectionTitle from "../SectionTitle";
 import BeTutorModal from "../BeTutorModal";
 
 const ExperiencedTeacher = () => {
-  const teachers = Array(8).fill({
+  const teachers = Array(9).fill({
     name: "Khalid Hasan",
     subject: "Chemistry",
     image: userImage,
   });
 
   return (
-    <div className="md:py-20 py-10 px-5">
+    <div className="md:py-20 py-10 px-5 md:px-16">
       <SectionTitle
         title="Our Experienced Teachers"
         subtitle="The best teachers from all over the country are here to help you."
       />
 
-      <div className="lg:px-20">
+      <div className="">
         <Swiper
           slidesPerView={1}
           spaceBetween={2}
@@ -38,11 +38,11 @@ const ExperiencedTeacher = () => {
               spaceBetween: 5,
             },
             768: {
-              slidesPerView: 2,
+              slidesPerView: 3,
               spaceBetween: 5,
             },
             1024: {
-              slidesPerView: 4,
+              slidesPerView: 5,
               spaceBetween: 5,
             },
           }}
@@ -52,7 +52,7 @@ const ExperiencedTeacher = () => {
             <SwiperSlide key={index + 1}>
               <div
                 key={index}
-                className="w-64 rounded-lg bg-gray-100 border border-cDeepBlue mx-auto"
+                className="w-60 rounded-lg bg-gray-100 border border-cDeepBlue mx-auto"
               >
                 <Image
                   src={teacher.image}

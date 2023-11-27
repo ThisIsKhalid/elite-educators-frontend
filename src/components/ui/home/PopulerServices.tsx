@@ -20,7 +20,7 @@ const PopulerServices = () => {
 
 
   return (
-    <div className="md:py-20 py-10 px-5 ">
+    <div className="md:py-20 py-10 md:px-16 px-5">
       <SectionTitle
         title="Our Populer Services"
         subtitle="Some of our most popular tutors are giving this services"

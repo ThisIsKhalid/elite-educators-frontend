@@ -26,8 +26,8 @@ const StudentsReview = () => {
   if (isLoading) return <HashLoading />;
 
   return (
-    <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 items-center md:py-20 py-10 px-5">
-      <div className="flex flex-col mx-auto text-center md:text-left">
+    <div className="grid lg:grid-cols-3 grid-cols-1 gap-5 items-center md:py-20 py-10 px-5 md:px-16">
+      <div className="flex flex-col">
         <div className="flex items-center justify-center md:justify-start">
           <div className="border-b-2 w-20 border-cOrange mr-3"></div>
           <p className="text-cOrange">Reviews from who got our any service</p>
@@ -44,7 +44,7 @@ const StudentsReview = () => {
         </p>
       </div>
 
-      <div>
+      <div className="col-span-2">
         <Swiper
           slidesPerView={1}
           spaceBetween={10}
@@ -60,8 +60,8 @@ const StudentsReview = () => {
               spaceBetween: 5,
             },
             1024: {
-              slidesPerView: 2,
-              spaceBetween: 30,
+              slidesPerView: 3,
+              spaceBetween: 15,
             },
           }}
           className="mySwiper"

@@ -5,7 +5,7 @@ import imagelogo from "../../assets/profile.png";
 
 const EventCard = () => {
   return (
-    <div className="grid md:grid-cols-4 grid-cols-1 items-center h-full bg-gray-100 shadow-lg lg:mx-10 rounded-lg hover:border-l-4 border-l-cOrange text-cBlack transition delay-500 py-5">
+    <div className="grid md:grid-cols-4 grid-cols-1 items-center h-full bg-gray-100 shadow-lg rounded-lg hover:border-l-4 border-l-cOrange text-cBlack transition delay-500 py-5">
       <div className="col-span-1 border-r flex flex-col items-center justify-center">
         <h1 className="text-5xl font-bold">02</h1>
         <p>Octaber, 2023</p>

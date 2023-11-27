@@ -10,7 +10,7 @@ import Link from "next/link";
 
 const TopBannner = () => {
   return (
-    <div className="grid md:grid-cols-2 grid-cols-1 text-cBlack items-center mx-5">
+    <div className="grid md:grid-cols-2 grid-cols-1 text-cBlack items-center md:px-16 px-0">
       <div className="flex flex-col mx-auto order-2 md:order-1">
         <div className="flex items-center justify-center md:justify-start">
           <div className="border-b-2 w-20 border-cOrange mr-3"></div>
@@ -22,7 +22,7 @@ const TopBannner = () => {
           Learn without <span className="text-cOrange">Limits</span>
         </h1>
 
-        <p className="mb-5 lg:w-[500px] text-justify">
+        <p className="mb-5 lg:w-[500px] text-justify px-5 md:px-0">
           As a mission-driven organization, we&#39;re relentlessly pursuing our
           vision of a world where every learner can access education to unlock
           their potential, without the barriers of location.

@@ -24,16 +24,16 @@ const FeedBackForm = () => {
     toast.success("Thank you for your feedback");
   };
   return (
-    <div className="md:py-20 py-10 px-5">
+    <div className="md:py-20 py-10 px-5 md:px-16">
       <SectionTitle
         title="FeedBack or Suggestion"
         subtitle="We are always ready to hear from you and improve our services to you better. Please feel free to send us your feedback. If you have any suggestion, please let us know."
       />
       <div className="grid md:grid-cols-2 grid-cols-1 items-center">
-        <div className="mx-auto">
+        <div className="">
           <Image src={feedbackImage} alt="Feedback" width={500} />
         </div>
-        <div className="">
+        <div className=" w-full">
           <Form submitHandler={onSubmit}>
             <div>
               <FormInput
@@ -42,7 +42,7 @@ const FeedBackForm = () => {
                 label="Name"
                 placeholder="Your Name"
                 required
-                className="md:w-3/4"
+                // className="md:w-3/4"
               />
             </div>
             <div>
@@ -52,7 +52,7 @@ const FeedBackForm = () => {
                 label="Email"
                 placeholder="Your email"
                 required
-                className="md:w-3/4"
+                // className="md:w-3/4"
               />
             </div>
             <div>
@@ -62,12 +62,12 @@ const FeedBackForm = () => {
                 label="Message"
                 placeholder="Your message"
                 required
-                className="md:w-3/4"
+                // className="md:w-3/4"
               />
             </div>
             <button
               type="submit"
-              className="btn md:w-3/4 w-full mt-5 bg-cBlue text-white hover:bg-cOrange"
+              className="btn w-full mt-5 bg-cBlue text-white hover:bg-cOrange"
             >
               Send
             </button>
