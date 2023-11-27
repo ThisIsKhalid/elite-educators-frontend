@@ -26,7 +26,7 @@ const StudentsReview = () => {
   if (isLoading) return <HashLoading />;
 
   return (
-    <div className="grid lg:grid-cols-3 grid-cols-1 gap-5 items-center md:py-20 py-10 px-5 md:px-16">
+    <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 items-center md:py-20 py-10 px-5 md:px-16">
       <div className="flex flex-col">
         <div className="flex items-center justify-center md:justify-start">
           <div className="border-b-2 w-20 border-cOrange mr-3"></div>
@@ -38,13 +38,13 @@ const StudentsReview = () => {
           Students Say About Us
         </h1>
 
-        <p className="lg:w-[500px]">
+        <p className="">
           Find a tutor is like finding a piece of missing heart, so find it
           carefully and invest your time into it.
         </p>
       </div>
 
-      <div className="col-span-2">
+      <div className="lg:col-span-2 col-span-1">
         <Swiper
           slidesPerView={1}
           spaceBetween={10}
@@ -56,12 +56,12 @@ const StudentsReview = () => {
           modules={[Autoplay]}
           breakpoints={{
             768: {
-              slidesPerView: 3,
+              slidesPerView: 2,
               spaceBetween: 5,
             },
             1024: {
               slidesPerView: 3,
-              spaceBetween: 15,
+              spaceBetween: 10,
             },
           }}
           className="mySwiper"
