@@ -4,7 +4,7 @@ import Button from "../Button";
 
 const FindTeacher = () => {
   return (
-    <div className="grid lg:grid-cols-2 grid-cols-1 items-center px-5 md:px-16 md:py-20 py-10">
+    <div className="grid md:grid-cols-2 grid-cols-1 items-center px-5 md:px-16 md:py-20 py-10">
       <div className="flex flex-col justify-center w-full h-full mt-5 md:mt-0 order-2 md:order-1">
         <div className="">
           <div className="flex items-center justify-center md:justify-start">

@@ -32,8 +32,8 @@ const TopBannner = () => {
           <Button text="Get Started" href="/signup" />
 
           <Link href="/services">
-            <button className="btn py-3 w-40 rounded-full flex items-center justify-center">
-              <span className="text-cOrange mr-1">
+            <button className="btn py-3 w-40 rounded-full flex items-center justify-center border border-gray-800 hover:bg-gray-800 hover:text-white group">
+              <span className="text-gray-800 group-hover:text-white mr-3">
                 <BiSolidRightArrow />
               </span>{" "}
               Subjects
@@ -49,8 +49,9 @@ const TopBannner = () => {
                 alt=""
                 style={{
                   maxWidth: "100%",
-                  height: "auto"
-                }} />
+                  height: "auto",
+                }}
+              />
             </div>
             <div className="w-7 h-7 rounded-full overflow-hidden absolute left-3">
               <Image
@@ -58,8 +59,9 @@ const TopBannner = () => {
                 alt=""
                 style={{
                   maxWidth: "100%",
-                  height: "auto"
-                }} />
+                  height: "auto",
+                }}
+              />
             </div>
             <div className="w-7 h-7 rounded-full overflow-hidden absolute left-6">
               <Image
@@ -67,8 +69,9 @@ const TopBannner = () => {
                 alt=""
                 style={{
                   maxWidth: "100%",
-                  height: "auto"
-                }} />
+                  height: "auto",
+                }}
+              />
             </div>
             <div className="w-7 h-7 rounded-full overflow-hidden absolute left-9">
               <Image
@@ -76,8 +79,9 @@ const TopBannner = () => {
                 alt=""
                 style={{
                   maxWidth: "100%",
-                  height: "auto"
-                }} />
+                  height: "auto",
+                }}
+              />
             </div>
           </div>
           <p className="text-xs">
@@ -93,8 +97,9 @@ const TopBannner = () => {
           width={600}
           style={{
             maxWidth: "100%",
-            height: "auto"
-          }} />
+            height: "auto",
+          }}
+        />
       </div>
     </div>
   );

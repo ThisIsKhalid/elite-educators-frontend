@@ -42,7 +42,7 @@ const ExperiencedTeacher = () => {
               spaceBetween: 5,
             },
             1024: {
-              slidesPerView: 5,
+              slidesPerView: 4,
               spaceBetween: 5,
             },
           }}
@@ -80,7 +80,7 @@ const ExperiencedTeacher = () => {
         </Swiper>
       </div>
       <div className="flex items-center justify-center mt-5 gap-5">
-        <Button text="Browse More" href="/tutors" />
+        {/* <Button text="Browse More" href="/tutors" /> */}
 
         <button
           onClick={() => {
@@ -91,9 +91,9 @@ const ExperiencedTeacher = () => {
               dialog.showModal();
             }
           }}
-          className="btn py-3 w-40 rounded-full flex items-center justify-center"
+          className="btn py-3 w-40 rounded-full flex items-center justify-center border border-gray-800 hover:bg-gray-800 hover:text-white group"
         >
-          <span className="text-cOrange mr-3">
+          <span className="text-gray-800 group-hover:text-white mr-3">
             <BiSolidRightArrow />
           </span>{" "}
           Be Tutor

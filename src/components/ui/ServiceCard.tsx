@@ -10,7 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { BsCart2, BsCartCheck, BsStarFill } from "react-icons/bs";
+import { BsCart2, BsCartCheck, BsStar, BsStarFill } from "react-icons/bs";
 import profile from "../../assets/user-profile.png";
 import BookingModal from "./BookingModal";
 
@@ -34,8 +34,13 @@ const ServiceCard = ({ service }: any) => {
   } = service;
 
   const stars = [];
-  for (let i = 1; i <= rating; i++) {
-    stars.push(<BsStarFill key={i} className="text-cOrange" />);
+  const roundedRating = Math.ceil(rating);
+  for (let i = 1; i <= 5; i++) {
+    if (i <= roundedRating) {
+      stars.push(<BsStarFill key={i} className="text-cOrange" />);
+    } else {
+      stars.push(<BsStar key={i} className="text-cOrange" />);
+    }
   }
 
   const handleAddToCart = () => {
