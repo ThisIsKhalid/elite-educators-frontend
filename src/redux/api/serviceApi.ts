@@ -10,7 +10,7 @@ export const serviceApi = baseApi.injectEndpoints({
         url: `${SERVICE}/${id}`,
         method: "GET",
       }),
-      providesTags: ["service"],
+      providesTags: ["service", "reviews"],
     }),
 
     getServices: build.query({
@@ -27,7 +27,7 @@ export const serviceApi = baseApi.injectEndpoints({
           meta,
         };
       },
-      providesTags: ["service"],
+      providesTags: ["service", "reviews"],
     }),
 
     createService: build.mutation({

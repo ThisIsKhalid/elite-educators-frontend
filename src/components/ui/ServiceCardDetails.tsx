@@ -101,7 +101,7 @@ const ServiceCardDetails = ({ id }: any) => {
             <span className="font-bold text-cBlack">Level :</span>{" "}
             <span className="text-cOrange">{level}</span>
           </h1>
-          <div className="flex flex-col md:flex-row gap-2">
+          <div className="flex flex-col md:flex-row md:gap-3">
             <h1 className="font-semibold">
               <span className="font-bold text-cBlack">Seats :</span>{" "}
               <span className="text-cOrange">{seats}</span>

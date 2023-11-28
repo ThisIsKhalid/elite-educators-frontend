@@ -60,5 +60,6 @@ export const reviewsApi = baseApi.injectEndpoints({
 export const {
     useAddReviewMutation,
     useGetReviewsQuery,
-    useGetReviewsByCourseIdQuery
+    useGetReviewsByCourseIdQuery,
+    useDeleteReviewMutation
 } = reviewsApi;

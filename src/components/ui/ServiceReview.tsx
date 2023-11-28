@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 import {
   useAddReviewMutation,
+  useDeleteReviewMutation,
   useGetReviewsByCourseIdQuery,
 } from "@/redux/api/reviewsApi";
 import { getUserInfo } from "@/services/auth.service";
@@ -10,8 +11,9 @@ import Image from "next/image";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { AiOutlineStar } from "react-icons/ai";
+import { AiOutlineDelete, AiOutlineStar } from "react-icons/ai";
 import { BsStar, BsStarFill } from "react-icons/bs";
+import { FiDelete } from "react-icons/fi";
 import people from "../../assets/profile.png";
 import HashLoading from "./HashLoading";
 
@@ -31,6 +33,7 @@ const ServiceReview = ({ id }: ServiceReviewProps) => {
     id,
     ...query,
   });
+  const [deleteReview] = useDeleteReviewMutation();
 
   if (isLoading) return <HashLoading />;
 
@@ -67,6 +70,17 @@ const ServiceReview = ({ id }: ServiceReviewProps) => {
     }
   };
 
+  const handleDelete = async (id: string) => {
+    if (loggedUser && loggedUser?.id) {
+      try {
+        await deleteReview(id).unwrap();
+        toast.success("Review deleted successfully");
+      } catch (error) {
+        toast.error("Something went wrong");
+      }
+    }
+  };
+
   return (
     <div className="grid lg:grid-cols-4  md:grid-cols-3 grid-cols-1 gap-5">
       {/* reviews part------------------ */}
@@ -87,6 +101,16 @@ const ServiceReview = ({ id }: ServiceReviewProps) => {
                 key={review.id}
                 className="bg-gray-100 rounded-lg relative lg:h-44 md:h-56 h-44"
               >
+                {loggedUser &&
+                  loggedUser?.id &&
+                  loggedUser?.id === review.studentId.id && (
+                    <button
+                      onClick={() => handleDelete(review.id)}
+                      className="absolute top-2 right-2 cursor-pointer border border-cOrange rounded-full p-1"
+                    >
+                      <AiOutlineDelete className=" text-cOrange " />
+                    </button>
+                  )}
                 <div className="absolute lg:-top-10 -top-8 left-1/2 -translate-x-1/2">
                   <div className="lg:w-20 w-16 h-16 lg:h-20 relative">
                     <Image
