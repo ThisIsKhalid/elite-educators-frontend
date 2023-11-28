@@ -84,138 +84,144 @@ const Headers = () => {
     }
   };
 
-  return (
-    <>
-      <div className="flex items-center justify-between px-5 bg-[#FFFFFF]">
-        <div>
-          <Image src={logo} alt="logo" width={160} height={80} style={{}} />
-        </div>
-        <div className="md:flex hidden gap-10 items-center text-base">
-          <CustomLink href="/" title="Home" className="" />
-          <CustomLink href="/services" title="Services" className="" />
-          <CustomLink href="/events" title="Events" className="" />
-          {userLoggedIn ? (
+  return <>
+    <div className="flex items-center justify-between px-5 bg-[#FFFFFF]">
+      <div>
+        <Image
+          src={logo}
+          alt="logo"
+          width={160}
+          height={80}
+          style={{
+            maxWidth: "100%",
+            height: "auto"
+          }} />
+      </div>
+      <div className="md:flex hidden gap-10 items-center text-base">
+        <CustomLink href="/" title="Home" className="" />
+        <CustomLink href="/services" title="Services" className="" />
+        <CustomLink href="/events" title="Events" className="" />
+        {userLoggedIn ? (
+          <>
+            <CustomLink href="/dashboard" title="Dashboard" className="" />
+          </>
+        ) : (
+          <>
+            <CustomLink href="/signin" title="Signin" className="" />
+          </>
+        )}
+      </div>
+      <div>
+        <div className="md:flex hidden items-center gap-3 text-base mb-2">
+          {/* <CustomLink href="/" title="Tutors" className="mx-4" />
+            <CustomLink href="/" title="About" className="mx-4" /> */}
+          <Link href="/cart" className="text-xl font-bold">
+            <BsCart2 />
+          </Link>
+
+          {userLoggedIn && role === "user" && (
+            <div
+              className="text-xl font-bold relative cursor-pointer"
+              onClick={() => {
+                const dialog = document.getElementById(
+                  "notification_modal"
+                ) as HTMLDialogElement;
+                if (dialog) {
+                  dialog.showModal();
+                }
+              }}
+            >
+              <IoNotificationsOutline className="" />
+              <span className="absolute -top-3 left-3 text-cOrange font-mono text-base">
+                {statusTrueBookings?.length}
+              </span>
+            </div>
+          )}
+
+          {userLoggedIn && (
             <>
-              <CustomLink href="/dashboard" title="Dashboard" className="" />
-            </>
-          ) : (
-            <>
-              <CustomLink href="/signin" title="Signin" className="" />
+              <button
+                onClick={logout}
+                className="btn btn-xs bg-cBlack text-gray-100 hover:bg-cBlue"
+              >
+                Signout
+              </button>
             </>
           )}
         </div>
-        <div>
-          <div className="md:flex hidden items-center gap-3 text-base mb-2">
-            {/* <CustomLink href="/" title="Tutors" className="mx-4" />
-              <CustomLink href="/" title="About" className="mx-4" /> */}
-            <Link href="/cart" className="text-xl font-bold">
-              <BsCart2 />
-            </Link>
 
-            {userLoggedIn && role === "user" && (
-              <div
-                className="text-xl font-bold relative cursor-pointer"
-                onClick={() => {
-                  const dialog = document.getElementById(
-                    "notification_modal"
-                  ) as HTMLDialogElement;
-                  if (dialog) {
-                    dialog.showModal();
-                  }
-                }}
-              >
-                <IoNotificationsOutline className="" />
-                <span className="absolute -top-3 left-3 text-cOrange font-mono text-base">
-                  {statusTrueBookings?.length}
-                </span>
-              </div>
-            )}
-
-            {userLoggedIn && (
-              <>
-                <button
-                  onClick={logout}
-                  className="btn btn-xs bg-cBlack text-gray-100 hover:bg-cBlue"
-                >
-                  Signout
-                </button>
-              </>
-            )}
-          </div>
-
-          <div className="flex md:hidden">
-            <label htmlFor="my-drawer" className="drawer-button">
-              <GiHamburgerMenu className="text-cDeepBlue text-xl" />
-            </label>
-            <div className="drawer z-10">
-              <input
-                ref={drawerCheckboxRef}
-                id="my-drawer"
-                type="checkbox"
-                className="drawer-toggle"
-              />
-              <div className="drawer-side">
-                <label
-                  htmlFor="my-drawer"
-                  aria-label="close sidebar"
-                  className="drawer-overlay"
-                ></label>
-                <ul className="menu p-4 w-1/2 min-h-full bg-cDeepBlue  text-white">
-                  {/* Sidebar content here */}
+        <div className="flex md:hidden">
+          <label htmlFor="my-drawer" className="drawer-button">
+            <GiHamburgerMenu className="text-cDeepBlue text-xl" />
+          </label>
+          <div className="drawer z-10">
+            <input
+              ref={drawerCheckboxRef}
+              id="my-drawer"
+              type="checkbox"
+              className="drawer-toggle"
+            />
+            <div className="drawer-side">
+              <label
+                htmlFor="my-drawer"
+                aria-label="close sidebar"
+                className="drawer-overlay"
+              ></label>
+              <ul className="menu p-4 w-1/2 min-h-full bg-cDeepBlue  text-white">
+                {/* Sidebar content here */}
+                <li>
+                  <CustomLink
+                    onClick={closeDrawer}
+                    href="/"
+                    title="Home"
+                    className=""
+                  />
+                </li>
+                <li>
+                  <CustomLink
+                    onClick={closeDrawer}
+                    href="/services"
+                    title="Services"
+                    className=""
+                  />
+                </li>
+                <li>
+                  <CustomLink
+                    onClick={closeDrawer}
+                    href="/events"
+                    title="Events"
+                    className=""
+                  />
+                </li>
+                {userLoggedIn ? (
                   <li>
                     <CustomLink
                       onClick={closeDrawer}
-                      href="/"
-                      title="Home"
+                      href="/dashboard"
+                      title="Dashboard"
                       className=""
                     />
                   </li>
+                ) : (
                   <li>
                     <CustomLink
                       onClick={closeDrawer}
-                      href="/services"
-                      title="Services"
+                      href="/signin"
+                      title="Signin"
                       className=""
                     />
                   </li>
-                  <li>
-                    <CustomLink
-                      onClick={closeDrawer}
-                      href="/events"
-                      title="Events"
-                      className=""
-                    />
-                  </li>
-                  {userLoggedIn ? (
-                    <li>
-                      <CustomLink
-                        onClick={closeDrawer}
-                        href="/dashboard"
-                        title="Dashboard"
-                        className=""
-                      />
-                    </li>
-                  ) : (
-                    <li>
-                      <CustomLink
-                        onClick={closeDrawer}
-                        href="/signin"
-                        title="Signin"
-                        className=""
-                      />
-                    </li>
-                  )}
-                </ul>
-              </div>
+                )}
+              </ul>
             </div>
           </div>
-          {/* Open the modal using document.getElementById('ID').showModal() method */}
-          <NotificationModel statusTrueBookings={statusTrueBookings} />
-          {/* ------------------- */}
         </div>
+        {/* Open the modal using document.getElementById('ID').showModal() method */}
+        <NotificationModel statusTrueBookings={statusTrueBookings} />
+        {/* ------------------- */}
       </div>
-    </>
-  );
+    </div>
+  </>;
 };
 
 export default Headers;

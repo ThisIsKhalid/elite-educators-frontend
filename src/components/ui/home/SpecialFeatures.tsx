@@ -25,7 +25,15 @@ const OurFeature = () => {
             </div>
           </div>
           <div className="bg-white rounded-lg flex flex-col gap-3 justify-center md:px-10 px-5 shadow-xl h-64">
-            <Image src={certificate} alt="" width={70} height={70} />
+            <Image
+              src={certificate}
+              alt=""
+              width={70}
+              height={70}
+              style={{
+                maxWidth: "100%",
+                height: "auto"
+              }} />
             <h3 className="text-2xl font-medium">Get Certificate</h3>
             <p className="text-gray-700">
               Add value to your Certificate and Increase your chances of getting
@@ -33,7 +41,15 @@ const OurFeature = () => {
             </p>
           </div>
           <div className="bg-white rounded-lg flex flex-col gap-3 justify-center md:px-10 px-5 shadow-xl h-64">
-            <Image src={instructor} alt="" width={70} height={70} />
+            <Image
+              src={instructor}
+              alt=""
+              width={70}
+              height={70}
+              style={{
+                maxWidth: "100%",
+                height: "auto"
+              }} />
             <h3 className="text-2xl font-medium">Amazing Instructor</h3>
             <p className="text-gray-700">
               Our Amazing Instructor bring Experience, Knowledge, and Fun on the
@@ -41,7 +57,15 @@ const OurFeature = () => {
             </p>
           </div>
           <div className="bg-white rounded-lg flex flex-col gap-3 justify-center md:px-10 px-5 shadow-xl h-64">
-            <Image src={support} alt="" width={70} height={70} />
+            <Image
+              src={support}
+              alt=""
+              width={70}
+              height={70}
+              style={{
+                maxWidth: "100%",
+                height: "auto"
+              }} />
             <h3 className="text-2xl font-medium">Life Time Support</h3>
             <p className="text-gray-700">
               You will have Life Time Access of the Courses & Resources. Also
@@ -49,7 +73,15 @@ const OurFeature = () => {
             </p>
           </div>
           <div className="bg-white rounded-lg flex flex-col gap-3 justify-center md:px-10 px-5 shadow-xl h-64">
-            <Image src={videoLesson} alt="" width={70} height={70} />
+            <Image
+              src={videoLesson}
+              alt=""
+              width={70}
+              height={70}
+              style={{
+                maxWidth: "100%",
+                height: "auto"
+              }} />
             <h3 className="text-2xl font-medium">Video Lesson</h3>
             <p className="text-gray-700">
               Recorded version of lectures from Professional Instructions to

@@ -27,7 +27,10 @@ const ProfileDetails = () => {
           alt="profile"
           width={200}
           height={200}
-        />
+          style={{
+            maxWidth: "100%",
+            height: "auto"
+          }} />
         <p className=" text-xl">Email:{data?.email}</p>
         <p className=" text-xl font-semibold">Role:{data?.role}</p>
         <p>Phone Number: {data?.phonenumber}</p>

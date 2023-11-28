@@ -64,7 +64,10 @@ const ServiceReview = ({ id }: ServiceReviewProps) => {
                       src={people}
                       alt=""
                       className="object-cover w-12 h-12 rounded-full bg-gray-500"
-                    />
+                      style={{
+                        maxWidth: "100%",
+                        height: "auto"
+                      }} />
                   </div>
                   <div>
                     <h4 className="font-bold">{review?.studentId?.name}</h4>

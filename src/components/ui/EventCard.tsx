@@ -18,7 +18,14 @@ const EventCard = () => {
               Global education fall meeting for everyone
             </h1>
             <div className="flex items-center gap-2 text-sm">
-              <Image src={imagelogo} alt="" width={20} />
+              <Image
+                src={imagelogo}
+                alt=""
+                width={20}
+                style={{
+                  maxWidth: "100%",
+                  height: "auto"
+                }} />
               <span>John Doe</span>
             </div>
           </div>

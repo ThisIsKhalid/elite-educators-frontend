@@ -17,6 +17,10 @@ const PopulerServices = () => {
 
   if (isLoading) return <HashLoading />;
   const services = data?.services;
+  // console.log(services);
+
+  const populerServices = services?.filter((service: any) => service.isPopular);
+  // console.log(populerServices);
 
 
   return (
@@ -26,7 +30,7 @@ const PopulerServices = () => {
         subtitle="Some of our most popular tutors are giving this services"
       />
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 my-10">
-        {services?.map((service: any) => (
+        {populerServices?.map((service: any) => (
           <ServiceCard key={service._id} service={service} />
         ))}
       </div>

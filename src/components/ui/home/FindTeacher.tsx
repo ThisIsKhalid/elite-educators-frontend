@@ -28,7 +28,14 @@ const FindTeacher = () => {
       </div>
 
       <div className="order-1 md:order-2">
-        <Image src={teacherPic} alt="" width={900} />
+        <Image
+          src={teacherPic}
+          alt=""
+          width={900}
+          style={{
+            maxWidth: "100%",
+            height: "auto"
+          }} />
       </div>
     </div>
   );

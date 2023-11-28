@@ -31,7 +31,14 @@ const FeedBackForm = () => {
       />
       <div className="grid md:grid-cols-2 grid-cols-1 items-center">
         <div className="">
-          <Image src={feedbackImage} alt="Feedback" width={500} />
+          <Image
+            src={feedbackImage}
+            alt="Feedback"
+            width={500}
+            style={{
+              maxWidth: "100%",
+              height: "auto"
+            }} />
         </div>
         <div className=" w-full">
           <Form submitHandler={onSubmit}>

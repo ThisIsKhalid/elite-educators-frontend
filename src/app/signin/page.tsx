@@ -48,7 +48,14 @@ const SignInPage = () => {
   return (
     <div className="min-h-screen grid md:grid-cols-2 grid-cols-1 items-center px-5 py-10">
       <div className="mx-auto">
-        <Image src={loginImage} alt="login" width={500} />
+        <Image
+          src={loginImage}
+          alt="login"
+          width={500}
+          style={{
+            maxWidth: "100%",
+            height: "auto"
+          }} />
       </div>
       <div>
         <h1 className="text-3xl font-semibold uppercase">Sign-In</h1>

@@ -57,12 +57,7 @@ const ServiceCard = ({ service }: any) => {
     <div className="h-[500px] md:h-72 bg-gray-100 rounded-lg border border-cDeepBlue/20 shadow-lg flex flex-col md:flex-row text-cDeepBlue">
       <div className="w-full md:w-1/2 h-full">
         <div className="relative w-full h-full">
-          <Image
-            src={image}
-            alt="service image"
-            objectFit="cover"
-            fill={true}
-          />
+          <Image src={image} alt="service image" fill sizes="100vw" />
         </div>
       </div>
       <div className="w-full md:w-1/2 flex items-center p-3">
@@ -90,21 +85,28 @@ const ServiceCard = ({ service }: any) => {
             {instructorId?.name}
           </p>
           <div className="flex gap-2">
-            <button
-              onClick={() => {
-                const dialog = document.getElementById(
-                  _id
-                ) as HTMLDialogElement;
-                if (dialog) {
-                  dialog.showModal();
-                }
-              }}
-              className="btn bg-cBlue hover:bg-cOrange btn-sm border-none text-gray-200"
-            >
-              Book Now
-            </button>
+            {price?.length > 0 ? (
+              <>
+                <button
+                  onClick={() => {
+                    const dialog = document.getElementById(
+                      _id
+                    ) as HTMLDialogElement;
+                    if (dialog) {
+                      dialog.showModal();
+                    }
+                  }}
+                  className="btn bg-cBlue hover:bg-cOrange btn-sm border-none text-gray-200"
+                >
+                  Book Now
+                </button>
+              </>
+            ) : (
+              ""
+            )}
+
             <Link href={`/services/${_id}`}>
-              <button className="btn btn-sm border hover:border-cOrange border-black">
+              <button className="btn btn-sm border border-black hover:bg-gray-800 hover:text-white">
                 Details
               </button>
             </Link>

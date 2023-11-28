@@ -44,16 +44,40 @@ const TopBannner = () => {
         <div className="md:block hidden">
           <div className="flex items-center mt-5 relative">
             <div className="w-7 h-7 rounded-full overflow-hidden">
-              <Image src={profile1} alt="" />
+              <Image
+                src={profile1}
+                alt=""
+                style={{
+                  maxWidth: "100%",
+                  height: "auto"
+                }} />
             </div>
             <div className="w-7 h-7 rounded-full overflow-hidden absolute left-3">
-              <Image src={profile2} alt="" />
+              <Image
+                src={profile2}
+                alt=""
+                style={{
+                  maxWidth: "100%",
+                  height: "auto"
+                }} />
             </div>
             <div className="w-7 h-7 rounded-full overflow-hidden absolute left-6">
-              <Image src={profile1} alt="" />
+              <Image
+                src={profile1}
+                alt=""
+                style={{
+                  maxWidth: "100%",
+                  height: "auto"
+                }} />
             </div>
             <div className="w-7 h-7 rounded-full overflow-hidden absolute left-9">
-              <Image src={profile2} alt="" />
+              <Image
+                src={profile2}
+                alt=""
+                style={{
+                  maxWidth: "100%",
+                  height: "auto"
+                }} />
             </div>
           </div>
           <p className="text-xs">
@@ -63,7 +87,14 @@ const TopBannner = () => {
         </div>
       </div>
       <div className="mx-auto order-1">
-        <Image src={photo} alt="" width={600} />
+        <Image
+          src={photo}
+          alt=""
+          width={600}
+          style={{
+            maxWidth: "100%",
+            height: "auto"
+          }} />
       </div>
     </div>
   );

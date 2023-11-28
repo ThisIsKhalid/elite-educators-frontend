@@ -83,10 +83,12 @@ const CheckoutPage = ({ id }: any) => {
                       <Image
                         src={image}
                         alt={subject}
-                        layout="fill"
-                        objectFit="cover"
                         className="rounded-lg"
-                      />
+                        fill
+                        sizes="100vw"
+                        style={{
+                          objectFit: "cover"
+                        }} />
                     </div>
                     <div>
                       <h4 className="font-semibold">{subject}</h4>

@@ -59,7 +59,10 @@ const ExperiencedTeacher = () => {
                   alt="user"
                   width={300}
                   className="w-full rounded-t-lg"
-                />
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
                 <div className="px-2 py-3 flex justify-between ">
                   <div>
                     <h1 className="text-lg font-semibold text-cBlack">
