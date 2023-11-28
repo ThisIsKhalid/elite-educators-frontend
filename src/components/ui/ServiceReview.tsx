@@ -115,14 +115,18 @@ const ServiceReview = ({ id }: ServiceReviewProps) => {
             </>
           );
         })}
-        <div className="w-full flex items-end">
-          <button
-            onClick={handleSeeMore}
-            className="btn btn-sm w-1/2 mx-auto border border-black hover:bg-gray-800 hover:text-white"
-          >
-            {visibleReviews === 3 ? "See More" : "See Less"}
-          </button>
-        </div>
+        {reviews && reviews.length > 0 && (
+          <>
+            <div className="w-full flex items-end">
+              <button
+                onClick={handleSeeMore}
+                className="btn btn-sm w-1/2 mx-auto border border-black hover:bg-gray-800 hover:text-white"
+              >
+                {visibleReviews === 3 ? "See More" : "See Less"}
+              </button>
+            </div>
+          </>
+        )}
       </div>
 
       {/* add review part------------------ */}
