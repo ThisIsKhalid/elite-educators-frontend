@@ -83,7 +83,7 @@ const SignInPage = () => {
             </div>
             <button
               type="submit"
-              className="btn md:w-3/4 mt-5 bg-cBlue text-white hover:bg-cOrange"
+              className="btn md:w-3/4 w-full mt-5 bg-cBlue text-white hover:bg-cOrange"
             >
               {isSubmitting ? <><SyncLoading /></> : "Sign In"}
             </button>

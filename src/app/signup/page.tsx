@@ -164,7 +164,7 @@ const SignUpPage = () => {
 
             <button
               type="submit"
-              className="btn md:w-3/4 bg-cBlue text-white hover:bg-cOrange"
+              className="btn md:w-3/4 w-full bg-cBlue text-white hover:bg-cOrange"
             >
               {isSubmitting ? <><SyncLoading /></> : "Sign Up"}
             </button>

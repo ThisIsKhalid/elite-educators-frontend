@@ -1,3 +1,5 @@
+'use client'
+
 import Image from "next/image";
 import { BiSolidRightArrow } from "react-icons/bi";
 import "swiper/css";
@@ -7,8 +9,10 @@ import userImage from "../../../assets/Untitled design1.png";
 import Button from "../Button";
 import SectionTitle from "../SectionTitle";
 import BeTutorModal from "../BeTutorModal";
+import { getUserInfo } from "@/services/auth.service";
 
 const ExperiencedTeacher = () => {
+  const loggeduser:any = getUserInfo();
   const teachers = Array(9).fill({
     name: "Khalid Hasan",
     subject: "Chemistry",
@@ -61,8 +65,9 @@ const ExperiencedTeacher = () => {
                   className="w-full rounded-t-lg"
                   style={{
                     maxWidth: "100%",
-                    height: "auto"
-                  }} />
+                    height: "auto",
+                  }}
+                />
                 <div className="px-2 py-3 flex justify-between ">
                   <div>
                     <h1 className="text-lg font-semibold text-cBlack">
@@ -79,26 +84,32 @@ const ExperiencedTeacher = () => {
           ))}
         </Swiper>
       </div>
-      <div className="flex items-center justify-center mt-5 gap-5">
-        {/* <Button text="Browse More" href="/tutors" /> */}
 
-        <button
-          onClick={() => {
-            const dialog = document.getElementById(
-              "be_tutor_modal"
-            ) as HTMLDialogElement;
-            if (dialog) {
-              dialog.showModal();
-            }
-          }}
-          className="btn py-3 w-40 rounded-full flex items-center justify-center border border-gray-800 hover:bg-gray-800 hover:text-white group"
-        >
-          <span className="text-gray-800 group-hover:text-white mr-3">
-            <BiSolidRightArrow />
-          </span>{" "}
-          Be Tutor
-        </button>
-      </div>
+      {loggeduser?.id && (
+        <>
+          <div className="flex items-center justify-center mt-5 gap-5">
+            {/* <Button text="Browse More" href="/tutors" /> */}
+
+            <button
+              onClick={() => {
+                const dialog = document.getElementById(
+                  "be_tutor_modal"
+                ) as HTMLDialogElement;
+                if (dialog) {
+                  dialog.showModal();
+                }
+              }}
+              className="btn py-3 w-40 rounded-full flex items-center justify-center border border-gray-800 hover:bg-gray-800 hover:text-white group"
+            >
+              <span className="text-gray-800 group-hover:text-white mr-3">
+                <BiSolidRightArrow />
+              </span>{" "}
+              Be Tutor
+            </button>
+          </div>
+        </>
+      )}
+
       {/* modal */}
       <BeTutorModal />
       {/* modal end */}

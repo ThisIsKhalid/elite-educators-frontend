@@ -22,6 +22,15 @@ const NotificationModel = ({
         <h3 className="font-bold text-lg uppercase text-center">
           Notification
         </h3>
+        {
+          statusTrueBookings?.length === 0 && (
+            <div className="text-center mt-5">
+              <p className="text-cOrange font-semibold">
+                You have no new notification
+              </p>
+            </div>
+          )
+        }
         <ul className="mt-5">
           {statusTrueBookings?.map((booking: any) => (
             <li
