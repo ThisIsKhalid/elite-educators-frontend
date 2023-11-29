@@ -1,8 +1,11 @@
 "use client";
 
 import { useGetSingleUserQuery } from "@/redux/api/authApi";
+import { useCreateTutorMutation } from "@/redux/api/tutorApi";
 import { getUserInfo } from "@/services/auth.service";
+import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 import HashLoading from "./HashLoading";
 
 type FormValues = {
@@ -15,8 +18,10 @@ type FormValues = {
 
 const BeTutorModal = () => {
   const loggedUser: any = getUserInfo();
+  const router = useRouter();
   const { id } = loggedUser;
   const { data, isLoading } = useGetSingleUserQuery(id);
+  const [createTutor] = useCreateTutorMutation();
 
   const {
     register,
@@ -35,7 +40,30 @@ const BeTutorModal = () => {
       address: data.address,
       experience: data.experience,
     };
-    console.log(formData);
+    // console.log(formData);
+    const res = await createTutor({ ...formData }).unwrap();
+    // console.log(res);
+    if (res?.id) {
+      const dialog = document.getElementById(
+        "be_tutor_modal"
+      ) as HTMLDialogElement;
+      if (dialog) {
+        dialog.close();
+      }
+
+      Swal.fire({
+        title: "Request Sending Done",
+        text: "Please check your request status in your dashboard",
+        icon: "success",
+        showCancelButton: true,
+        confirmButtonText: "Go to Dashboard",
+        cancelButtonText: "Stay here",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push("/");
+        }
+      });
+    }
   };
 
   return (
@@ -48,7 +76,7 @@ const BeTutorModal = () => {
           </button>
         </form>
         <h3 className="font-bold text-lg uppercase text-center">Tutor Form</h3>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form method="dialog" onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control">
             <label className="label">
               <span className="label-text">Name</span>
