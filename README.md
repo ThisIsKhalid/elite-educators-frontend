@@ -79,6 +79,15 @@ To get started with the Elite Educators Frontend, follow these steps:
 
 For a complete list of dependencies and devDependencies, refer to the [package.json](package.json) file.
 
+## Screenshots
+
+<div>
+   <img width="70%" src="https://github.com/ThisIsKhalid/elite-educators-frontend/blob/main/public/readmeImg/elite-educators.png"/>
+   <img width="70%" src="https://github.com/ThisIsKhalid/elite-educators-frontend/blob/main/public/readmeImg/service.png"/>
+   <img width="70%" src="https://github.com/ThisIsKhalid/elite-educators-frontend/blob/main/public/readmeImg/signup.png"/>
+   <img width="70%" src="https://github.com/ThisIsKhalid/elite-educators-frontend/blob/main/public/readmeImg/servicelist.png"/>
+</div>
+
 ## Usage
 
 ### User
