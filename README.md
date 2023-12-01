@@ -5,6 +5,8 @@
 
 The **Elite Educators** Platform is a comprehensive online education hub designed to streamline and enhance the educational experience for both students and educators. With a user-centric approach, the platform facilitates efficient communication, service management, and secure transactions. Using this platform, people can easily find their favorite teacher from anywhere across the country. Now, you don't have to go to any specific place to get tuition. You can do it online after booking a service from a specific tutor for a specific subject.
 
+live site: https://elite-educators-frontend.vercel.app
+
 ## Table of Contents
 
 - [Features](#features)
