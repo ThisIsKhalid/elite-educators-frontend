@@ -1,31 +1,7 @@
-
 # Elite Educators
 
-Elite Educators is a web application that connects students with tutors from various locations. The application allows users to search for tutors, schedule sessions, and view events. The application also includes a dashboard for managing user accounts and tutor schedules.
-
-Live site: https://elite-educators-frontend.vercel.app/
-
-## Technologies Used
-
-- Next.js 13
-- TypeScript
-- Tailwind CSS
-- Daisy UI
-- Redux Toolkit
-- React Hook Form
-- JWT
-
-## Features
-
-- Search for tutors by location and subject
-- Schedule sessions with tutors
-- View upcoming events
-- Manage user accounts and tutor schedules using the dashboard
-
-Certainly! Below is a template for a more complete README file for the "elite-educators-frontend" GitHub project in Markdown format:
-
-
-# Elite Educators Frontend
+[![GitHub issues](https://img.shields.io/github/issues/ThisIsKhalid/elite-educators-frontend)](https://github.com/ThisIsKhalid/elite-educators-frontend/issues)
+[![GitHub stars](https://img.shields.io/github/stars/ThisIsKhalid/elite-educators-frontend)](https://github.com/ThisIsKhalid/elite-educators-frontend/stargazers)
 
 Welcome to the Elite Educators Frontend repository! This project is designed to provide an intuitive and user-friendly interface for the Elite Educators platform, aiming to streamline educational processes and enhance the overall user experience.
 
@@ -34,8 +10,8 @@ Welcome to the Elite Educators Frontend repository! This project is designed to 
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+- [Technologies Used](#technologies-used)
+
 
 ## Features
 
@@ -43,7 +19,7 @@ Welcome to the Elite Educators Frontend repository! This project is designed to 
 - **Dashboard:** Interactive dashboard displaying key information and statistics.
 - **Course Management:** Easily create, update, and manage courses.
 - **Student Profiles:** Detailed profiles for each student with performance tracking.
-- **Responsive Design:** A responsive and mobile-friendly interface for a seamless user experience.
+- **Responsive Design:** A responsive and mobile-friendly interface for seamless user experience.
 - **Notifications:** Real-time notifications for important updates and announcements.
 
 ## Installation
@@ -62,7 +38,16 @@ To get started with the Elite Educators Frontend, follow these steps:
    ```
 
 3. **Configure environment variables:**
-   Create a `.env` file based on the provided `.env.example` and fill in the necessary configuration.
+   Create a `.env` file based on the provided and fill in the necessary configuration.
+
+   Example `.env` file:
+
+   ```env
+   NEXT_PUBLIC_API_BASE_URL=
+   EDGE_STORE_ACCESS_KEY=
+   EDGE_STORE_SECRET_KEY=
+   ```
+   This configuration assumes that you are using the publicly hosted backend API. Adjust the `NEXT_PUBLIC_API_BASE_URL` if you are running a local backend server.
 
 4. **Run the application:**
    ```bash
@@ -72,16 +57,104 @@ To get started with the Elite Educators Frontend, follow these steps:
 5. **Access the application:**
    Open your browser and navigate to `http://localhost:3000` to access the Elite Educators Frontend.
 
+## Technologies Used
+
+- **TypeScript:** 5
+- **Next.js:** 13.5.4
+- **React:** 18
+- **React Redux:** 8.1.3
+- **Redux Toolkit:** 1.9.7
+- **Tailwind CSS:** 3.3.3
+- **React Hook Form:** 7.47.0
+- **Axios:** 1.5.1
+- **JWT Decode:** 3.1.2
+- **React Countup:** 6.4.2
+- **React Hot Toast:** 2.4.1
+- **React Icons:** 4.11.0
+- **Swiper:** 10.3.1
+
+
+For a complete list of dependencies and devDependencies, refer to the [package.json](package.json) file.
+
 ## Usage
 
-Describe how users can effectively use the application. Include screenshots or GIFs if applicable. Provide any additional information or special instructions for a smooth user experience.
+### User
 
-## Contributing
+As a user of the Elite Educators platform, you can perform the following actions:
 
-We welcome contributions from the community! If you'd like to contribute to developing the Elite Educators Frontend, please follow our [contribution guidelines](CONTRIBUTING.md). Feel free to open issues for bug reports or feature requests.
+1. **Sign Up / Login:**
+   - Create a new account by signing up with a valid email address and password.
+   - Existing users can log in using their credentials to access the platform.
 
-## License
+2. **Search and Filter Services:**
+   - Search for educational services based on criteria such as location, level, and name.
+   - Apply filters to narrow down results by service rating and level.
 
-This project is licensed under the [MIT License](LICENSE). Please feel free to use, modify, and distribute the code according to the terms of the license.
+3. **View Service Details:**
+   - Access detailed information about each service to make informed decisions.
 
-Feel free to customize the sections and content based on the specific details of your project. If you have specific badges, acknowledgments, or other information to include, incorporate them as needed
+4. **Book a Service:**
+   - Select a service and initiate the booking process.
+   - Choose the pricing plan (e.g., price per week) and specify the start and end dates for the service.
+
+5. **Manage Bookings:**
+   - View the list of bookings in the user dashboard.
+   - Check the status of each booking, whether accepted or rejected by the admin/teacher.
+   - Delete bookings if needed.
+
+6. **Receive Notifications:**
+   - Get notified when an admin/teacher accepts or rejects a booking.
+   - Receive payment notifications and updates on the status of your services.
+
+7. **Payment Process:**
+   - After a booking is accepted, proceed to payment by clicking the "Pay" button.
+   - Be redirected to a checkout page for payment processing through SSL-Commerz.
+
+8. **Payment Status:**
+   - Receive notifications for successful or unsuccessful payments.
+   - Check the dashboard to view the list of services for which payment has been successfully processed.
+
+### Admin
+
+As an admin on the Elite Educators platform, you have additional responsibilities and capabilities:
+
+1. **User Management:**
+   - Admins are created by superadmins.
+   - Admins have the ability to delete user accounts.
+
+2. **Service Management:**
+   - Post, update, delete, and retrieve details of educational services.
+   - Admins can ensure accurate and up-to-date information about the services.
+
+3. **Booking Management:**
+   - Delete user bookings to manage service availability.
+   - Admins have control over the booking system to address any issues or adjustments.
+
+### Superadmin
+
+As a superadmin, you have the highest level of authority and can perform the following:
+
+1. **Admin Creation:**
+   - Create new admin accounts to manage the platform efficiently.
+
+2. **User Deletion:**
+   - Delete user accounts as needed.
+
+3. **Superadmin Management:**
+   - Manage superadmin accounts, ensuring secure access and oversight of the platform.
+
+### Additional Information
+
+- **Security:**
+  - Security measures are implemented to protect user and admin accounts.
+  - SSL-Commerz is used for secure payment processing.
+
+- **Notifications:**
+  - Users and admins receive notifications for various events, including booking updates and payment status.
+
+- **Dashboard:**
+  - Both users and admins can utilize a personalized dashboard for a streamlined experience.
+
+- **Collaboration:**
+  - Admins and users can collaborate seamlessly to ensure a smooth educational service experience.
+
